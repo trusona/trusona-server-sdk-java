@@ -1,3 +1,8 @@
+allprojects {
+  ext."signing.keyId" = signingKeyId
+  ext."signing.secretKeyRingFile" = signingSecretKeyRingFile
+  ext."signing.password" = signingPassword
+}
 
 artifactory {
   contextUrl = "https://trusona.jfrog.io/trusona/"

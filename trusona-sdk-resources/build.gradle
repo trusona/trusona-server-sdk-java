@@ -1,18 +1,23 @@
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
     }
+  }
+}
+
+signing {
+  sign publishing.publications.mavenJava
+  sign configurations.archives
 }
 
 dependencies {
-    compile("org.apache.commons:commons-lang3:3.5")
-    compile("commons-codec:commons-codec:1.10")
-    compile("com.fasterxml.jackson.core:jackson-databind:2.7.2")
+    compile("org.apache.commons:commons-lang3:3.7")
+    compile("commons-codec:commons-codec:1.11")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.9.6")
     compile("org.slf4j:slf4j-api:1.7.25")
 
-    testCompile("org.codehaus.groovy:groovy-all:2.4.11")
+    testCompile("org.codehaus.groovy:groovy-all:2.5.0")
     testCompile("org.spockframework:spock-core:1.1-groovy-2.4")
-    testCompile("ch.qos.logback:logback-classic:1.1.7")
+    testCompile("ch.qos.logback:logback-classic:1.2.3")
 }
