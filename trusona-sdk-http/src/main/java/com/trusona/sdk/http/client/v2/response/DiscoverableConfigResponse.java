@@ -7,6 +7,7 @@ import java.util.List;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
 public class DiscoverableConfigResponse extends BaseRequestResponse {
+  private static final long serialVersionUID = 7347804786051L;
 
   private List<String> endpoints;
 

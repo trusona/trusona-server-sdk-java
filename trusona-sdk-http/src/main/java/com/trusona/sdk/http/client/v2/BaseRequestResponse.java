@@ -8,6 +8,7 @@ import java.io.Serializable;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 public abstract class BaseRequestResponse implements Serializable {
+  private static final long serialVersionUID = -789268235971L;
 
   @Override
   public boolean equals(Object object) {
