@@ -1,6 +1,7 @@
 branches:
   only:
   - /^master.*$/
+  - /^release.*$/
 
 language: java
 jdk: oraclejdk8
