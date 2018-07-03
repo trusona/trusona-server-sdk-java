@@ -1,0 +1,26 @@
+
+artifactory {
+  contextUrl = "https://trusona.jfrog.io/trusona/"
+
+  publish {
+    repository {
+      repoKey =  project.hasProperty("isRelease") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
+      username = System.getenv("artifactory_username") ?: trusonaUsername
+      password = System.getenv("artifactory_password") ?: trusonaPassword
+      maven = true
+    }
+    defaults {
+      publications("mavenJava")
+      publishArtifacts = true
+      publishPom = true
+    }
+  }
+  resolve {
+    repository {
+      repoKey =  project.hasProperty("isRelease") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
+      username = System.getenv("artifactory_username") ?: trusonaUsername
+      password = System.getenv("artifactory_password") ?: trusonaPassword
+      maven = true
+    }
+  }
+}

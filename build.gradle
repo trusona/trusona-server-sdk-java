@@ -1,11 +1,32 @@
 buildscript {
   repositories {
+    mavenCentral()
     jcenter()
   }
 
   dependencies {
-    classpath("org.jfrog.buildinfo:build-info-extractor-gradle:4.6.2")
+    classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.3"
   }
+}
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:all,-processing"
+        }
+        tasks.withType(GroovyCompile) {
+            options.compilerArgs << "-Xlint:all,-processing"
+        }
+    }
+
+    tasks.matching { it instanceof Test }.all {
+        testLogging.events = ["failed", "passed", "skipped", "standardOut", "standardError"]
+        testLogging.showStandardStreams = true
+    }
+
+    configurations.all {
+        transitive = true
+    }
 }
 
 subprojects {
@@ -14,39 +35,17 @@ subprojects {
 
   apply plugin: "java"
   apply plugin: "groovy"
+  apply plugin: "signing"
+  apply plugin: "maven"
   apply plugin: "maven-publish"
   apply plugin: "com.jfrog.artifactory"
+  apply from: "../build-extras.gradle"
 
   sourceCompatibility = 1.7
   targetCompatibility = 1.7
 
   repositories {
     mavenCentral()
-  }
-
-  artifactory {
-    contextUrl = "https://trusona.jfrog.io/trusona/"
-    publish {
-      repository {
-        repoKey =  project.hasProperty("isRelease") ? "sdk-releases-local" : "sdk-snapshots-local"
-        username = System.getenv("artifactory_username")?.trim() ?: trusonaUsername
-        password = System.getenv("artifactory_password")?.trim() ?: trusonaPassword
-        maven = true
-      }
-      defaults {
-        publications("mavenJava")
-        publishArtifacts = true
-        publishPom = true
-      }
-    }
-    resolve {
-      repository {
-        repoKey = "sdk-snapshots-local"
-        username = System.getenv("artifactory_username")?.trim() ?: trusonaUsername
-        password = System.getenv("artifactory_password")?.trim() ?: trusonaPassword
-        maven = true
-      }
-    }
   }
 
   task "printVersion" {

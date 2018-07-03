@@ -9,16 +9,15 @@ install: true
 script:
   - ./gradlew clean build
 
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: ./gradlew artifactoryPublish
+    on:
+      branch: master
 
-#deploy:
-#  - provider: script
-#    skip_cleanup: true
-#    script: ./gradlew artifactoryPublish
-#    on:
-#      branch: master
-#  - provider: script
-#    skip_cleanup: true
-#    script: ./gradlew artifactoryPublish -PisRelease=true
-#    on:
-#      tags: true
-#
+  - provider: script
+    skip_cleanup: true
+    script: ./gradlew artifactoryPublish -PisRelease=true
+    on:
+      tags: true
