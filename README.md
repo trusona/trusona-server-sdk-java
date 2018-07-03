@@ -64,22 +64,6 @@ The Trusona Server SDK requires Java 7 or above.
 
 The Trusona SDK jars are hosted on the Trusona Artifactory server. Artifactory acts as a Maven repository that requires credentials to access it. In order to access the Trusona Server SDK, you will need to add the Trusona Maven repository to your project and configure it to use the Artifactory username and password provided by Trusona. Here is an example of how to configure Gradle to talk to Artifactory.
 
-
-### Storing your credentials
-
-There are a couple ways to use your Trusona credentials without checking them into your project:
-
-1. Store them locally in `~/.gradle/gradle.properties`
-1. Use environment variables
-
-We recommend using both approaches. Using `gradle.properties` is ideal for development environments and environment variables are well suited for CI environments. To get it working, start by storing your credentials in `~/.gradle/gradle.properties`
-
-```groovy
-trusonaUsername=<YOUR_ARTIFACTORY_USERNAME>
-trusonaPassword=<YOUR_ARTIFACTORY_PASSWORD>
-```
-
-
 ### Adding the Trusona repository
 
 In your project, add the following snippet to your list of repositories in `build.gradle`.
@@ -87,11 +71,7 @@ In your project, add the following snippet to your list of repositories in `buil
 ```groovy
 repositories {
   maven {
-    credentials {
-      username System.getenv("TRUSONA_USERNAME")?.trim() ?: trusonaUsername
-      password System.getenv("TRUSONA_PASSWORD")?.trim() ?: trusonaPassword
-    }
-    url 'https://trusona.jfrog.io/trusona/sdk-releases'
+    url 'https://trusona.jfrog.io/trusona/sdk-public-releases'
   }
 }
 ```
