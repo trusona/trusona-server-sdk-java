@@ -1,0 +1,3 @@
+rootProject.name = 'trusona-server-sdk'
+include 'trusona-sdk-resources', 'trusona-sdk-http', 'trusona-sdk'
+

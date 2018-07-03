@@ -1,0 +1,57 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath("org.jfrog.buildinfo:build-info-extractor-gradle:4.6.2")
+  }
+}
+
+subprojects {
+  group "com.trusona"
+  version "3.2.1-SNAPSHOT"
+
+  apply plugin: "java"
+  apply plugin: "groovy"
+  apply plugin: "maven-publish"
+  apply plugin: "com.jfrog.artifactory"
+
+  sourceCompatibility = 1.7
+  targetCompatibility = 1.7
+
+  repositories {
+    mavenCentral()
+  }
+
+  artifactory {
+    contextUrl = "https://trusona.jfrog.io/trusona/"
+    publish {
+      repository {
+        repoKey =  project.hasProperty("isRelease") ? "sdk-releases-local" : "sdk-snapshots-local"
+        username = System.getenv("artifactory_username")?.trim() ?: trusonaUsername
+        password = System.getenv("artifactory_password")?.trim() ?: trusonaPassword
+        maven = true
+      }
+      defaults {
+        publications("mavenJava")
+        publishArtifacts = true
+        publishPom = true
+      }
+    }
+    resolve {
+      repository {
+        repoKey = "sdk-snapshots-local"
+        username = System.getenv("artifactory_username")?.trim() ?: trusonaUsername
+        password = System.getenv("artifactory_password")?.trim() ?: trusonaPassword
+        maven = true
+      }
+    }
+  }
+
+  task "printVersion" {
+    doLast {
+      println project.version
+    }
+  }
+}

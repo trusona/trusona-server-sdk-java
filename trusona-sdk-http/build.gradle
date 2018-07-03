@@ -1,0 +1,24 @@
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+    }
+  }
+}
+
+dependencies {
+  compile(project(':trusona-sdk-resources'))
+
+  compile("org.apache.commons:commons-lang3:3.5")
+  compile("commons-codec:commons-codec:1.10")
+  compile("com.squareup.retrofit2:retrofit:2.3.0")
+  compile("com.squareup.retrofit2:converter-jackson:2.3.0")
+  compile("com.squareup.okhttp3:logging-interceptor:3.9.1")
+  compile("org.slf4j:slf4j-api:1.7.25")
+
+  testCompile("org.codehaus.groovy:groovy-all:2.4.11")
+  testCompile("org.spockframework:spock-core:1.1-groovy-2.4")
+  testCompile("ch.qos.logback:logback-classic:1.1.7")
+  testCompile("com.squareup.okhttp3:mockwebserver:3.9.1")
+  testCompile("com.squareup.retrofit2:retrofit-mock:2.3.0")
+}
