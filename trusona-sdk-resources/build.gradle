@@ -12,12 +12,12 @@ signing {
 }
 
 dependencies {
-    compile("org.apache.commons:commons-lang3:3.7")
-    compile("commons-codec:commons-codec:1.11")
-    compile("com.fasterxml.jackson.core:jackson-databind:2.9.6")
-    compile("org.slf4j:slf4j-api:1.7.25")
+    compile "org.apache.commons:commons-lang3:3.7"
+    compile "commons-codec:commons-codec:1.11"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.9.6"
+    compile "org.slf4j:slf4j-api:1.7.25"
 
-    testCompile("org.codehaus.groovy:groovy-all:2.5.0")
-    testCompile("org.spockframework:spock-core:1.1-groovy-2.4")
-    testCompile("ch.qos.logback:logback-classic:1.2.3")
+    testCompile "org.codehaus.groovy:groovy-all:2.5.0"
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+    testCompile "ch.qos.logback:logback-classic:1.2.3"
 }
