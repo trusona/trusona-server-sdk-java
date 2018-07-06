@@ -77,9 +77,6 @@ repositories {
 }
 ```
 
-This will setup the Trusona repository to look for credentials from environment variables, and falling back on the values in `~/.gradle/gradle.properties`.
-
-
 ## Adding the Trusona SDK dependency
 
 Then add the `com.trusona:trusona-sdk` dependency and refresh Gradle.
