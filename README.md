@@ -59,9 +59,10 @@ repositories {
 }
 ```
 
+
 ## Adding the Trusona SDK dependency
 
-Then add the `com.trusona:trusona-sdk` dependency and refresh Gradle.
+Then add the `com.trusona:trusona-sdk` dependency, as shown below, and rebuild your project.
 
 ```groovy
 dependencies {
