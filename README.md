@@ -8,12 +8,9 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)
-   1. [Artifactory username and password](#artifactory-username-and-password)
    1. [Server SDK API Credentials](#server-sdk-api-credentials)
    1. [System requirements](#system-requirements)
-1. [Gradle Artifactory Setup](#gradle-artifactory-setup)
-   1. [Storing your credentials](#storing-your-credentials)
-   1. [Adding the Trusona repository](#adding-the-trusona-repository)
+1. [Gradle Setup](#gradle-setup)
    1. [Adding the Trusona SDK dependency](#adding-the-trusona-sdk-dependency)
 1. [Integrating the API into a project](#integrating-the-api-into-a-project)
    1. [Creating a Trusona object](#creating-a-trusona-object)
@@ -38,14 +35,6 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
 
 ## Prerequisites
 
-
-### Artifactory username and password
-
-Trusona uses Artifactory to distribute artifacts associated with the Trusona mobile and server SDKs.
-
-When Trusona provisions a developer account, we will create a new user in Artifactory and supply you with a username and password that you will use later on in this guide.
-
-
 ### Server SDK API Credentials
 
 The Server SDK requires API credentials that are used by the SDK to identify and authenticate requests from your application to the Trusona APIs.
@@ -60,20 +49,13 @@ The two credentials required by the SDK include a `token` and `secret`. Both are
 The Trusona Server SDK requires Java 7 or above.
 
 
-## Gradle Artifactory Setup
+## Gradle Setup
 
-The Trusona SDK jars are hosted on the Trusona Artifactory server. Artifactory acts as a Maven repository that requires credentials to access it. In order to access the Trusona Server SDK, you will need to add the Trusona Maven repository to your project and configure it to use the Artifactory username and password provided by Trusona. Here is an example of how to configure Gradle to talk to Artifactory.
-
-### Adding the Trusona repository
-
-In your project, add the following snippet to your list of repositories in `build.gradle`.
+In your project, ensure that the repository `mavenCentral()` is part of your list of available repositories in `build.gradle`.
 
 ```groovy
 repositories {
-  ...
-  maven {
-    url "https://oss.sonatype.org/content/repositories/releases/"
-  }
+  mavenCentral()
 }
 ```
 
