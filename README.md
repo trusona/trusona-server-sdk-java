@@ -41,7 +41,7 @@ The Server SDK requires API credentials that are used by the SDK to identify and
 
 The two credentials required by the SDK include a `token` and `secret`. Both are strings generated and distributed by Trusona.
 
-*NOTE:* The `token` and `secret` should not be shared with anyone. They are how you authenticate to the Trusona services, and you should not check them into source control.
+> NOTE: The `token` and `secret` should not be publicly shared. They are how you authenticate to the Trusona services: do use accepted best practices in regard to their storage and access.
 
 
 ### System requirements
