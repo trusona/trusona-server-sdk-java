@@ -21,6 +21,15 @@ task javadocZip(type: Zip) {
   archiveName = "${project.name}-${project.version}.zip"
 }
 
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives javadocJar, javadocZip, sourceJar
+}
+
 publishing {
   publications {
     mavenJava(MavenPublication) {

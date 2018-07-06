@@ -9,7 +9,7 @@ artifactory {
 
   publish {
     repository {
-      repoKey =  project.hasProperty("isRelease") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
+      repoKey =  project.findProperty("isRelease") == "true" ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
       username = System.getenv("artifactory_username") ?: trusonaUsername
       password = System.getenv("artifactory_password") ?: trusonaPassword
       maven = true
@@ -22,7 +22,7 @@ artifactory {
   }
   resolve {
     repository {
-      repoKey =  project.hasProperty("isRelease") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
+      repoKey =  project.findProperty("isRelease") == "true" ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
       username = System.getenv("artifactory_username") ?: trusonaUsername
       password = System.getenv("artifactory_password") ?: trusonaPassword
       maven = true
