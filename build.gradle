@@ -42,11 +42,49 @@ subprojects {
 
   repositories {
     mavenCentral()
+    jcenter()
   }
 
   task "printVersion" {
     doLast {
       println project.version
+    }
+  }
+
+  uploadArchives {
+    repositories {
+      mavenDeployer {
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+        repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+          authentication(userName: ossrhUsername, password: ossrhPassword)
+        }
+
+        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+          authentication(userName: ossrhUsername, password: ossrhPassword)
+        }
+
+        pom.project {
+          name 'Trusona Server SDK for Java'
+          artifactId 'trusona-sdk'
+          packaging 'jar'
+
+          description 'The Trusona Server SDK allows simplified interaction with the Trusona API.'
+          url 'https://github.com/trusona/trusona-server-sdk-java'
+
+          scm {
+            developerConnection 'https://github.com/trusona/trusona-server-sdk-java.git'
+            url 'https://github.com/trusona/trusona-server-sdk-java'
+          }
+
+          licenses {
+            license {
+              name 'The Apache License, Version 2.0'
+              url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            }
+          }
+        }
+      }
     }
   }
 }
