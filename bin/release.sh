@@ -45,6 +45,7 @@ read RESPONSE
 if [ "${RESPONSE}" == "y" ]; then
   git push --set-upstream origin ${BRANCH_NAME}
   git push --set-upstream origin ${TAG_NAME}
+  git checkout master
 else
   echo "Run the following commands to publish release:\n"
   echo git push --set-upstream origin ${BRANCH_NAME}
