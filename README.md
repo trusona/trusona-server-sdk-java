@@ -1,6 +1,6 @@
-# Trusona Server SDK
-
 [![Build Status](https://travis-ci.com/trusona/trusona-server-sdk-java.svg?branch=master)](https://travis-ci.com/trusona/trusona-server-sdk-java)
+
+# Trusona Server SDK
 
 The Trusona Server SDK allows simplified interaction with the Trusona API.
 
