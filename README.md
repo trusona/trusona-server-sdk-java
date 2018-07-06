@@ -70,8 +70,9 @@ In your project, add the following snippet to your list of repositories in `buil
 
 ```groovy
 repositories {
+  ...
   maven {
-    url 'https://trusona.jfrog.io/trusona/sdk-public-releases'
+    url "https://oss.sonatype.org/content/repositories/releases/"
   }
 }
 ```
@@ -85,7 +86,7 @@ Then add the `com.trusona:trusona-sdk` dependency and refresh Gradle.
 
 ```groovy
 dependencies {
-  compile("com.trusona:trusona-sdk:3.2.0")
+  compile "com.trusona:trusona-sdk:3.2.2"
 }
 ```
 
