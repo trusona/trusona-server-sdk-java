@@ -27,3 +27,10 @@ deploy:
     script: ./gradlew uploadArchives artifactoryPublish -PisRelease=true
     on:
       tags: true
+
+notifications:
+  slack:
+    on_success: always
+    on_failure: always
+    rooms:
+      - ${SLACK_ACCOUNT}:${SLACK_SECRET_TOKEN}#${SLACK_CHANNEL}
