@@ -10,10 +10,10 @@ public class IdentityDocument extends BaseDto {
   private static final long serialVersionUID = -1940208243248465229L;
 
   private UUID id;
-  private String             hash;
+  private String hash;
   private VerificationStatus verificationStatus;
-  private Date               verifiedAt;
-  private String             type;
+  private Date verifiedAt;
+  private String type;
 
   public UUID getId() {
     return id;

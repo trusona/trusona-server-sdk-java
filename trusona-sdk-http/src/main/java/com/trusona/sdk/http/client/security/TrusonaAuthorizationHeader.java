@@ -15,20 +15,20 @@ public class TrusonaAuthorizationHeader {
   }
 
   public TrusonaAuthorizationHeader(String token, String signature) {
-    this.token      = token;
-    this.signature  = signature;
+    this.token = token;
+    this.signature = signature;
   }
 
   public static TrusonaAuthorizationHeader parseAuthorizationHeader(String rawHeaderValue) {
     String headerValue = StringUtils.trimToNull(rawHeaderValue);
 
-    if(headerValue != null) {
+    if (headerValue != null) {
       String[] headerParts = StringUtils.split(headerValue);
 
-      if(headerParts.length == 2) {
+      if (headerParts.length == 2) {
         String[] values = StringUtils.split(headerParts[1], DELIMITER);
 
-        if(values.length == 2) {
+        if (values.length == 2) {
           return new TrusonaAuthorizationHeader(values[0], values[1]);
         }
       }
@@ -54,7 +54,7 @@ public class TrusonaAuthorizationHeader {
     StringBuilder builder = new StringBuilder(String.format("%s ", TOKEN_TYPE));
     builder.append(getToken());
 
-    if(getSignature() != null) {
+    if (getSignature() != null) {
       builder.append(DELIMITER).append(getSignature());
     }
     return builder.toString();

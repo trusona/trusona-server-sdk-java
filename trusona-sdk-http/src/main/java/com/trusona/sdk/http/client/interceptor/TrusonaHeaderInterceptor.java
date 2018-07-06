@@ -13,8 +13,8 @@ import java.util.TimeZone;
 
 public class TrusonaHeaderInterceptor implements Interceptor {
   private static final String TRUSONA_USER_AGENT = "TrusonaServerSdk/1.0";
-  private static final String DATE_FORMAT        = "EEE, dd MMM YYYY  HH:mm:ss Z";
-  private static final TimeZone GMT              = TimeZone.getTimeZone("GMT");
+  private static final String DATE_FORMAT = "EEE, dd MMM YYYY  HH:mm:ss Z";
+  private static final TimeZone GMT = TimeZone.getTimeZone("GMT");
 
   @Override
   public Response intercept(Chain chain) throws IOException {

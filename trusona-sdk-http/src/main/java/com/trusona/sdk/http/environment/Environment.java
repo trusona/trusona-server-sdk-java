@@ -4,5 +4,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 public interface Environment {
   HttpLoggingInterceptor.Level getLoggingLevel();
+
   String getEndpointUrl();
 }

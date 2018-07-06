@@ -9,5 +9,6 @@ public class Headers {
   public static final String X_SIGNATURE = "X-Signature";
 
 
-  private Headers() {}
+  private Headers() {
+  }
 }

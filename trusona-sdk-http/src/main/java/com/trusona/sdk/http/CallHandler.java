@@ -13,7 +13,7 @@ public class CallHandler<T> {
     this.call = call;
   }
 
-  public T handle(ErrorHandler ... errorHandlers) throws TrusonaException {
+  public T handle(ErrorHandler... errorHandlers) throws TrusonaException {
     try {
       Response<T> response = call.execute();
 

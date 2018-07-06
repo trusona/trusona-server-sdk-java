@@ -13,22 +13,22 @@ import java.util.UUID;
 public class Trusonafication extends BaseDto {
   private static final long serialVersionUID = 4438341104830942514L;
 
-  private int     desiredLevel;
-  private String  deviceIdentifier;
+  private int desiredLevel;
+  private String deviceIdentifier;
   @JsonProperty("trucode_id")
-  private UUID    truCodeId;
-  private String  userIdentifier;
-  private String  action;
-  private String  resource;
-  private Date    expiresAt;
-  private String  callbackUrl;
+  private UUID truCodeId;
+  private String userIdentifier;
+  private String action;
+  private String resource;
+  private Date expiresAt;
+  private String callbackUrl;
   private boolean userPresence;
   private boolean prompt;
   private boolean showIdentityDocument;
 
   private Trusonafication() {
     this.userPresence = true;
-    this.prompt       = true;
+    this.prompt = true;
   }
 
   public int getDesiredLevel() {
@@ -268,7 +268,9 @@ public class Trusonafication extends BaseDto {
    *
    * @return an executive level trusonafication builder.
    */
-  public static IdentifierStep executive() { return new ExecutiveBuilder(); }
+  public static IdentifierStep executive() {
+    return new ExecutiveBuilder();
+  }
 
 
   @Override

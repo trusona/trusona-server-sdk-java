@@ -14,9 +14,9 @@ class TrusonaIntegrationSpec extends Specification {
 
   def setup() {
     trusona = new Trusona(
-        System.getenv(TRUSONA_TOKEN),
-        System.getenv(TRUSONA_SECRET),
-        TrusonaEnvironment.UAT
+      System.getenv(TRUSONA_TOKEN),
+      System.getenv(TRUSONA_SECRET),
+      TrusonaEnvironment.UAT
     )
   }
 

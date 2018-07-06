@@ -3,6 +3,7 @@ package com.trusona.sdk.http.client.v2.response
 import com.trusona.sdk.http.client.RequestResponseSpec
 
 import static com.trusona.sdk.config.JacksonConfig.dateFormat
+
 /**
  * Copyright Trusona, Inc.
  * Created on 1/22/18 for trusona-server-sdk.

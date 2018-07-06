@@ -20,12 +20,12 @@ import java.util.UUID;
 
 import static com.trusona.sdk.resources.dto.TrusonaficationStatus.IN_PROGRESS;
 
-public class TrusonaficationClient  implements TrusonaficationApi {
+public class TrusonaficationClient implements TrusonaficationApi {
   private final static String LEGACY_PREFIX = "trusonaId:";
 
   private final ServiceGenerator serviceGenerator;
-  private final ErrorHandler     defaultErrorHandler;
-  private final Duration         pollingInterval;
+  private final ErrorHandler defaultErrorHandler;
+  private final Duration pollingInterval;
 
 
   public TrusonaficationClient(ServiceGenerator serviceGenerator) {
@@ -48,7 +48,8 @@ public class TrusonaficationClient  implements TrusonaficationApi {
           ErrorResponse errorResponse = getErrorResponse(response);
           if (errorResponse.getError().equals("NO_DOCUMENTS")) {
             throw new NoIdentityDocumentsException(errorResponse.getDescription());
-          } else {
+          }
+          else {
             throw new TrusonaException(errorResponse.getMessage());
           }
         }
@@ -71,7 +72,8 @@ public class TrusonaficationClient  implements TrusonaficationApi {
     while (response != null && IN_PROGRESS.equals(TrusonaficationStatus.valueOf(response.getStatus()))) {
       try {
         sleep(pollingInterval);
-      } catch (InterruptedException e) {
+      }
+      catch (InterruptedException e) {
         throw new TrusonaException("Thread was interrupted while polling for trusonafication result", e);
       }
 

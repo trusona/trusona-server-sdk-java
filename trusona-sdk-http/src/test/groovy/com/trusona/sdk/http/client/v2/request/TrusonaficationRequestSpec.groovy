@@ -11,16 +11,16 @@ import static com.trusona.sdk.config.JacksonConfig.dateFormat
 class TrusonaficationRequestSpec extends RequestResponseSpec<TrusonaficationRequest> {
 
   TrusonaficationRequest sut = new TrusonaficationRequest(
-      deviceIdentifier: 'datDevice',
-      userIdentifier: 'datUser',
-      desiredLevel: 2,
-      action: 'partay',
-      resource: 'your hauz',
-      expiresAt: dateFormat.parse('2018-01-23T23:28:45Z'),
-      callbackUrl: 'https://kid-and-play.com/',
-      userPresence: false,
-      prompt: false,
-      showIdentityDocument: true
+    deviceIdentifier: 'datDevice',
+    userIdentifier: 'datUser',
+    desiredLevel: 2,
+    action: 'partay',
+    resource: 'your hauz',
+    expiresAt: dateFormat.parse('2018-01-23T23:28:45Z'),
+    callbackUrl: 'https://kid-and-play.com/',
+    userPresence: false,
+    prompt: false,
+    showIdentityDocument: true
   )
 
   String json = """\

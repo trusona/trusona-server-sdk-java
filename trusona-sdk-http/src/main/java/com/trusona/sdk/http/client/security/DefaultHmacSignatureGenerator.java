@@ -27,7 +27,7 @@ public class DefaultHmacSignatureGenerator implements HmacSignatureGenerator {
     );
 
     String valueToDigest = StringUtils.join(parts, LF);
-    
+
     return Base64.encodeBase64String(HmacUtils.hmacSha256Hex(secret, valueToDigest).getBytes());
   }
 }

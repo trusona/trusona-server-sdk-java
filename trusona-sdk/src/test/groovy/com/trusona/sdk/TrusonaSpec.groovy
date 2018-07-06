@@ -94,10 +94,10 @@ class TrusonaSpec extends Specification {
       }""".stripIndent()
 
     mockWebServer.enqueue(new MockResponse()
-        .setBody(body)
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(201)
+      .setBody(body)
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(201)
     )
 
     when:
@@ -125,10 +125,10 @@ class TrusonaSpec extends Specification {
       }""".stripIndent()
 
     mockWebServer.enqueue(new MockResponse()
-        .setBody(body)
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(409)
+      .setBody(body)
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(409)
     )
 
     when:
@@ -149,10 +149,10 @@ class TrusonaSpec extends Specification {
       }""".stripIndent()
 
     mockWebServer.enqueue(new MockResponse()
-        .setBody(body)
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(424)
+      .setBody(body)
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(424)
     )
 
     when:
@@ -187,10 +187,10 @@ class TrusonaSpec extends Specification {
       }""".stripIndent()
 
     mockWebServer.enqueue(new MockResponse()
-        .setBody(body)
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
+      .setBody(body)
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
     )
 
     when:
@@ -214,10 +214,10 @@ class TrusonaSpec extends Specification {
       }""".stripIndent()
 
     mockWebServer.enqueue(new MockResponse()
-        .setBody(body)
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(404)
+      .setBody(body)
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(404)
     )
 
     when:
@@ -278,10 +278,10 @@ class TrusonaSpec extends Specification {
     given:
     def truCodeId = UUID.randomUUID()
     mockWebServer.enqueue(new MockResponse()
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
-        .setBody("""\
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
+      .setBody("""\
         {
           "endpoints": [ ]
         }
@@ -289,10 +289,10 @@ class TrusonaSpec extends Specification {
     )
 
     mockWebServer.enqueue(new MockResponse()
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
-        .setBody("""\
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
+      .setBody("""\
         {
           "id": "${truCodeId.toString()}",
           "paired": true,
@@ -313,10 +313,10 @@ class TrusonaSpec extends Specification {
     given:
     def truCodeId = UUID.randomUUID()
     mockWebServer.enqueue(new MockResponse()
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
-        .setBody("""\
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
+      .setBody("""\
         {
           "endpoints": [ "${mockWebServer.url("/")}", "${mockWebServer.url("/")}" ]
         }
@@ -328,10 +328,10 @@ class TrusonaSpec extends Specification {
       .setResponseCode(404))
 
     mockWebServer.enqueue(new MockResponse()
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
-        .setBody("""\
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
+      .setBody("""\
         {
           "id": "${truCodeId.toString()}",
           "paired": true,
@@ -352,10 +352,10 @@ class TrusonaSpec extends Specification {
     given:
     def truCodeId = UUID.randomUUID()
     mockWebServer.enqueue(new MockResponse()
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
-        .setBody("""\
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
+      .setBody("""\
         {
           "endpoints": [ "${mockWebServer.url("/")}", "${mockWebServer.url("/")}" ]
         }
@@ -380,10 +380,10 @@ class TrusonaSpec extends Specification {
     given:
     def truCodeId = UUID.randomUUID()
     mockWebServer.enqueue(new MockResponse()
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
-        .setBody("""\
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
+      .setBody("""\
         {
           "endpoints": [ ]
         }
@@ -395,10 +395,10 @@ class TrusonaSpec extends Specification {
       .setResponseCode(404))
 
     mockWebServer.enqueue(new MockResponse()
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
-        .setBody("""\
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
+      .setBody("""\
         {
           "endpoints": [ ]
         }
@@ -410,10 +410,10 @@ class TrusonaSpec extends Specification {
       .setResponseCode(404))
 
     mockWebServer.enqueue(new MockResponse()
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
-        .setBody("""\
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
+      .setBody("""\
         {
           "endpoints": [ ]
         }
@@ -421,10 +421,10 @@ class TrusonaSpec extends Specification {
     )
 
     mockWebServer.enqueue(new MockResponse()
-        .setHeader("Content-Type", "application/json; charset=utf-8")
-        .setHeader('X-Signature', 'signature')
-        .setResponseCode(200)
-        .setBody("""\
+      .setHeader("Content-Type", "application/json; charset=utf-8")
+      .setHeader('X-Signature', 'signature')
+      .setResponseCode(200)
+      .setBody("""\
         {
           "id": "96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9",
           "identifier": "wall-e@dogs.example.net"

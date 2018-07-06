@@ -10,7 +10,7 @@ class DeviceSpec extends DtoSpec<Device> {
   }"""
 
   Device sut = new Device(
-      activatedAt: JacksonConfig.dateFormat.parse("2018-01-23T23:28:45Z"),
-      active: true
+    activatedAt: JacksonConfig.dateFormat.parse("2018-01-23T23:28:45Z"),
+    active: true
   )
 }

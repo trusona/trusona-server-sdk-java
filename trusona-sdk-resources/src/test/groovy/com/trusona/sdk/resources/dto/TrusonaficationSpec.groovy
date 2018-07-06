@@ -101,10 +101,10 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
   def "should default showIdentityDocument to true when executive"() {
     when:
     def sut = Trusonafication.executive()
-        .deviceIdentifier('wall-eeeee')
-        .action('jackson')
-        .resource('humans')
-        .build()
+      .deviceIdentifier('wall-eeeee')
+      .action('jackson')
+      .resource('humans')
+      .build()
 
     then:
     sut.showIdentityDocument

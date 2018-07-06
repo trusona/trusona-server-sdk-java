@@ -9,7 +9,7 @@ import com.trusona.sdk.resources.DevicesApi;
 import com.trusona.sdk.resources.dto.Device;
 import com.trusona.sdk.resources.exception.TrusonaException;
 
-public class DevicesClient  implements DevicesApi {
+public class DevicesClient implements DevicesApi {
   private ServiceGenerator serviceGenerator;
   private ErrorHandler defaultErrorHandler;
 
@@ -23,6 +23,6 @@ public class DevicesClient  implements DevicesApi {
     DeviceService deviceService = serviceGenerator.getService(DeviceService.class);
 
     return new CallHandler<>(deviceService.getDevice(deviceIdentifer))
-        .handle(defaultErrorHandler);
+      .handle(defaultErrorHandler);
   }
 }

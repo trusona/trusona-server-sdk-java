@@ -31,7 +31,8 @@ public class GenericErrorHandler extends BaseErrorHandler implements ErrorHandle
 
       if (errorResponse.getFieldErrors() != null && !errorResponse.getFieldErrors().isEmpty()) {
         throw new ValidationException(errorResponse.getDescription(), errorResponse.getFieldErrors());
-      } else {
+      }
+      else {
         throw new TrusonaException(errorResponse.getDescription());
       }
     }

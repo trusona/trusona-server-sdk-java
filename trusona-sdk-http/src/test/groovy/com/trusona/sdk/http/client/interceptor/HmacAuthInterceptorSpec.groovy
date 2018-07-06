@@ -32,7 +32,7 @@ class HmacAuthInterceptorSpec extends InterceptorSpec {
 
   def "intercept should verify a X-Signature header"() {
     given:
-    mockSigner.getSignature(_,"secret") >> "signature"
+    mockSigner.getSignature(_, "secret") >> "signature"
     mockWebServer.enqueue(new MockResponse()
       .addHeader("X-Signature", "signature")
       .setResponseCode(200))
@@ -49,7 +49,7 @@ class HmacAuthInterceptorSpec extends InterceptorSpec {
 
   def "intercept should set status to 401, and body to {} when X-Signature header is not valid"() {
     given:
-    mockSigner.getSignature(_,"secret") >> "somethingelse"
+    mockSigner.getSignature(_, "secret") >> "somethingelse"
     mockWebServer.enqueue(new MockResponse()
       .addHeader("X-Signature", "signature")
       .setResponseCode(200))
@@ -67,7 +67,7 @@ class HmacAuthInterceptorSpec extends InterceptorSpec {
 
   def "intercept should set status to 401 and body to {} when X-Signature header is not present"() {
     given:
-    mockSigner.getSignature(_,"secret") >> "somethingelse"
+    mockSigner.getSignature(_, "secret") >> "somethingelse"
     mockWebServer.enqueue(new MockResponse().setResponseCode(200))
 
     when:
@@ -83,7 +83,7 @@ class HmacAuthInterceptorSpec extends InterceptorSpec {
 
   def "intercept should not validate error responses"() {
     given:
-    mockSigner.getSignature(_,"secret") >> "somethingelse"
+    mockSigner.getSignature(_, "secret") >> "somethingelse"
     mockWebServer.enqueue(new MockResponse().setResponseCode(422))
 
     when:

@@ -24,7 +24,8 @@ public abstract class BaseErrorHandler implements ErrorHandler {
       try {
         errorBody.close();
       }
-      catch (IOException e) {}
+      catch (IOException e) {
+      }
     }
   }
 }

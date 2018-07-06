@@ -13,13 +13,13 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 public class TrusonaficationRequest extends BaseRequestResponse {
   private static final long serialVersionUID = -250413453219401260L;
 
-  private String  deviceIdentifier;
-  private String  userIdentifier;
-  private int     desiredLevel;
-  private String  action;
-  private String  resource;
-  private Date    expiresAt;
-  private String  callbackUrl;
+  private String deviceIdentifier;
+  private String userIdentifier;
+  private int desiredLevel;
+  private String action;
+  private String resource;
+  private Date expiresAt;
+  private String callbackUrl;
   private boolean userPresence;
   private boolean prompt;
   private boolean showIdentityDocument;

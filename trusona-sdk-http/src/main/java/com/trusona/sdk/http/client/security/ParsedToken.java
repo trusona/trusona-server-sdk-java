@@ -6,10 +6,10 @@ import java.util.UUID;
 
 public class ParsedToken {
   @JsonProperty("sub")
-  private UUID   subject;
+  private UUID subject;
 
   @JsonProperty("iss")
-  private String   issuer;
+  private String issuer;
 
   @JsonProperty("aud")
   private String audience;

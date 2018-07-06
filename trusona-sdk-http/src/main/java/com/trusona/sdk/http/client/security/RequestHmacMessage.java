@@ -7,7 +7,7 @@ import okio.Buffer;
 
 import java.io.IOException;
 
-public class RequestHmacMessage  implements HmacMessage {
+public class RequestHmacMessage implements HmacMessage {
 
   private final Request request;
 
@@ -18,7 +18,7 @@ public class RequestHmacMessage  implements HmacMessage {
   @Override
   public String getBodyDigest() throws IOException {
     RequestBody requestBody = request.body();
-    Buffer      sink        = new Buffer();
+    Buffer sink = new Buffer();
 
     if (requestBody != null) {
       requestBody.writeTo(sink);

@@ -1,8 +1,8 @@
 package com.trusona.sdk.resources.dto;
 
-import java.util.Date;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -17,10 +17,10 @@ public class TrusonaficationResult extends BaseDto {
   private final Date expiresAt;
 
   public TrusonaficationResult(UUID trusonaficationId, TrusonaficationStatus status, String userIdentifier, Date expiresAt) {
-    this.trusonaficationId  = trusonaficationId;
-    this.status             = status;
-    this.userIdentifier     = userIdentifier;
-    this.expiresAt          = expiresAt;
+    this.trusonaficationId = trusonaficationId;
+    this.status = status;
+    this.userIdentifier = userIdentifier;
+    this.expiresAt = expiresAt;
   }
 
   /**

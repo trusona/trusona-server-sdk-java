@@ -24,7 +24,7 @@ class JacksonConfigSpec extends Specification {
 
   def "should not include null values in JSON"() {
     when:
-    def res = JacksonConfig.objectMapper.writeValueAsString(new IdentityDocument(id:UUID.randomUUID()))
+    def res = JacksonConfig.objectMapper.writeValueAsString(new IdentityDocument(id: UUID.randomUUID()))
 
     then:
     !res.contains("null")

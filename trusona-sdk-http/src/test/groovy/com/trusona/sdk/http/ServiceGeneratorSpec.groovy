@@ -135,7 +135,7 @@ class ServiceGeneratorSpec extends Specification {
     call.request().url().scheme() == mockWebServer.url("/").scheme()
   }
 
-  def "create should create a client that can deserialize JSON"(){
+  def "create should create a client that can deserialize JSON"() {
     given:
     def sut = ServiceGenerator.create(mockEnvironment, credentials, mockSignatureGenerator)
 
@@ -153,7 +153,7 @@ class ServiceGeneratorSpec extends Specification {
     res.body().foo == "bar"
   }
 
-  def "create should create a client that adds an X-Date header"(){
+  def "create should create a client that adds an X-Date header"() {
     given:
     def sut = ServiceGenerator.create(mockEnvironment, credentials, mockSignatureGenerator)
 
@@ -172,7 +172,7 @@ class ServiceGeneratorSpec extends Specification {
     !req.getHeader("X-Date").empty
   }
 
-  def "create should create a client that adds the Trusona user agent"(){
+  def "create should create a client that adds the Trusona user agent"() {
     given:
     def sut = ServiceGenerator.create(mockEnvironment, credentials, mockSignatureGenerator)
 

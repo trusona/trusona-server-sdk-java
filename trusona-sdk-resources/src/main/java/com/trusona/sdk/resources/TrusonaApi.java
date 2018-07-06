@@ -15,10 +15,10 @@ import java.util.UUID;
 public interface TrusonaApi extends TrusonaficationApi {
 
   UserDevice createUserDevice(String userIdentifier, String deviceIdentifier)
-      throws DeviceNotFoundException, DeviceAlreadyBoundException, ValidationException, TrusonaException;
+    throws DeviceNotFoundException, DeviceAlreadyBoundException, ValidationException, TrusonaException;
 
   boolean activateUserDevice(String activationCode)
-          throws DeviceNotFoundException, ValidationException, TrusonaException;
+    throws DeviceNotFoundException, ValidationException, TrusonaException;
 
 
   String getWebSdkConfig() throws TrusonaException;

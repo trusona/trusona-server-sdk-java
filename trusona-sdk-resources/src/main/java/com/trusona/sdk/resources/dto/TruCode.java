@@ -15,6 +15,7 @@ public class TruCode extends BaseDto {
 
   /**
    * Get the ID of the TruCode
+   *
    * @return the ID as a UUID
    */
   public UUID getId() {
@@ -23,6 +24,7 @@ public class TruCode extends BaseDto {
 
   /**
    * Get the identifier that was paired to this TruCode.
+   *
    * @return the identifier
    */
   public String getIdentifier() {

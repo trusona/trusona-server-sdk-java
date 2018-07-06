@@ -3,7 +3,7 @@ package com.trusona.sdk.resources.dto;
 /**
  * Represents the possible outcomes of an identity document verification
  */
-public enum  VerificationStatus {
+public enum VerificationStatus {
   /**
    * Verification of the identity document has not been attempted.
    */

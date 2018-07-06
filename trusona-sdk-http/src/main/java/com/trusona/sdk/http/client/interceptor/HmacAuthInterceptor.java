@@ -18,7 +18,7 @@ public class HmacAuthInterceptor implements Interceptor {
   private static final String EMPTY_JSON_CONTENT_TYPE = "application/json; charset=utf-8";
 
   private final HmacSignatureGenerator signatureGenerator;
-  private final ApiCredentials         apiCredentials;
+  private final ApiCredentials apiCredentials;
 
   public HmacAuthInterceptor(HmacSignatureGenerator signatureGenerator, ApiCredentials apiCredentials) {
     this.signatureGenerator = signatureGenerator;
@@ -33,8 +33,8 @@ public class HmacAuthInterceptor implements Interceptor {
   public Response intercept(Chain chain) throws IOException {
     Request request = chain.request();
 
-    RequestHmacMessage         hmacMessage         = new RequestHmacMessage(request);
-    String                     signature           = signatureGenerator.getSignature(hmacMessage, apiCredentials.getSecret());
+    RequestHmacMessage hmacMessage = new RequestHmacMessage(request);
+    String signature = signatureGenerator.getSignature(hmacMessage, apiCredentials.getSecret());
     TrusonaAuthorizationHeader authorizationHeader = new TrusonaAuthorizationHeader(apiCredentials.getToken(), signature);
 
     return validateResponse(chain.proceed(request.newBuilder()
@@ -59,7 +59,7 @@ public class HmacAuthInterceptor implements Interceptor {
     if (!incomingResponse.isSuccessful()) {
       return incomingResponse;
     }
-    
+
     String signature = incomingResponse.header(Headers.X_SIGNATURE);
 
     if (signature != null) {
@@ -67,10 +67,12 @@ public class HmacAuthInterceptor implements Interceptor {
 
       if (signature.equals(expectedSignature)) {
         return incomingResponse;
-      } else {
+      }
+      else {
         return failResponse(incomingResponse);
       }
-    } else {
+    }
+    else {
       return failResponse(incomingResponse);
     }
   }

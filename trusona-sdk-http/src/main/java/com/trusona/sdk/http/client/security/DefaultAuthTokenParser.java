@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
 
 public class DefaultAuthTokenParser implements AuthTokenParser {
   private static final Logger logger = LoggerFactory.getLogger(AuthTokenParser.class);
+
   @Override
   public ParsedToken parseToken(String token) {
     ParsedToken parsedToken = null;
