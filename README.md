@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/trusona/trusona-server-sdk-java.svg?branch=master)](https://travis-ci.com/trusona/trusona-server-sdk-java)
+[![Coverage Status](https://coveralls.io/repos/github/trusona/trusona-server-sdk-java/badge.svg?branch=master)](https://coveralls.io/github/trusona/trusona-server-sdk-java?branch=master)
 
 # Trusona Server SDK
 
