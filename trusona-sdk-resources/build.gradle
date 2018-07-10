@@ -6,7 +6,7 @@ task sourceJar(type: Jar) {
 javadoc {
   source = sourceSets.main.allJava
   classpath = configurations.compileClasspath
-  title = "Trusona SDK"
+  title = "Trusona Resources SDK"
   options {
     memberLevel = JavadocMemberLevel.PUBLIC
     source = "1.7"
