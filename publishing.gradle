@@ -15,7 +15,7 @@ uploadArchives {
 
       pom.project {
         name 'Trusona Server SDK for Java'
-        artifactId 'trusona-sdk'
+        artifactId project.name
         packaging 'jar'
 
         description 'The Trusona Server SDK allows simplified interaction with the Trusona API.'
