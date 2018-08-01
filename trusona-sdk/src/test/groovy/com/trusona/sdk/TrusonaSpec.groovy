@@ -8,6 +8,7 @@ import com.trusona.sdk.http.client.security.HmacSignatureGenerator
 import com.trusona.sdk.http.environment.Environment
 import com.trusona.sdk.resources.DevicesApi
 import com.trusona.sdk.resources.TrusonaficationApi
+import com.trusona.sdk.resources.UsersApi
 import com.trusona.sdk.resources.dto.Trusonafication
 import com.trusona.sdk.resources.dto.UserDevice
 import com.trusona.sdk.resources.dto.VerificationStatus
@@ -74,7 +75,7 @@ class TrusonaSpec extends Specification {
     mockTrusonaficationClient = Mock(TrusonaficationApi)
     mockDevicesClient = Mock(DevicesApi)
 
-    sut = new Trusona(mockServiceGenerator, mockCredentials, mockTrusonaficationClient, mockDevicesClient)
+    sut = new Trusona(mockServiceGenerator, mockCredentials, mockTrusonaficationClient, mockDevicesClient, Mock(UsersApi))
     sut.pollingInterval = Duration.ofMillis(1)
   }
 
@@ -567,5 +568,16 @@ class TrusonaSpec extends Specification {
 
     then:
     1 * mockDevicesClient.getDevice(deviceIdentifier)
+    0 * _
   }
+
+  def "delete-user should delegate to the UsersApi"() {
+    when:
+    sut.deleteUser("any-identifier")
+
+    then:
+    1 * _.deleteUser("any-identifier")
+    0 * _
+  }
+
 }

@@ -5,6 +5,7 @@ import com.trusona.sdk.config.JacksonConfig;
 import com.trusona.sdk.http.*;
 import com.trusona.sdk.http.client.DevicesClient;
 import com.trusona.sdk.http.client.TrusonaficationClient;
+import com.trusona.sdk.http.client.UsersClient;
 import com.trusona.sdk.http.client.security.DefaultHmacSignatureGenerator;
 import com.trusona.sdk.http.client.security.ParsedToken;
 import com.trusona.sdk.http.client.v2.response.DiscoverableConfigResponse;
@@ -18,6 +19,7 @@ import com.trusona.sdk.http.environment.UatEnvironment;
 import com.trusona.sdk.resources.DevicesApi;
 import com.trusona.sdk.resources.TrusonaApi;
 import com.trusona.sdk.resources.TrusonaficationApi;
+import com.trusona.sdk.resources.UsersApi;
 import com.trusona.sdk.resources.dto.*;
 import com.trusona.sdk.resources.exception.*;
 import org.slf4j.Logger;
@@ -28,6 +30,8 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
+
+import static org.apache.commons.lang3.Validate.notEmpty;
 
 /**
  * The main class to interact with Trusona.
@@ -40,22 +44,26 @@ public class Trusona implements TrusonaApi {
   private final ErrorHandler genericErrorHandler;
   private final TrusonaficationApi trusonaficationApi;
   private final DevicesApi devicesApi;
+  private final UsersApi usersApi;
 
-  private Duration pollingInterval = Duration.ofSeconds(5);
+  Duration pollingInterval = Duration.ofSeconds(5);
 
-  Trusona(ServiceGenerator serviceGenerator, ApiCredentials apiCredentials, TrusonaficationApi trusonaficationApi, DevicesApi devicesApi) {
+
+  Trusona(ServiceGenerator serviceGenerator, ApiCredentials apiCredentials,
+          TrusonaficationApi trusonaficationApi, DevicesApi devicesApi, UsersApi usersApi) {
+
     this.serviceGenerator = serviceGenerator;
     this.apiCredentials = apiCredentials;
     this.trusonaficationApi = trusonaficationApi;
     this.devicesApi = devicesApi;
+    this.usersApi = usersApi;
 
-    this.pollingInterval = Duration.ofSeconds(5);
     this.genericErrorHandler = new GenericErrorHandler();
   }
 
   //TODO: Remove these intermediary constructors after everything is delegated to clients.
   Trusona(ServiceGenerator sg, ApiCredentials apiCredentials) {
-    this(sg, apiCredentials, new TrusonaficationClient(sg), new DevicesClient(sg));
+    this(sg, apiCredentials, new TrusonaficationClient(sg), new DevicesClient(sg), new UsersClient(sg));
   }
 
   Trusona(TrusonaEnvironment environment, ApiCredentials apiCredentials) {
@@ -284,6 +292,18 @@ public class Trusona implements TrusonaApi {
   @Override
   public IdentityDocument getIdentityDocument(UUID id) throws TrusonaException {
     return new CallHandler<>(getIdentityDocumentservice().getIdentityDocument(id)).handle(genericErrorHandler);
+  }
+
+  /**
+   * Delete a user by their user identifier
+   *
+   * @param userIdentifier A String that would be used to identifier a user.
+   * @return Void
+   * @throws TrusonaException If network errors occur
+   */
+  @Override
+  public Void deleteUser(String userIdentifier) throws TrusonaException {
+    return usersApi.deleteUser(notEmpty(userIdentifier));
   }
 
   /**
