@@ -12,7 +12,7 @@ import com.trusona.sdk.resources.exception.ValidationException;
 import java.util.List;
 import java.util.UUID;
 
-public interface TrusonaApi extends TrusonaficationApi {
+public interface TrusonaApi extends TrusonaficationApi, DevicesApi {
 
   UserDevice createUserDevice(String userIdentifier, String deviceIdentifier)
     throws DeviceNotFoundException, DeviceAlreadyBoundException, ValidationException, TrusonaException;
@@ -30,6 +30,4 @@ public interface TrusonaApi extends TrusonaficationApi {
   List<IdentityDocument> findIdentityDocuments(String userIdentifier) throws TrusonaException;
 
   IdentityDocument getIdentityDocument(UUID id) throws TrusonaException;
-
-  Device getDevice(String deviceIdentifier) throws TrusonaException;
 }
