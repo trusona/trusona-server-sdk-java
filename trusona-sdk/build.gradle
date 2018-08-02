@@ -9,7 +9,7 @@ javadoc {
   title = "Trusona SDK"
   options {
     memberLevel = JavadocMemberLevel.PUBLIC
-    source = "1.7"
+    source = "1.8"
   }
 }
 

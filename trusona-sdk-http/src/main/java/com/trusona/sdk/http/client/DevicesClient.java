@@ -19,10 +19,8 @@ public class DevicesClient implements DevicesApi {
   }
 
   @Override
-  public Device getDevice(String deviceIdentifer) throws TrusonaException {
+  public Device getDevice(String deviceIdentifier) throws TrusonaException {
     DeviceService deviceService = serviceGenerator.getService(DeviceService.class);
-
-    return new CallHandler<>(deviceService.getDevice(deviceIdentifer))
-      .handle(defaultErrorHandler);
+    return new CallHandler<>(deviceService.getDevice(deviceIdentifier)).handle(defaultErrorHandler);
   }
 }
