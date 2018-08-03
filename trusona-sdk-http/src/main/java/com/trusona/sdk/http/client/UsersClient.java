@@ -1,11 +1,14 @@
 package com.trusona.sdk.http.client;
 
 import com.trusona.sdk.http.CallHandler;
+import com.trusona.sdk.http.ErrorHandler;
 import com.trusona.sdk.http.GenericErrorHandler;
 import com.trusona.sdk.http.ServiceGenerator;
 import com.trusona.sdk.http.client.v2.service.UserService;
 import com.trusona.sdk.resources.UsersApi;
 import com.trusona.sdk.resources.exception.TrusonaException;
+import com.trusona.sdk.resources.exception.UserNotFoundException;
+import retrofit2.Response;
 
 public class UsersClient implements UsersApi {
 
@@ -18,8 +21,18 @@ public class UsersClient implements UsersApi {
   }
 
   @Override
-  public Void deleteUser(String userIdentifier) throws TrusonaException {
+  public Void deactivateUser(String userIdentifier) throws UserNotFoundException, TrusonaException {
     UserService userService = serviceGenerator.getService(UserService.class);
-    return new CallHandler<>(userService.deleteUser(userIdentifier)).handle(defaultErrorHandler);
+
+    ErrorHandler notFoundErrorHandler = new BaseErrorHandler() {
+      public void handleErrors(Response response) throws TrusonaException {
+        if (response.code() == 404) {
+          throw new UserNotFoundException("The user you are attempting to deactivate does not exist or is already inactive.");
+        }
+      }
+    };
+
+    return new CallHandler<>(userService.deleteUser(userIdentifier))
+      .handle(notFoundErrorHandler, defaultErrorHandler);
   }
 }
