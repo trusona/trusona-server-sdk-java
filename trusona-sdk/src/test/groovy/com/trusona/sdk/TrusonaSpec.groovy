@@ -571,12 +571,12 @@ class TrusonaSpec extends Specification {
     0 * _
   }
 
-  def "delete-user should delegate to the UsersApi"() {
+  def "deactivateUser should delegate to the UsersApi"() {
     when:
-    sut.deleteUser("any-identifier")
+    sut.deactivateUser("any-identifier")
 
     then:
-    1 * _.deleteUser("any-identifier")
+    1 * _.deactivateUser("any-identifier")
     0 * _
   }
 

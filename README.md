@@ -31,6 +31,7 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
       1. [Identity document verification statuses](#identity-document-verification-statuses)
       1. [Identity document types](#identity-document-types)
    1. [Retrieving a device](#retrieving-a-device)
+   1. [Deactivating a user](#deactivating-a-user)
    1. [Handling errors](#handling-errors)
 
 
@@ -67,7 +68,7 @@ Then add the `com.trusona:trusona-sdk` dependency, as shown below, and rebuild y
 
 ```groovy
 dependencies {
-  compile "com.trusona:trusona-sdk:3.2.2"
+  compile "com.trusona:trusona-sdk:3.4.0"
 }
 ```
 
@@ -395,6 +396,19 @@ if (device.isActive()) {
   // Device has been activated and can receive/respond to Trusonafications
 }
 ```
+
+
+### Deactivating a user
+
+You may wish to disable a user from having the ability to authenticate from any of the devices they have registered with. To deactivate a user:
+
+```java
+Trusona trusona = new Trusona(token, secret);
+
+trusona.deactivateUser("73CC202D-F866-4C72-9B43-9FCF5AF149BD");
+```
+
+The deactivated user can be reactivated at a later date by binding them to a new device in Trusona.
 
 
 ### Handling errors

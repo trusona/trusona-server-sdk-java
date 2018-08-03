@@ -1,8 +1,15 @@
 package com.trusona.sdk;
 
+import static org.apache.commons.lang3.Validate.notEmpty;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.trusona.sdk.config.JacksonConfig;
-import com.trusona.sdk.http.*;
+import com.trusona.sdk.http.ApiCredentials;
+import com.trusona.sdk.http.CallHandler;
+import com.trusona.sdk.http.EndpointMutator;
+import com.trusona.sdk.http.ErrorHandler;
+import com.trusona.sdk.http.GenericErrorHandler;
+import com.trusona.sdk.http.ServiceGenerator;
 import com.trusona.sdk.http.client.DevicesClient;
 import com.trusona.sdk.http.client.TrusonaficationClient;
 import com.trusona.sdk.http.client.UsersClient;
@@ -20,18 +27,27 @@ import com.trusona.sdk.resources.DevicesApi;
 import com.trusona.sdk.resources.TrusonaApi;
 import com.trusona.sdk.resources.TrusonaficationApi;
 import com.trusona.sdk.resources.UsersApi;
-import com.trusona.sdk.resources.dto.*;
-import com.trusona.sdk.resources.exception.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import retrofit2.Response;
-
+import com.trusona.sdk.resources.dto.Device;
+import com.trusona.sdk.resources.dto.IdentityDocument;
+import com.trusona.sdk.resources.dto.TruCode;
+import com.trusona.sdk.resources.dto.Trusonafication;
+import com.trusona.sdk.resources.dto.TrusonaficationResult;
+import com.trusona.sdk.resources.dto.TrusonaficationStatus;
+import com.trusona.sdk.resources.dto.UserDevice;
+import com.trusona.sdk.resources.dto.WebSdkConfig;
+import com.trusona.sdk.resources.exception.DeviceAlreadyBoundException;
+import com.trusona.sdk.resources.exception.DeviceNotFoundException;
+import com.trusona.sdk.resources.exception.NoIdentityDocumentsException;
+import com.trusona.sdk.resources.exception.TrusonaException;
+import com.trusona.sdk.resources.exception.UserNotFoundException;
+import com.trusona.sdk.resources.exception.ValidationException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
-
-import static org.apache.commons.lang3.Validate.notEmpty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import retrofit2.Response;
 
 /**
  * The main class to interact with Trusona.
@@ -295,15 +311,16 @@ public class Trusona implements TrusonaApi {
   }
 
   /**
-   * Delete a user by their user identifier
+   * Deactivate a user by their user identifier
    *
-   * @param userIdentifier A String that would be used to identifier a user.
+   * @param userIdentifier A String that would be used to identify the user.
    * @return Void
-   * @throws TrusonaException If network errors occur
+   * @throws UserNotFoundException If the user cannot be found or is already inactive.
+   * @throws TrusonaException If any network or server errors occur.
    */
   @Override
-  public Void deleteUser(String userIdentifier) throws TrusonaException {
-    return usersApi.deleteUser(notEmpty(userIdentifier));
+  public Void deactivateUser(String userIdentifier) throws UserNotFoundException, TrusonaException {
+    return usersApi.deactivateUser(notEmpty(userIdentifier));
   }
 
   /**
