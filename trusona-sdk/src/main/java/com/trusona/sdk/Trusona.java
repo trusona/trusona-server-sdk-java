@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.trusona.sdk.config.JacksonConfig;
 import com.trusona.sdk.http.ApiCredentials;
 import com.trusona.sdk.http.CallHandler;
-import com.trusona.sdk.http.EndpointMutator;
 import com.trusona.sdk.http.ErrorHandler;
 import com.trusona.sdk.http.GenericErrorHandler;
 import com.trusona.sdk.http.ServiceGenerator;
@@ -15,10 +14,8 @@ import com.trusona.sdk.http.client.TrusonaficationClient;
 import com.trusona.sdk.http.client.UsersClient;
 import com.trusona.sdk.http.client.security.DefaultHmacSignatureGenerator;
 import com.trusona.sdk.http.client.security.ParsedToken;
-import com.trusona.sdk.http.client.v2.response.DiscoverableConfigResponse;
 import com.trusona.sdk.http.client.v2.service.IdentityDocumentService;
 import com.trusona.sdk.http.client.v2.service.TruCodeService;
-import com.trusona.sdk.http.client.v2.service.TrusonaficationService;
 import com.trusona.sdk.http.client.v2.service.UserDeviceService;
 import com.trusona.sdk.http.environment.Environment;
 import com.trusona.sdk.http.environment.ProdEnvironment;
@@ -41,7 +38,6 @@ import com.trusona.sdk.resources.exception.NoIdentityDocumentsException;
 import com.trusona.sdk.resources.exception.TrusonaException;
 import com.trusona.sdk.resources.exception.UserNotFoundException;
 import com.trusona.sdk.resources.exception.ValidationException;
-import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
@@ -105,16 +101,8 @@ public class Trusona implements TrusonaApi {
     return serviceGenerator.getService(UserDeviceService.class);
   }
 
-  private TrusonaficationService getTrusonaficationService() {
-    return serviceGenerator.getService(TrusonaficationService.class);
-  }
-
   private TruCodeService getTruCodeService() {
     return serviceGenerator.getService(TruCodeService.class);
-  }
-
-  private TruCodeService getTruCodeService(String endpoint) {
-    return serviceGenerator.getService(TruCodeService.class, new EndpointMutator(endpoint));
   }
 
   private IdentityDocumentService getIdentityDocumentservice() {
@@ -244,34 +232,8 @@ public class Trusona implements TrusonaApi {
    */
   @Override
   public TruCode getPairedTruCode(UUID id) throws TrusonaException {
-    TruCode truCode = null;
-
-    try {
-      Response<DiscoverableConfigResponse> response = getTruCodeService().getDiscoverableConfig().execute();
-
-      if (response.isSuccessful()) {
-        if (response.body().getEndpoints().isEmpty()) {
-          logger.warn("Endoint configuration was empty. Only trying main endpoint.");
-          truCode = doTrucodeGet(id, null);
-        }
-        for (String endpoint : response.body().getEndpoints()) {
-          truCode = doTrucodeGet(id, endpoint);
-          if (truCode != null) {
-            break;
-          }
-        }
-      }
-      else {
-        genericErrorHandler.handleErrors(response);
-      }
-    }
-    catch (IOException e) {
-      throw new TrusonaException("A network related error occurred trying to get a trucode. " +
-        "You should double check that you can connect to Trusona and try your request again.", e);
-    }
-
-
-    return truCode;
+    return new CallHandler<>(getTruCodeService().getPairedTrucode(id))
+      .handle(genericErrorHandler);
   }
 
   /**
@@ -333,12 +295,6 @@ public class Trusona implements TrusonaApi {
   @Override
   public Device getDevice(String deviceIdentifier) throws TrusonaException {
     return devicesApi.getDevice(deviceIdentifier);
-  }
-
-  private TruCode doTrucodeGet(UUID trucodeId, String endpoint) throws TrusonaException, IOException {
-    TruCodeService service = endpoint == null ? getTruCodeService() : getTruCodeService(endpoint);
-
-    return new CallHandler<>(service.getPairedTrucode(trucodeId)).handle(genericErrorHandler);
   }
 
   private static Environment getHttpEnvironment(TrusonaEnvironment environment) {

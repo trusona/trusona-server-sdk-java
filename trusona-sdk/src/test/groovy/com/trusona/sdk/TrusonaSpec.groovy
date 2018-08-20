@@ -284,56 +284,6 @@ class TrusonaSpec extends Specification {
       .setResponseCode(200)
       .setBody("""\
         {
-          "endpoints": [ ]
-        }
-        """)
-    )
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "id": "${truCodeId.toString()}",
-          "paired": true,
-          "identifier": "foobar"
-        }
-      """)
-    )
-
-    when:
-    def res = sut.getPairedTruCode(truCodeId)
-
-    then:
-    res.identifier == "foobar"
-    res.id == truCodeId
-  }
-
-  def "getPairedTrucode should check all the configured endpoints"() {
-    given:
-    def truCodeId = UUID.randomUUID()
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ "${mockWebServer.url("/")}", "${mockWebServer.url("/")}" ]
-        }
-        """)
-    )
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(404))
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
           "id": "${truCodeId.toString()}",
           "paired": true,
           "identifier": "foobar"
@@ -353,20 +303,6 @@ class TrusonaSpec extends Specification {
     given:
     def truCodeId = UUID.randomUUID()
     mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ "${mockWebServer.url("/")}", "${mockWebServer.url("/")}" ]
-        }
-        """)
-    )
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(404))
-    mockWebServer.enqueue(new MockResponse()
       .setHeader('X-Signature', 'signature')
       .setResponseCode(404))
 
@@ -381,45 +317,12 @@ class TrusonaSpec extends Specification {
     given:
     def truCodeId = UUID.randomUUID()
     mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ ]
-        }
-        """)
-    )
-
-    mockWebServer.enqueue(new MockResponse()
       .setHeader('X-Signature', 'signature')
       .setResponseCode(404))
 
     mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ ]
-        }
-        """)
-    )
-
-    mockWebServer.enqueue(new MockResponse()
       .setHeader('X-Signature', 'signature')
       .setResponseCode(404))
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ ]
-        }
-        """)
-    )
 
     mockWebServer.enqueue(new MockResponse()
       .setHeader("Content-Type", "application/json; charset=utf-8")
