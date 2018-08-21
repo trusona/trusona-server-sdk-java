@@ -246,18 +246,18 @@ public class Trusona implements TrusonaApi {
    */
   @Override
   public TruCode getPairedTruCode(UUID id, Long timeout) throws TrusonaException {
-    TruCode truCode = null;
-    Long stopTime = System.currentTimeMillis() + timeout;
-    while (truCode == null && System.currentTimeMillis() < stopTime) {
-      truCode = getPairedTruCode(id);
-      if (truCode == null) {
-        try {
-          sleep(pollingInterval);
-        }
-        catch (InterruptedException e) {
-          throw new TrusonaException("Thread was interrupted while polling for a paired TruCode", e);
-        }
+    final Long stopTime = System.currentTimeMillis() + timeout;
+    TruCode truCode = getPairedTruCode(id);
+    Long remainingTime;
+    while (truCode == null && (remainingTime = stopTime - System.currentTimeMillis()) >= 0) {
+      Long sleepTime = Math.min(pollingInterval.toMillis(), remainingTime);
+      try {
+        Thread.sleep(sleepTime);
       }
+      catch (InterruptedException e) {
+        throw new TrusonaException("Thread was interrupted while polling for a paired TruCode", e);
+      }
+      truCode = getPairedTruCode(id);
     }
     return truCode;
   }
@@ -305,9 +305,5 @@ public class Trusona implements TrusonaApi {
       default:
         return new ProdEnvironment();
     }
-  }
-
-  private static void sleep(Duration duration) throws InterruptedException {
-    Thread.sleep(duration.toMillis());
   }
 }
