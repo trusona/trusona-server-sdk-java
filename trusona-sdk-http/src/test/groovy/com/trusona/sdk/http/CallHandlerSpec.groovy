@@ -45,7 +45,7 @@ class CallHandlerSpec extends Specification {
 
     then:
     def exc = thrown(TrusonaException)
-    exc.message == "A network related error occurred trying to get a trucode. You should double check that you can connect to Trusona and try your request again."
+    exc.message == "A network related error occurred. You should double check that you can connect to Trusona and try your request again."
     exc.cause == ioException
   }
 }

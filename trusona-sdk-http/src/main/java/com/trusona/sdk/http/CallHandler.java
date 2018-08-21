@@ -23,7 +23,7 @@ public class CallHandler<T> {
       return response.body();
     }
     catch (IOException e) {
-      throw new TrusonaException("A network related error occurred trying to get a trucode. " +
+      throw new TrusonaException("A network related error occurred. " +
         "You should double check that you can connect to Trusona and try your request again.", e);
     }
   }

@@ -284,56 +284,6 @@ class TrusonaSpec extends Specification {
       .setResponseCode(200)
       .setBody("""\
         {
-          "endpoints": [ ]
-        }
-        """)
-    )
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "id": "${truCodeId.toString()}",
-          "paired": true,
-          "identifier": "foobar"
-        }
-      """)
-    )
-
-    when:
-    def res = sut.getPairedTruCode(truCodeId)
-
-    then:
-    res.identifier == "foobar"
-    res.id == truCodeId
-  }
-
-  def "getPairedTrucode should check all the configured endpoints"() {
-    given:
-    def truCodeId = UUID.randomUUID()
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ "${mockWebServer.url("/")}", "${mockWebServer.url("/")}" ]
-        }
-        """)
-    )
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(404))
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
           "id": "${truCodeId.toString()}",
           "paired": true,
           "identifier": "foobar"
@@ -353,20 +303,6 @@ class TrusonaSpec extends Specification {
     given:
     def truCodeId = UUID.randomUUID()
     mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ "${mockWebServer.url("/")}", "${mockWebServer.url("/")}" ]
-        }
-        """)
-    )
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(404))
-    mockWebServer.enqueue(new MockResponse()
       .setHeader('X-Signature', 'signature')
       .setResponseCode(404))
 
@@ -379,47 +315,11 @@ class TrusonaSpec extends Specification {
 
   def "getPairedTruCode with a specified timeout should poll until a paired TruCode is found (or Timeout is reached)"() {
     given:
-    def truCodeId = UUID.randomUUID()
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ ]
-        }
-        """)
-    )
+    sut.pollingInterval = Duration.ofSeconds(5)
 
     mockWebServer.enqueue(new MockResponse()
       .setHeader('X-Signature', 'signature')
       .setResponseCode(404))
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ ]
-        }
-        """)
-    )
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(404))
-
-    mockWebServer.enqueue(new MockResponse()
-      .setHeader("Content-Type", "application/json; charset=utf-8")
-      .setHeader('X-Signature', 'signature')
-      .setResponseCode(200)
-      .setBody("""\
-        {
-          "endpoints": [ ]
-        }
-        """)
-    )
 
     mockWebServer.enqueue(new MockResponse()
       .setHeader("Content-Type", "application/json; charset=utf-8")
@@ -434,7 +334,7 @@ class TrusonaSpec extends Specification {
     )
 
     when:
-    def res = sut.getPairedTruCode(UUID.fromString("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"), 5000)
+    def res = sut.getPairedTruCode(UUID.fromString("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"), 500)
 
     then:
     res.identifier == "wall-e@dogs.example.net"
