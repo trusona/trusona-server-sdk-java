@@ -23,6 +23,10 @@ public class ErrorResponse extends BaseRequestResponse {
     this.fieldErrors = fieldErrors;
   }
 
+  public ErrorResponse(String error, String message) {
+    this(error, message, null);
+  }
+
   public ErrorResponse(String error, String message, String description) {
     this.error = error;
     this.message = message;

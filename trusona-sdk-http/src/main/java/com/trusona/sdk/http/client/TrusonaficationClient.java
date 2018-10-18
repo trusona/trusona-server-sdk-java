@@ -53,6 +53,9 @@ public class TrusonaficationClient implements TrusonaficationApi {
             throw new TrusonaException(errorResponse.getMessage());
           }
         }
+        else if (response.code() == 422) {
+          throw new TrusonaException(getErrorResponse(response).getMessage());
+        }
       }
     };
 
