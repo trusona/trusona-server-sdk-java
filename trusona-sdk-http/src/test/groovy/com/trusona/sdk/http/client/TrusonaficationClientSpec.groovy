@@ -5,6 +5,7 @@ import com.trusona.sdk.http.client.v2.response.TrusonaficationResponse
 import com.trusona.sdk.resources.dto.Trusonafication
 import com.trusona.sdk.resources.exception.NoIdentityDocumentsException
 import com.trusona.sdk.resources.exception.TrusonaException
+import groovy.json.JsonSlurper
 import okhttp3.mockwebserver.MockResponse
 import spock.lang.Unroll
 
@@ -41,7 +42,6 @@ class TrusonaficationClientSpec extends ClientSpec {
       .resource('your lawn')
       .build())
     def request = mockWebServer.takeRequest()
-    def requestBody = request.body.readUtf8()
 
     then:
     request.method == 'POST'
@@ -71,12 +71,44 @@ class TrusonaficationClientSpec extends ClientSpec {
       .build())
 
     def request = mockWebServer.takeRequest()
-    def requestBody = request.body.readUtf8()
+    def map = new JsonSlurper().parse(request.body.readByteArray()) as Map
 
     then:
     request.method == 'POST'
     request.path == '/api/v2/trusonafications'
-    requestBody.contains(truCodeId.toString())
+    map.trucode_id == truCodeId as String
+
+    res.trusonaficationId == fromString('96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9')
+    res.status == IN_PROGRESS
+  }
+
+  def "createTrusonafication should send the email-address to the trusona service."() {
+    given:
+    def responseJson = """\
+    {
+      "id": "96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9",
+      "status": "IN_PROGRESS"
+    }
+    """
+
+    def emailAddress = "african-tiger@taco.jones"
+
+    mockWebServer.enqueue(signedResponse(201, responseJson))
+
+    when:
+    def res = sut.createTrusonafication(Trusonafication.essential()
+      .emailAddress(emailAddress)
+      .action('pee')
+      .resource('your lawn')
+      .build())
+
+    def request = mockWebServer.takeRequest()
+    def map = new JsonSlurper().parse(request.body.readByteArray()) as Map
+
+    then:
+    request.method == 'POST'
+    request.path == '/api/v2/trusonafications'
+    map.email == emailAddress
 
     res.trusonaficationId == fromString('96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9')
     res.status == IN_PROGRESS
@@ -123,6 +155,29 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     then:
     thrown(NoIdentityDocumentsException)
+  }
+
+  def "createTrusonafication should throw a generic exception when the service determines the relying-party cannot trusonafy a specific email address"() {
+    given:
+    mockWebServer.enqueue(signedResponse(
+      422,
+      """      
+      {
+        "error": "Failed Trusonafication",
+        "message": "Relying Party is not allowed to send a trusonafication to 'bob@taco.com'"       
+      }
+      """))
+
+    when:
+    sut.createTrusonafication(Trusonafication.executive()
+      .emailAddress("bob@taco.com")
+      .action("eat")
+      .resource("socks")
+      .build()
+    )
+
+    then:
+    thrown(TrusonaException)
   }
 
   def "getTrusonaficationResult should poll while it is IN_PROGRESS"() {

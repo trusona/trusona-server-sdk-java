@@ -46,6 +46,7 @@ public class TrusonaficationClient implements TrusonaficationApi {
       public void handleErrors(Response response) throws TrusonaException {
         if (response.code() == 424) {
           ErrorResponse errorResponse = getErrorResponse(response);
+
           if (errorResponse.getError().equals("NO_DOCUMENTS")) {
             throw new NoIdentityDocumentsException(errorResponse.getDescription());
           }
