@@ -5,7 +5,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.3"
+    classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.5"
   }
 }
 
@@ -34,6 +34,7 @@ subprojects {
   apply plugin: "signing"
   apply plugin: "maven"
   apply plugin: "maven-publish"
+  apply plugin: "jacoco"
 
   sourceCompatibility = 1.8
   targetCompatibility = 1.8
@@ -47,6 +48,15 @@ subprojects {
     doLast {
       println project.version
     }
+  }
+
+  test {
+    testLogging {
+      showStandardStreams = true
+      events "PASSED", "FAILED", "SKIPPED"
+    }
+
+    finalizedBy jacocoTestReport
   }
 
   apply from: "../publishing.gradle"
