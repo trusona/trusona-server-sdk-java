@@ -8,7 +8,7 @@ import spock.lang.Specification
  */
 class TrusonaficationExecutiveBuilderSpec extends Specification {
 
-  Trusonafication.ExecutiveBuilder sut = new Trusonafication.ExecutiveBuilder()
+  def sut = new Trusonafication.ExecutiveBuilder()
 
   def "constructor should have desiredLevel set to 3"() {
     expect:
@@ -26,6 +26,15 @@ class TrusonaficationExecutiveBuilderSpec extends Specification {
 
     then:
     sut.trusonafication.deviceIdentifier == 'wall-e'
+    res == sut
+  }
+
+  def "emailAddress should set the emailAddress and return the builder"() {
+    when:
+    def res = sut.emailAddress('taco@jones.com')
+
+    then:
+    sut.trusonafication.emailAddress == 'taco@jones.com'
     res == sut
   }
 
