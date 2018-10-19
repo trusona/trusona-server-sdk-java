@@ -150,9 +150,9 @@ Once a device is bound to a user, that user can be Trusonafied using the device 
 Trusona trusona = new Trusona(token, secret);
 
 Trusonafication trusonafication = Trusonafication.essential()
-      .deviceIdentifier('PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI')
-      .action('login')
-      .resource('Acme Bank')
+      .deviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
+      .action("login")
+      .resource("Acme Bank")
       .build();
 
 TrusonaficationResult result = trusona.createTrusonafication(trusonafication);
@@ -170,9 +170,9 @@ By default, Essential Trusonafications are built such that the user's presence i
 Trusona trusona = new Trusona(token, secret);
 
 Trusonafication trusonafication = Trusonafication.essential()
-      .deviceIdentifier('PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI')
-      .action('login')
-      .resource('Acme Bank')
+      .deviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
+      .action("login")
+      .resource("Acme Bank")
       .withoutUserPresence()
       .withoutPrompt()
       .build();
@@ -193,8 +193,8 @@ Trusona trusona = new Trusona(token, secret);
 
 Trusonafication trusonafication = Trusonafication.essential()
       .truCode(UUID.fromString("73CC202D-F866-4C72-9B43-9FCF5AF149BD"))
-      .action('login')
-      .resource('Acme Bank')
+      .action("login")
+      .resource("Acme Bank")
       .build();
 
 TrusonaficationResult result = trusona.createTrusonafication(trusonafication);
@@ -214,8 +214,8 @@ Trusona trusona = new Trusona(token, secret);
 
 Trusonafication trusonafication = Trusonafication.essential()
       .userIdentifier("73CC202D-F866-4C72-9B43-9FCF5AF149BD")
-      .action('login')
-      .resource('Acme Bank')
+      .action("login")
+      .resource("Acme Bank")
       .build();
 
 TrusonaficationResult result = trusona.createTrusonafication(trusonafication);
@@ -235,8 +235,8 @@ Trusona trusona = new Trusona(token, secret);
 
 Trusonafication trusonafication = Trusonafication.essential()
       .emailAddress("user@domain.com")
-      .action('login')
-      .resource('Acme Bank')
+      .action("login")
+      .resource("Acme Bank")
       .build();
 
 TrusonaficationResult result = trusona.createTrusonafication(trusonafication);
@@ -263,9 +263,9 @@ To create an Executive Trusonafication, call the `executive` method initially in
 Trusona trusona = new Trusona(token, secret);
 
 Trusonafication trusonafication = Trusonafication.executive()
-      .deviceIdentifier('PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI')
-      .action('login')
-      .resource('Acme Bank')
+      .deviceIdentifier("PBanKaajTmz_Cq1pDkrRzyeISBSBoGjExzp5r6-UjcI")
+      .action("login")
+      .resource("Acme Bank")
       .build();
 
 TrusonaficationResult result = trusona.createTrusonafication(trusonafication);
