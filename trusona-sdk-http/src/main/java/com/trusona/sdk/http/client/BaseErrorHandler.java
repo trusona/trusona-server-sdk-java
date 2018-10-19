@@ -20,14 +20,14 @@ public abstract class BaseErrorHandler implements ErrorHandler {
         return JacksonConfig.getObjectMapper().readValue(errorBody.get().charStream(), ErrorResponse.class);
       }
       catch (IOException e) {
-        throw new TrusonaException("An unknown error occurred. Contact Trusona to determine the exact cause.", e);
+        throw new TrusonaException("Failed to parse server error", e);
       }
       finally {
         errorBody.get().close();
       }
     }
     else {
-      return new ErrorResponse("UNKNOWN", "An unknown error occurred. Contact Trusona to determine the exact cause");
+      return new ErrorResponse("MISSING_ERROR_BODY", "Response error did not have a body");
     }
   }
 }
