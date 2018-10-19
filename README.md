@@ -228,6 +228,33 @@ if (result.isSuccessful()) {
 
 In some cases you may already know the user's identifier (i.e. in a multi-factor or step-up authentication scenario). This example shows how to issue a Trusonafication using the user's identifier.
 
+#### Creating an Essential Trusonafication, with the user's email address
+
+```java
+Trusona trusona = new Trusona(token, secret);
+
+Trusonafication trusonafication = Trusonafication.essential()
+      .emailAddress("user@domain.com")
+      .action('login')
+      .resource('Acme Bank')
+      .build();
+
+TrusonaficationResult result = trusona.createTrusonafication(trusonafication);
+
+if (result.isSuccessful()) {
+  // handle successful authentication
+}
+
+```
+In some cases you may be able to send a Trusonafication to a user
+by specifying their email address. This is the case if one of the following is true:
+
+- You have verified ownership of a domain through the Trusona Developer's site
+- You have an agreement with Trusona allowing you to send Trusonafications to any email address.
+
+Creating a Trusonafication with an email address is similar to the other
+use cases, except you use the `emailAddress()` method rather than `userIdentifier()` or `deviceIdentifier()`.
+
 #### Creating an Executive Trusonafication
 
 To create an Executive Trusonafication, call the `executive` method initially instead of `essential`.
