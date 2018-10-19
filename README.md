@@ -234,7 +234,7 @@ In some cases you may already know the user's identifier (i.e. in a multi-factor
 Trusona trusona = new Trusona(token, secret);
 
 Trusonafication trusonafication = Trusonafication.essential()
-      .emailAddress("user@domain.com")
+      .email("user@domain.com")
       .action("login")
       .resource("Acme Bank")
       .build();
@@ -253,7 +253,7 @@ by specifying their email address. This is the case if one of the following is t
 - You have an agreement with Trusona allowing you to send Trusonafications to any email address.
 
 Creating a Trusonafication with an email address is similar to the other
-use cases, except you use the `emailAddress()` method rather than `userIdentifier()` or `deviceIdentifier()`.
+use cases, except you use the `email()` method rather than `userIdentifier()` or `deviceIdentifier()`.
 
 #### Creating an Executive Trusonafication
 
