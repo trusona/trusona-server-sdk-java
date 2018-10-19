@@ -26,10 +26,10 @@ class TrusonaficationEssentialBuilderSpec extends Specification {
 
   def "emailAddress should set the emailAddress and return the builder"() {
     when:
-    def res = sut.emailAddress('taco@jones.com')
+    def res = sut.email('taco@jones.com')
 
     then:
-    sut.trusonafication.emailAddress == 'taco@jones.com'
+    sut.trusonafication.email == 'taco@jones.com'
     res == sut
   }
 

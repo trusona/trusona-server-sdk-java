@@ -38,11 +38,11 @@ public class TrusonaficationRequest extends BaseRequestResponse {
     this.deviceIdentifier = deviceIdentifier;
   }
 
-  public String getEmailAddress() {
+  public String getEmail() {
     return emailAddress;
   }
 
-  public void setEmailAddress(String emailAddress) {
+  public void setEmail(String emailAddress) {
     this.emailAddress = emailAddress;
   }
 

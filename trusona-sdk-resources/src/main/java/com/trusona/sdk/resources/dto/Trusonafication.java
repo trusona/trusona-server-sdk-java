@@ -78,7 +78,7 @@ public class Trusonafication extends BaseDto {
     return showIdentityDocument;
   }
 
-  public String getEmailAddress() {
+  public String getEmail() {
     return emailAddress;
   }
 
@@ -114,7 +114,7 @@ public class Trusonafication extends BaseDto {
      * @param emailAddress the user's email address
      * @return the next step required to finish building the trusonafication.
      */
-    ActionStep emailAddress(String emailAddress);
+    ActionStep email(String emailAddress);
   }
 
   public interface ActionStep {
@@ -203,7 +203,7 @@ public class Trusonafication extends BaseDto {
     }
 
     @Override
-    public ActionStep emailAddress(String emailAddress) {
+    public ActionStep email(String emailAddress) {
       trusonafication.emailAddress = emailAddress;
       return this;
     }
