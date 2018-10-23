@@ -26,6 +26,9 @@ public class Trusonafication extends BaseDto {
   private boolean prompt;
   private boolean showIdentityDocument;
 
+  @JsonProperty("email")
+  private String emailAddress;
+
   private Trusonafication() {
     this.userPresence = true;
     this.prompt = true;
@@ -75,6 +78,10 @@ public class Trusonafication extends BaseDto {
     return showIdentityDocument;
   }
 
+  public String getEmail() {
+    return emailAddress;
+  }
+
   public interface IdentifierStep {
     /**
      * Sets the device identifier of the user to be authenticated.
@@ -100,6 +107,14 @@ public class Trusonafication extends BaseDto {
      * @return the next step required to finish building the trusonafication.
      */
     ActionStep userIdentifier(String userIdentifier);
+
+    /**
+     * Sets the user identifier of the user to be authenticated.
+     *
+     * @param emailAddress the user's email address
+     * @return the next step required to finish building the trusonafication.
+     */
+    ActionStep email(String emailAddress);
   }
 
   public interface ActionStep {
@@ -121,6 +136,7 @@ public class Trusonafication extends BaseDto {
      */
     FinalizeStep resource(String resource);
   }
+
 
   public interface FinalizeStep {
     /**
@@ -183,6 +199,12 @@ public class Trusonafication extends BaseDto {
     @Override
     public ActionStep truCode(UUID truCodeId) {
       trusonafication.truCodeId = truCodeId;
+      return this;
+    }
+
+    @Override
+    public ActionStep email(String emailAddress) {
+      trusonafication.emailAddress = emailAddress;
       return this;
     }
 
