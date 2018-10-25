@@ -35,7 +35,7 @@ git add build.gradle
 git commit -m "release ${TAG_NAME}"
 git tag -f -a ${TAG_NAME} -m "release ${TAG_NAME}"
 
-echo "Do you want to publish version ${RELEASE_VERSION} now? [y/N]: "
+/bin/echo -n "Do you want to publish version ${RELEASE_VERSION} now? [y/N]: "
 read RESPONSE
 
 if [ "${RESPONSE}" == "y" ]; then
