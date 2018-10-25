@@ -24,7 +24,7 @@ deploy:
 
   - provider: script
     skip_cleanup: true
-    script: ./gradlew uploadArchives artifactoryPublish -PisRelease=true
+    script: ./gradlew uploadArchives artifactoryPublish
     on:
       tags: true
 

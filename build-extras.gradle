@@ -2,6 +2,10 @@ allprojects {
   ext."signing.keyId" = signingKeyId
   ext."signing.secretKeyRingFile" = signingSecretKeyRingFile
   ext."signing.password" = signingPassword
+
+  ext.environmentValue = { key ->
+    System.getenv(key as String)?.trim() ?: null
+  }
 }
 
 artifactory {
@@ -9,7 +13,7 @@ artifactory {
 
   publish {
     repository {
-      repoKey =  project.findProperty("isRelease") == "true" ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
+      repoKey =  environmentValue.call("TRAVIS_TAG") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
       username = System.getenv("artifactory_username") ?: trusonaUsername
       password = System.getenv("artifactory_password") ?: trusonaPassword
       maven = true
@@ -22,7 +26,7 @@ artifactory {
   }
   resolve {
     repository {
-      repoKey =  project.findProperty("isRelease") == "true" ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
+      repoKey =  environmentValue.call("TRAVIS_TAG") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
       username = System.getenv("artifactory_username") ?: trusonaUsername
       password = System.getenv("artifactory_password") ?: trusonaPassword
       maven = true
