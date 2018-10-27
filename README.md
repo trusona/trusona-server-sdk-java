@@ -205,7 +205,7 @@ if (result.isSuccessful()) {
 
 ```
 
-In this example, instead of specifying a device identifier, you can provide an ID for a TruCode that was scanned by the Trusona Mobile SDK. This will create a Trusonafication for the device that scanned the TruCode. See [Using TruCode for device discovery](#useing-trucode-for-device-discovery) below for more information on using TruCodes.
+In this example, instead of specifying a device identifier, you can provide an ID for a TruCode that was scanned by the Trusona Mobile SDK. This will create a Trusonafication for the device that scanned the TruCode. See [Using TruCode for device discovery](#using-trucode-for-device-discovery) below for more information on using TruCodes.
 
 #### Creating an Essential Trusonafication, with the user's identifier
 
