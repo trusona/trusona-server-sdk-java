@@ -17,7 +17,6 @@ class TrusonaficationRequestSpec extends RequestResponseSpec<TrusonaficationRequ
     action: 'partay',
     resource: 'your hauz',
     expiresAt: dateFormat.parse('2018-01-23T23:28:45Z'),
-    callbackUrl: 'https://kid-and-play.com/',
     userPresence: false,
     prompt: false,
     showIdentityDocument: true
@@ -31,7 +30,6 @@ class TrusonaficationRequestSpec extends RequestResponseSpec<TrusonaficationRequ
     "action": "partay",
     "resource": "your hauz",
     "expires_at": "2018-01-23T23:28:45Z",
-    "callback_url": "https://kid-and-play.com/",
     "user_presence": false,
     "prompt": false,
     "show_identity_document": true

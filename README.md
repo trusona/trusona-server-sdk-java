@@ -260,7 +260,6 @@ Executive Trusonafications require the user to scan an identity document to auth
 | `userIdentifier`      |    N[^1] |  none   | The identifier of the user that was registered to a device.                                      |
 | `action`              |    Y     |  none   | The action being verified by the Trusonafication. (e.g. 'login', 'verify')                       |
 | `resource`            |    Y     |  none   | The resource being acted upon by the user. (e.g. 'website', 'account')                           |
-| `callbackUrl`         |    N     |  null   | A callback URL that is called by the Trusona API when the Trusonafication has been completed.    |
 | `expiresAt`           |    N     |  null   | An ISO-8601 UTC date that sets the expiration time of the Trusonafication.                       |
 | `withoutUserPresence` |    N     |  false  | Removes the requirement for the user to demonstrate presence when accepting the Trusonafication. |
 | `withoutPrompt`       |    N     |  false  | Removes the requirement for the user to explicityly "Accept" or "Reject" the Trusonafication.    |

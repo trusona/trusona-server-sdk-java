@@ -21,7 +21,6 @@ public class Trusonafication extends BaseDto {
   private String action;
   private String resource;
   private Date expiresAt;
-  private String callbackUrl;
   private boolean userPresence;
   private boolean prompt;
   private boolean showIdentityDocument;
@@ -57,10 +56,6 @@ public class Trusonafication extends BaseDto {
 
   public Date getExpiresAt() {
     return expiresAt;
-  }
-
-  public String getCallbackUrl() {
-    return callbackUrl;
   }
 
   public boolean isUserPresence() {
@@ -141,15 +136,6 @@ public class Trusonafication extends BaseDto {
     FinalizeStep withoutUserPresence();
 
     /**
-     * Sets the url to call when this trusonafication has either been accepted or rejected. Trusonafications that expire
-     * will not invoke the callback URL.
-     *
-     * @param callbackUrl the callback URL.
-     * @return the next step required to finish building the trusonafication.
-     */
-    FinalizeStep callbackUrl(String callbackUrl);
-
-    /**
      * Sets the time when this authentication request should expire. It cannot be responded to after it expires.
      *
      * @param expiresAt the expiration time.
@@ -201,12 +187,6 @@ public class Trusonafication extends BaseDto {
     @Override
     public FinalizeStep resource(String resource) {
       trusonafication.resource = resource;
-      return this;
-    }
-
-    @Override
-    public FinalizeStep callbackUrl(String callbackUrl) {
-      trusonafication.callbackUrl = callbackUrl;
       return this;
     }
 
