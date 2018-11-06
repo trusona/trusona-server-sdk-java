@@ -4,6 +4,8 @@ build/
 .env
 .DS_STORE
 buildinfo.*
-keystores/trusona-signing.*
+keystores/trusona-signing.gpg
+keystores/trusona-signing.key
+keystores/trusona-signing.pub
 tmp/
 */out/
