@@ -56,15 +56,6 @@ class TrusonaficationExecutiveBuilderSpec extends Specification {
     res == sut
   }
 
-  def "callbackUrl should set the callbackUrl and return the builder"() {
-    when:
-    def res = sut.callbackUrl('https://earl.grey.com')
-
-    then:
-    sut.trusonafication.callbackUrl == 'https://earl.grey.com'
-    res == sut
-  }
-
   def "expiresAt should set the expiresAt and return the builder"() {
     given:
     def date = new Date()

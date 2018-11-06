@@ -17,7 +17,6 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
     action: 'partay',
     resource: 'your hauz',
     expiresAt: dateFormat.parse('2018-01-23T23:28:45Z'),
-    callbackUrl: 'https://kid-and-play.com/',
     userPresence: false,
     prompt: false,
     showIdentityDocument: true
@@ -32,7 +31,6 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
     "action": "partay",
     "resource": "your hauz",
     "expires_at": "2018-01-23T23:28:45Z",
-    "callback_url": "https://kid-and-play.com/",
     "user_presence": false,
     "email": "african-tiger@taco.net",
     "prompt": false,
@@ -62,18 +60,6 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
 
     then:
     sut.prompt
-  }
-
-  def "should default callbackUrl to null"() {
-    when:
-    def sut = Trusonafication.essential()
-      .deviceIdentifier('wall-e')
-      .action('jackson')
-      .resource('humans')
-      .build()
-
-    then:
-    sut.callbackUrl == null
   }
 
   def "should default expiresAt to null"() {

@@ -1,10 +1,9 @@
 package com.trusona.sdk.http.client.v2.request;
 
-import com.trusona.sdk.http.client.v2.BaseRequestResponse;
-
-import java.util.Date;
-
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+
+import com.trusona.sdk.http.client.v2.BaseRequestResponse;
+import java.util.Date;
 
 /**
  * Copyright Trusona, Inc.
@@ -20,7 +19,6 @@ public class TrusonaficationRequest extends BaseRequestResponse {
   private String action;
   private String resource;
   private Date expiresAt;
-  private String callbackUrl;
   private boolean userPresence;
   private boolean prompt;
   private boolean showIdentityDocument;
@@ -84,14 +82,6 @@ public class TrusonaficationRequest extends BaseRequestResponse {
 
   public void setExpiresAt(Date expiresAt) {
     this.expiresAt = expiresAt;
-  }
-
-  public String getCallbackUrl() {
-    return callbackUrl;
-  }
-
-  public void setCallbackUrl(String callbackUrl) {
-    this.callbackUrl = callbackUrl;
   }
 
   public boolean isUserPresence() {
