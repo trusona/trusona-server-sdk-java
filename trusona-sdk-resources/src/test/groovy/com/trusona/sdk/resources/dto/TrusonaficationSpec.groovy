@@ -11,6 +11,7 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
   Trusonafication sut = new Trusonafication(
     deviceIdentifier: 'datDevice',
     userIdentifier: 'datUser',
+    emailAddress: 'african-tiger@taco.net',
     truCodeId: UUID.fromString("3827D5E5-B6C1-49F8-865E-72794D10BEF4"),
     desiredLevel: 2,
     action: 'partay',
@@ -31,6 +32,7 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
     "resource": "your hauz",
     "expires_at": "2018-01-23T23:28:45Z",
     "user_presence": false,
+    "email": "african-tiger@taco.net",
     "prompt": false,
     "show_identity_document": true
   }

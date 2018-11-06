@@ -68,7 +68,7 @@ class GenericErrorHandlerSpec extends Specification {
 
     then:
     def exc = thrown(TrusonaException)
-    exc.message == "An unknown error occurred. Contact Trusona to determine the exact cause."
+    exc.message == "Failed to parse error response"
   }
 
   @Unroll
