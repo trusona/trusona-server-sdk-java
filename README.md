@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/trusona/trusona-server-sdk-java.svg?branch=master)](https://travis-ci.com/trusona/trusona-server-sdk-java)
-[![Coverage Status](https://coveralls.io/repos/github/trusona/trusona-server-sdk-java/badge.svg?branch=master)](https://coveralls.io/github/trusona/trusona-server-sdk-java?branch=master)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/5959a0775d2ada2d326f/test_coverage)](https://codeclimate.com/github/trusona/trusona-server-sdk-java/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5959a0775d2ada2d326f/maintainability)](https://codeclimate.com/github/trusona/trusona-server-sdk-java/maintainability)
 
 # Trusona Server SDK
