@@ -2,10 +2,14 @@ buildscript {
   repositories {
     mavenCentral()
     jcenter()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
   }
 
   dependencies {
     classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.5"
+    classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.1.1"
   }
 }
 
