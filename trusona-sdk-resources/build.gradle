@@ -37,6 +37,7 @@ publishing {
 
       artifact sourceJar
       artifact javadocZip
+      artifact javadocJar
     }
   }
 }

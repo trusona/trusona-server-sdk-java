@@ -18,13 +18,13 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: ./gradlew uploadArchives artifactoryPublish
+    script: ./gradlew publish artifactoryPublish
     on:
       branch: master
 
   - provider: script
     skip_cleanup: true
-    script: ./gradlew uploadArchives artifactoryPublish
+    script: ./gradlew publish artifactoryPublish
     on:
       tags: true
 
