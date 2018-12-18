@@ -6,6 +6,7 @@ import com.trusona.sdk.http.ServiceGenerator
 import com.trusona.sdk.http.client.security.HmacMessage
 import com.trusona.sdk.http.client.security.HmacSignatureGenerator
 import com.trusona.sdk.http.environment.Environment
+import com.trusona.sdk.http.environment.ProdEnvironment
 import com.trusona.sdk.resources.DevicesApi
 import com.trusona.sdk.resources.TrusonaficationApi
 import com.trusona.sdk.resources.UsersApi
@@ -479,5 +480,4 @@ class TrusonaSpec extends Specification {
     1 * _.deactivateUser("any-identifier")
     0 * _
   }
-
 }

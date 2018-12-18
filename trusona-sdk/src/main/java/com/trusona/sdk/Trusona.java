@@ -79,7 +79,7 @@ public class Trusona implements TrusonaApi {
   }
 
   Trusona(TrusonaEnvironment environment, ApiCredentials apiCredentials) {
-    this(ServiceGenerator.create(getHttpEnvironment(environment), apiCredentials, new DefaultHmacSignatureGenerator()), apiCredentials);
+    this(ServiceGenerator.create(EnvironmentFactory.getEnvironment(environment), apiCredentials, new DefaultHmacSignatureGenerator()), apiCredentials);
   }
 
   public Trusona(String token, String secret, TrusonaEnvironment environment) {
@@ -295,15 +295,5 @@ public class Trusona implements TrusonaApi {
   @Override
   public Device getDevice(String deviceIdentifier) throws TrusonaException {
     return devicesApi.getDevice(deviceIdentifier);
-  }
-
-  private static Environment getHttpEnvironment(TrusonaEnvironment environment) {
-    switch (environment) {
-      case UAT:
-        return new UatEnvironment();
-      case PRODUCTION:
-      default:
-        return new ProdEnvironment();
-    }
   }
 }

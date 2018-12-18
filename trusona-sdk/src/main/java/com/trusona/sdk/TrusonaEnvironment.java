@@ -6,5 +6,7 @@ package com.trusona.sdk;
  */
 public enum TrusonaEnvironment {
   PRODUCTION,
-  UAT
+  UAT,
+  AP_UAT,
+  AP_PRODUCTION
 }
