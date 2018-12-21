@@ -35,6 +35,7 @@ The Trusona Server SDK allows simplified interaction with the Trusona API.
    1. [Retrieving a device](#retrieving-a-device)
    1. [Deactivating a user](#deactivating-a-user)
    1. [Handling errors](#handling-errors)
+   1. [Using a specific Trusona region](#using-a-specific-trusona-region)
 
 
 ## Prerequisites
@@ -443,6 +444,15 @@ The deactivated user can be reactivated at a later date by binding them to a new
 ### Handling errors
 
 Failed requests get thrown as a `TrusonaException`, which contains a message about what went wrong and what you should do to fix the problem. Some calls may also throw subclasses of `TrusonaException` for scenarios where it might be possible to correct the issue programmatically. It's up to you if you want to handle those specific scenarios or just catch all `TrusonaException`s. If a request fails validation and has error messages for specific fields, a `ValidationException` will get thrown and you can call `getFieldErrors` to inspect the error messages associated with each field that failed.
+
+
+### Using a specific Trusona region
+
+All users are provisioned in the default region. Unless otherwise noted, you will not need to configure Trusona to use a specific region. If you have been provisioned in a specific region, you will need to point the SDK to use that region. This can be done by passing the appropriate region endpoint to the constructor. For example:
+
+```java
+Trusona trusona = trusona = new Trusona(token, secret, TrusonaEnvironment.AP_PRODUCTION);
+```
 
 
 ### Need additional help?
