@@ -448,7 +448,7 @@ Failed requests get thrown as a `TrusonaException`, which contains a message abo
 
 ### Using a specific Trusona region
 
-All users are provisioned in the default region. Unless otherwise noted you will not need to configure Trusona to use a specific region. If you have been provisioned in a specific region, you will need to point the SDK to use that region. This can be done by passing the appropriate region endpoint to the constructor. For example:
+All users are provisioned in the default region. Unless otherwise noted, you will not need to configure Trusona to use a specific region. If you have been provisioned in a specific region, you will need to point the SDK to use that region. This can be done by passing the appropriate region endpoint to the constructor. For example:
 
 ```java
 Trusona trusona = trusona = new Trusona(token, secret, TrusonaEnvironment.AP_PRODUCTION);
