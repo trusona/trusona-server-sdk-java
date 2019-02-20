@@ -31,7 +31,7 @@ allprojects {
 
 subprojects {
   group "com.trusona"
-  version "3.5.4-SNAPSHOT"
+  version "3.6.0-SNAPSHOT"
 
   apply plugin: "java"
   apply plugin: "groovy"
