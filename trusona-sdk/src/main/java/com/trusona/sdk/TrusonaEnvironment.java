@@ -8,5 +8,7 @@ public enum TrusonaEnvironment {
   PRODUCTION,
   UAT,
   AP_UAT,
-  AP_PRODUCTION
+  AP_PRODUCTION,
+  EU_PRODUCTION,
+  EU_UAT
 }
