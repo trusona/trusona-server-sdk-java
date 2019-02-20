@@ -16,6 +16,10 @@ public class EnvironmentFactory {
         return new ApProdEnvironment();
       case AP_UAT:
         return new ApUatEnvironment();
+      case EU_PRODUCTION:
+        return new EuProdEnvironment();
+      case EU_UAT:
+        return new EuUatEnvironment();
       default:
         throw new IllegalArgumentException("Unexpected environment: " + env);
     }
