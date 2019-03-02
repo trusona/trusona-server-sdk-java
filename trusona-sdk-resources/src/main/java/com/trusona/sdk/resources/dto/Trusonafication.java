@@ -28,6 +28,8 @@ public class Trusonafication extends BaseDto {
   @JsonProperty("email")
   private String emailAddress;
 
+  private String trusonaId;
+
   private Trusonafication() {
     this.userPresence = true;
     this.prompt = true;
@@ -77,6 +79,10 @@ public class Trusonafication extends BaseDto {
     return emailAddress;
   }
 
+  public String getTrusonaId() {
+    return trusonaId;
+  }
+
   public interface IdentifierStep {
     /**
      * Sets the device identifier of the user to be authenticated.
@@ -104,12 +110,20 @@ public class Trusonafication extends BaseDto {
     ActionStep userIdentifier(String userIdentifier);
 
     /**
-     * Sets the user identifier of the user to be authenticated.
+     * Sets the email address of the user to be authenticated using the Trusona app.
      *
      * @param emailAddress the user's email address
      * @return the next step required to finish building the trusonafication.
      */
     ActionStep email(String emailAddress);
+
+    /**
+     * Sets the Trusona ID of the user to be authenticated using the Trusona app.
+     *
+     * @param trusonaId the user's Trusona ID
+     * @return the next step required to finish building the trusonafication.
+     */
+    ActionStep trusonaId(String trusonaId);
   }
 
   public interface ActionStep {
@@ -197,6 +211,12 @@ public class Trusonafication extends BaseDto {
     @Override
     public ActionStep userIdentifier(String userIdentifier) {
       trusonafication.userIdentifier = userIdentifier;
+      return this;
+    }
+
+    @Override
+    public ActionStep trusonaId(String trusonaId) {
+      trusonafication.trusonaId = trusonaId;
       return this;
     }
 
