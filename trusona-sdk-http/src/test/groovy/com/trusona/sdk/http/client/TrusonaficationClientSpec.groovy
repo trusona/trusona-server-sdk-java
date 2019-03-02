@@ -38,8 +38,8 @@ class TrusonaficationClientSpec extends ClientSpec {
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
       .deviceIdentifier('wall-e')
-      .action('pee')
-      .resource('your lawn')
+      .action('eat')
+      .resource('your lunch')
       .build())
     def request = mockWebServer.takeRequest()
 
@@ -66,8 +66,8 @@ class TrusonaficationClientSpec extends ClientSpec {
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
       .truCode(truCodeId)
-      .action('pee')
-      .resource('your lawn')
+      .action('eat')
+      .resource('your lunch')
       .build())
 
     def request = mockWebServer.takeRequest()
@@ -98,8 +98,8 @@ class TrusonaficationClientSpec extends ClientSpec {
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
       .email(emailAddress)
-      .action('pee')
-      .resource('your lawn')
+      .action('eat')
+      .resource('your lunch')
       .build())
 
     def request = mockWebServer.takeRequest()
@@ -122,8 +122,8 @@ class TrusonaficationClientSpec extends ClientSpec {
     when:
     sut.createTrusonafication(Trusonafication.essential()
       .deviceIdentifier('wall-e')
-      .action('pee')
-      .resource('your lawn')
+      .action('eat')
+      .resource('your lunch')
       .build())
 
     then:
@@ -137,7 +137,7 @@ class TrusonaficationClientSpec extends ClientSpec {
     given:
     mockWebServer.enqueue(signedResponse(
       424,
-      """      
+      """
       {
         "error": "NO_DOCUMENTS",
         "message": "User does not meet the requirements to accept this Trusonafication.",
@@ -161,10 +161,10 @@ class TrusonaficationClientSpec extends ClientSpec {
     given:
     mockWebServer.enqueue(signedResponse(
       422,
-      """      
+      """
       {
         "error": "Failed Trusonafication",
-        "message": "Relying Party is not allowed to send a trusonafication to 'bob@taco.com'"       
+        "message": "Relying Party is not allowed to send a trusonafication to 'bob@taco.com'"
       }
       """))
 
@@ -243,8 +243,8 @@ class TrusonaficationClientSpec extends ClientSpec {
       updatedAt: dateFormat.parse("2018-01-23T23:28:46Z"),
       deviceIdentifier: "wall-e",
       desiredLevel: 2,
-      action: "pee",
-      resource: "your lawn",
+      action: "eat",
+      resource: "your lunch",
       expiresAt: dateFormat.parse("2018-01-23T23:28:47Z"),
       userPresence: true,
       prompt: true
@@ -266,8 +266,8 @@ class TrusonaficationClientSpec extends ClientSpec {
       updatedAt: dateFormat.parse("2018-01-23T23:28:46Z"),
       deviceIdentifier: "wall-e",
       desiredLevel: 2,
-      action: "pee",
-      resource: "your lawn",
+      action: "eat",
+      resource: "your lunch",
       expiresAt: dateFormat.parse("2018-01-23T23:28:47Z"),
       userPresence: true,
       prompt: true
