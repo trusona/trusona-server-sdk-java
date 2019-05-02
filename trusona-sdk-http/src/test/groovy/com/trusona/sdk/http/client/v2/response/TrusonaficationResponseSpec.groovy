@@ -26,7 +26,8 @@ class TrusonaficationResponseSpec extends RequestResponseSpec<TrusonaficationRes
     result: new TrusonaficationResultResponse(
       id: UUID.fromString('96ea5830-8e5e-42c5-9cbb-8a941d2ff7f8'),
       accepted: true,
-      acceptedLevel: 2
+      acceptedLevel: 2,
+      boundUserIdentifier: 'dr.mantis.tobboggan'
     )
   )
 
@@ -47,7 +48,8 @@ class TrusonaficationResponseSpec extends RequestResponseSpec<TrusonaficationRes
     "result": {
       "id": "96ea5830-8e5e-42c5-9cbb-8a941d2ff7f8",
       "is_accepted": true,
-      "accepted_level": 2
+      "accepted_level": 2,
+      "bound_user_identifier": "dr.mantis.tobboggan"
     }
   }
   """

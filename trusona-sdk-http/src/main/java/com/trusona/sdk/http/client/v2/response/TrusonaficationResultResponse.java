@@ -18,6 +18,7 @@ public class TrusonaficationResultResponse extends BaseRequestResponse {
   @JsonProperty("is_accepted")
   private boolean accepted;
   private Integer acceptedLevel;
+  private String boundUserIdentifier;
 
   public UUID getId() {
     return id;
@@ -41,6 +42,14 @@ public class TrusonaficationResultResponse extends BaseRequestResponse {
 
   public void setAcceptedLevel(Integer acceptedLevel) {
     this.acceptedLevel = acceptedLevel;
+  }
+
+  public String getBoundUserIdentifier() {
+    return boundUserIdentifier;
+  }
+
+  public void setBoundUserIdentifier(String boundUserIdentifier) {
+    this.boundUserIdentifier = boundUserIdentifier;
   }
 
   @Override

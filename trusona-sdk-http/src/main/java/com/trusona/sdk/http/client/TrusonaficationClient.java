@@ -98,7 +98,8 @@ public class TrusonaficationClient implements TrusonaficationApi {
       response.getId(),
       TrusonaficationStatus.valueOf(response.getStatus()),
       userIdentifier,
-      response.getExpiresAt()
+      response.getExpiresAt(),
+      response.getResult() != null ? response.getResult().getBoundUserIdentifier() : null
     );
   }
 
