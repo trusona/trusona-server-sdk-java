@@ -14,7 +14,7 @@ class TrusonaficationResultSpec extends Specification {
   @Unroll
   def "isSuccessful should return #expected when the status is #status.inspect()"() {
     given:
-    def sut = new TrusonaficationResult(UUID.randomUUID(), status, 'blars-tacoman', new Date())
+    def sut = new TrusonaficationResult(UUID.randomUUID(), status, 'blars-tacoman', new Date(), null)
 
     when:
     def res = sut.isSuccessful()
