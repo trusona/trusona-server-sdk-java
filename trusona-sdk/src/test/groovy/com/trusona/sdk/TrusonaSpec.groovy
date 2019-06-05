@@ -6,7 +6,6 @@ import com.trusona.sdk.http.ServiceGenerator
 import com.trusona.sdk.http.client.security.HmacMessage
 import com.trusona.sdk.http.client.security.HmacSignatureGenerator
 import com.trusona.sdk.http.environment.Environment
-import com.trusona.sdk.http.environment.ProdEnvironment
 import com.trusona.sdk.resources.DevicesApi
 import com.trusona.sdk.resources.TrusonaficationApi
 import com.trusona.sdk.resources.UsersApi
@@ -26,7 +25,7 @@ import spock.lang.Unroll
 
 import java.time.Duration
 
-import static JacksonConfig.dateFormat
+import static com.trusona.sdk.config.JacksonConfig.dateFormat
 
 class TrusonaSpec extends Specification {
 
