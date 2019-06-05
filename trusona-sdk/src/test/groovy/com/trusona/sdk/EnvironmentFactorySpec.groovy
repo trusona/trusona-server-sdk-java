@@ -19,6 +19,7 @@ class EnvironmentFactorySpec extends Specification {
     AP_UAT        | new ApUatEnvironment()
     EU_PRODUCTION | new EuProdEnvironment()
     EU_UAT        | new EuUatEnvironment()
+    VERIFY        | new VerifyEnvironment()
   }
 
   def "getEnvironment should return IllegalArgumentException for unknown environments"() {
