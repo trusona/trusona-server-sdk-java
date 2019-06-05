@@ -83,14 +83,11 @@ dependencies {
 
 The `Trusona` class is the main class you will interact with to talk to the Trusona APIs. It can be created with the `token` and `secret` provided by [Trusona](#server-sdk-api-credentials).
 
-*NOTE:* The `token` and `secret` should not be shared with anyone. They are how you authenticate to the Trusona services, and you should not check them into source control.
-
 ```java
 Trusona trusona = new Trusona(token, secret);
 ```
 
-You'll also want to make sure the `token` and `secret` values aren't checked in to your project.
-
+*NOTE:* The `token` and `secret` should not be shared with anyone. They are how you authenticate to the Trusona services, and you should not check them into source control.
 
 ### Registering devices with Trusona
 
@@ -293,7 +290,7 @@ Executive Trusonafications require the user to scan an identity document to auth
 | `resource`            |    Y     |  none   | The resource being acted upon by the user. e.g. website, account                                 |
 | `expiresAt`           |    N     |  null   | An ISO-8601 UTC date that sets the expiration time of the Trusonafication.                       |
 | `withoutUserPresence` |    N     |  false  | Removes the requirement for the user to demonstrate presence when accepting the Trusonafication. |
-| `withoutPrompt`       |    N     |  false  | Removes the requirement for the user to explicityly "Accept" or "Reject" the Trusonafication.    |
+| `withoutPrompt`       |    N     |  false  | Removes the requirement for the user to explicitly "Accept" or "Reject" the Trusonafication.    |
 
 [^1]: You must provide at least one field that would allow Trusona to determine which user to authenticate. The identifier fields are `deviceIdentifier`, `truCode`, and `userIdentifier`.
 
