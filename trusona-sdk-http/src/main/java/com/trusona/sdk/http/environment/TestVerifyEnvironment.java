@@ -2,7 +2,7 @@ package com.trusona.sdk.http.environment;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
-public class VerifyEnvironment implements Environment {
+public class TestVerifyEnvironment implements Environment {
   private static final String ENDPOINT_URL = "https://api.verify.trusona.net";
 
   @Override

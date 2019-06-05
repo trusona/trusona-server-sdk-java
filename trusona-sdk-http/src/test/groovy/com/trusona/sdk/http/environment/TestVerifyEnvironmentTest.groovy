@@ -3,11 +3,11 @@ package com.trusona.sdk.http.environment
 import okhttp3.logging.HttpLoggingInterceptor
 import spock.lang.Specification
 
-class VerifyEnvironmentTest extends Specification {
-  VerifyEnvironment sut
+class TestVerifyEnvironmentTest extends Specification {
+  TestVerifyEnvironment sut
 
   def setup() {
-    sut = new VerifyEnvironment()
+    sut = new TestVerifyEnvironment()
   }
 
   def "getLoggingLevel should return BODY"() {

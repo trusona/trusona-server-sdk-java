@@ -11,5 +11,5 @@ public enum TrusonaEnvironment {
   AP_PRODUCTION,
   EU_PRODUCTION,
   EU_UAT,
-  VERIFY
+  TEST_VERIFY
 }
