@@ -1,6 +1,7 @@
 package com.trusona.sdk.resources.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Date;
@@ -24,6 +25,7 @@ public class Trusonafication extends BaseDto {
   private boolean userPresence;
   private boolean prompt;
   private boolean showIdentityDocument;
+  private Map<String, Object> customFields;
 
   @JsonProperty("email")
   private String emailAddress;
@@ -71,6 +73,10 @@ public class Trusonafication extends BaseDto {
 
   public boolean isShowIdentityDocument() {
     return showIdentityDocument;
+  }
+
+  public Map<String, Object> getCustomFields() {
+    return customFields;
   }
 
   public String getEmail() {
