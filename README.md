@@ -255,6 +255,31 @@ by specifying their email address. This is the case if one of the following is t
 Creating a Trusonafication with an email address is similar to the other
 use cases, except you use the `email()` method rather than `userIdentifier()` or `deviceIdentifier()`.
 
+#### Adding custom fields to a Trusonafication
+If you are using the mobile SDK to build a custom app that integrates with Trusona, you have the option of including additional data on the Trusonafication which the app can use to affect its behavior. For example, you may want to include additional context on the Trusonafication prompt. You can add these custom fields by calling the `customField` method as shown below. The custom fields will then be available in the Trusonafication received by the mobile SDK.
+
+Note that the custom fields are not used in the case that the Trusonafication is being handled by the Trusona app.
+
+```java
+Trusona trusona = new Trusona(token, secret);
+
+Trusonafication trusonafication = Trusonafication.essential()
+      .email("user@domain.com")
+      .action("login")
+      .resource("Acme Bank")
+      .customField("lastLogin", "2019-07-03T22:36:00Z")
+      .customField("greeting", "Good afternoon!")
+      .build();
+
+TrusonaficationResult result = trusona.createTrusonafication(trusonafication);
+
+if (result.isSuccessful()) {
+  // handle successful authentication
+}
+
+```
+
+
 #### Creating an Executive Trusonafication
 
 To create an Executive Trusonafication, call the `executive` method initially instead of `essential`.
@@ -291,6 +316,7 @@ Executive Trusonafications require the user to scan an identity document to auth
 | `expiresAt`           |    N     |  null   | An ISO-8601 UTC date that sets the expiration time of the Trusonafication.                       |
 | `withoutUserPresence` |    N     |  false  | Removes the requirement for the user to demonstrate presence when accepting the Trusonafication. |
 | `withoutPrompt`       |    N     |  false  | Removes the requirement for the user to explicitly "Accept" or "Reject" the Trusonafication.    |
+| `customField`         |    N     | null    | Adds custom fields to the Trusonafication, which can be inspected in the mobile SDK when receiving the Trusonafication. |
 
 [^1]: You must provide at least one field that would allow Trusona to determine which user to authenticate. The identifier fields are `deviceIdentifier`, `truCode`, and `userIdentifier`.
 

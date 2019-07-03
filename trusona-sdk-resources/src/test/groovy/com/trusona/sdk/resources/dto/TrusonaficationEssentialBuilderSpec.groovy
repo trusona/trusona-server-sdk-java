@@ -82,6 +82,15 @@ class TrusonaficationEssentialBuilderSpec extends Specification {
     res == sut
   }
 
+  def "customField should set a custom field and return a builder"() {
+    when:
+    def res = sut.customField('foo', 'bar')
+
+    then:
+    sut.trusonafication.customFields['foo'] == 'bar'
+    res == sut
+  }
+
   def "build should return the underlying trusonafication"() {
     when:
     def res = sut.build()
