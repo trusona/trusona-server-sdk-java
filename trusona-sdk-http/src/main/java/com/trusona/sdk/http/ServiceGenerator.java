@@ -5,6 +5,8 @@ import com.trusona.sdk.http.client.interceptor.HmacAuthInterceptor;
 import com.trusona.sdk.http.client.interceptor.TrusonaHeaderInterceptor;
 import com.trusona.sdk.http.client.security.HmacSignatureGenerator;
 import com.trusona.sdk.http.environment.Environment;
+import java.util.concurrent.TimeUnit;
+import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -29,13 +31,19 @@ public class ServiceGenerator {
     return retrofit.baseUrl().toString();
   }
 
-  public static ServiceGenerator create(Environment environment, ApiCredentials apiCredentials, HmacSignatureGenerator hmacSignatureGenerator) {
+  public static ServiceGenerator create(Environment environment,
+                                        ApiCredentials apiCredentials,
+                                        HmacSignatureGenerator hmacSignatureGenerator) {
+
     HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new Slf4jLogger());
     loggingInterceptor.setLevel(environment.getLoggingLevel());
 
     OkHttpClient client = new OkHttpClient.Builder()
       .addInterceptor(new TrusonaHeaderInterceptor())
       .addNetworkInterceptor(new HmacAuthInterceptor(hmacSignatureGenerator, apiCredentials))
+      .connectionPool(new ConnectionPool())
+      .writeTimeout(60, TimeUnit.SECONDS)
+      .readTimeout(60, TimeUnit.SECONDS)
       .addNetworkInterceptor(loggingInterceptor)
       .build();
 
