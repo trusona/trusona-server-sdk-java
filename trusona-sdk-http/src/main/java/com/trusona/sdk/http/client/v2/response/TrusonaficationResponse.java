@@ -1,18 +1,27 @@
 package com.trusona.sdk.http.client.v2.response;
 
-import com.trusona.sdk.http.client.v2.request.TrusonaficationRequest;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
+import com.trusona.sdk.http.client.v2.BaseResponse;
 import java.util.Date;
 import java.util.UUID;
-
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
 /**
  * Copyright Trusona, Inc.
  * Created on 1/22/18 for trusona-server-sdk.
  */
-public class TrusonaficationResponse extends TrusonaficationRequest {
+public class TrusonaficationResponse extends BaseResponse {
   private static final long serialVersionUID = 3555946086952925089L;
+
+  private String deviceIdentifier;
+  private String emailAddress;
+  private int desiredLevel;
+  private String action;
+  private String resource;
+  private Date expiresAt;
+  private boolean userPresence;
+  private boolean prompt;
+  private boolean showIdentityDocument;
 
   private UUID id;
   private String status;
@@ -21,6 +30,83 @@ public class TrusonaficationResponse extends TrusonaficationRequest {
   private Date createdAt;
   private Date updatedAt;
   private TrusonaficationResultResponse result;
+
+  public TrusonaficationResponse() {
+    userPresence = true;
+    prompt = true;
+  }
+
+  public String getDeviceIdentifier() {
+    return deviceIdentifier;
+  }
+
+  public void setDeviceIdentifier(String deviceIdentifier) {
+    this.deviceIdentifier = deviceIdentifier;
+  }
+
+  public String getEmail() {
+    return emailAddress;
+  }
+
+  public void setEmail(String emailAddress) {
+    this.emailAddress = emailAddress;
+  }
+
+  public int getDesiredLevel() {
+    return desiredLevel;
+  }
+
+  public void setDesiredLevel(int desiredLevel) {
+    this.desiredLevel = desiredLevel;
+  }
+
+  public String getAction() {
+    return action;
+  }
+
+  public void setAction(String action) {
+    this.action = action;
+  }
+
+  public String getResource() {
+    return resource;
+  }
+
+  public void setResource(String resource) {
+    this.resource = resource;
+  }
+
+  public Date getExpiresAt() {
+    return expiresAt;
+  }
+
+  public void setExpiresAt(Date expiresAt) {
+    this.expiresAt = expiresAt;
+  }
+
+  public boolean isUserPresence() {
+    return userPresence;
+  }
+
+  public void setUserPresence(boolean userPresence) {
+    this.userPresence = userPresence;
+  }
+
+  public boolean isPrompt() {
+    return prompt;
+  }
+
+  public void setPrompt(boolean prompt) {
+    this.prompt = prompt;
+  }
+
+  public boolean isShowIdentityDocument() {
+    return showIdentityDocument;
+  }
+
+  public void setShowIdentityDocument(boolean showIdentityDocument) {
+    this.showIdentityDocument = showIdentityDocument;
+  }
 
   public UUID getId() {
     return id;

@@ -1,12 +1,12 @@
 package com.trusona.sdk.http.client.v2.response;
 
-import com.trusona.sdk.http.client.v2.BaseRequestResponse;
+import com.trusona.sdk.http.client.v2.BaseResponse;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.List;
 import java.util.Map;
 
-public class ErrorResponse extends BaseRequestResponse {
+public class ErrorResponse extends BaseResponse {
   private static final long serialVersionUID = -207143182156053353L;
 
   private String error;

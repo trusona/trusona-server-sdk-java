@@ -1,13 +1,12 @@
 package com.trusona.sdk.http.client.v2;
 
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+
+import java.io.Serializable;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.io.Serializable;
-
-import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
-
-public abstract class BaseRequestResponse implements Serializable {
+public abstract class BaseResponse implements Serializable {
   private static final long serialVersionUID = -789268235971L;
 
   @Override
