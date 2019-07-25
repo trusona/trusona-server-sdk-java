@@ -14,7 +14,7 @@ public class TrusonaficationResponse extends BaseResponse {
   private static final long serialVersionUID = 3555946086952925089L;
 
   private String deviceIdentifier;
-  private String emailAddress;
+  private String email;
   private int desiredLevel;
   private String action;
   private String resource;
@@ -45,11 +45,11 @@ public class TrusonaficationResponse extends BaseResponse {
   }
 
   public String getEmail() {
-    return emailAddress;
+    return email;
   }
 
-  public void setEmail(String emailAddress) {
-    this.emailAddress = emailAddress;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public int getDesiredLevel() {
