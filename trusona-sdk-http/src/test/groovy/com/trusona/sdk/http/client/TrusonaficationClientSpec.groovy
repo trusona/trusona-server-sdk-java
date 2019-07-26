@@ -99,7 +99,7 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
-      .email(emailAddress)
+      .email(email)
       .action('eat')
       .resource('your lunch')
       .build())
