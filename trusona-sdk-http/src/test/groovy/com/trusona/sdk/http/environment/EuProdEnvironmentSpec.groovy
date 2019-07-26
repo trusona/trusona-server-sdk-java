@@ -19,7 +19,7 @@ class EuProdEnvironmentSpec extends Specification {
     res.equals(HttpLoggingInterceptor.Level.NONE)
   }
 
-  def "getEndpointUrl should return the prod url"() {
+  def "getEndpointUrl should return the EU prod url"() {
     when:
     def res = sut.getEndpointUrl()
 

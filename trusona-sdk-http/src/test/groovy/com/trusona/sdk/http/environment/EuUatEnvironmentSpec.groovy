@@ -18,7 +18,7 @@ class EuUatEnvironmentSpec extends Specification {
   }
 
 
-  def "getEndpointUrl should return the AP UAT url"() {
+  def "getEndpointUrl should return the EU UAT url"() {
     when:
     def res = sut.getEndpointUrl()
 

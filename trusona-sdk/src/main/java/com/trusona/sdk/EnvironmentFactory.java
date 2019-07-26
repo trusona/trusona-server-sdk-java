@@ -20,6 +20,8 @@ public class EnvironmentFactory {
         return new EuProdEnvironment();
       case EU_UAT:
         return new EuUatEnvironment();
+      case TEST_VERIFY:
+        return new TestVerifyEnvironment();
       default:
         throw new IllegalArgumentException("Unexpected environment: " + env);
     }

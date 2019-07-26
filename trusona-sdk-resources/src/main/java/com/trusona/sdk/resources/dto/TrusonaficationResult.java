@@ -15,12 +15,14 @@ public class TrusonaficationResult extends BaseDto {
   private final TrusonaficationStatus status;
   private final String userIdentifier;
   private final Date expiresAt;
+  private final String boundUserIdentifier;
 
-  public TrusonaficationResult(UUID trusonaficationId, TrusonaficationStatus status, String userIdentifier, Date expiresAt) {
+  public TrusonaficationResult(UUID trusonaficationId, TrusonaficationStatus status, String userIdentifier, Date expiresAt, String boundUserIdentifier) {
     this.trusonaficationId = trusonaficationId;
     this.status = status;
     this.userIdentifier = userIdentifier;
     this.expiresAt = expiresAt;
+    this.boundUserIdentifier = boundUserIdentifier;
   }
 
   /**
@@ -43,6 +45,7 @@ public class TrusonaficationResult extends BaseDto {
   }
 
   /**
+   * @deprecated
    * The identifier of the user that responded to the authentication request. May be populated even if the user didn't
    * meet all the security requirements, so it is important check the result of the
    * {@link TrusonaficationResult#isSuccessful()} method before granting access to the user.
@@ -70,6 +73,16 @@ public class TrusonaficationResult extends BaseDto {
    */
   public Date getExpiresAt() {
     return expiresAt;
+  }
+
+  /**
+   * The user identifier bound between the user who responded to the Trusonafication and the Relying Party that
+   * created the Trusonafication
+   *
+   * @return
+   */
+  public String getBoundUserIdentifier() {
+    return boundUserIdentifier;
   }
 
   @Override

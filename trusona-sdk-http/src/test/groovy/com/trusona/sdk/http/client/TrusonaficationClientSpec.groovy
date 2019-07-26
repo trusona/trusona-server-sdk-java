@@ -2,6 +2,7 @@ package com.trusona.sdk.http.client
 
 import com.trusona.sdk.http.GenericErrorHandler
 import com.trusona.sdk.http.client.v2.response.TrusonaficationResponse
+import com.trusona.sdk.http.client.v2.response.TrusonaficationResultResponse
 import com.trusona.sdk.resources.dto.Trusonafication
 import com.trusona.sdk.resources.exception.NoIdentityDocumentsException
 import com.trusona.sdk.resources.exception.TrusonaException
@@ -15,6 +16,7 @@ import static com.trusona.sdk.config.JacksonConfig.getDateFormat
 import static com.trusona.sdk.resources.dto.TrusonaficationStatus.ACCEPTED
 import static com.trusona.sdk.resources.dto.TrusonaficationStatus.IN_PROGRESS
 import static java.util.UUID.fromString
+import static java.util.UUID.randomUUID
 
 class TrusonaficationClientSpec extends ClientSpec {
 
@@ -269,45 +271,59 @@ class TrusonaficationClientSpec extends ClientSpec {
     when:
     def res = sut.trusonaficationResultFromResponse(new TrusonaficationResponse(
       id: fromString("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"),
-      status: "IN_PROGRESS",
+      status: "ACCEPTED",
       userIdentifier: "sealz",
       createdAt: dateFormat.parse("2018-01-23T23:28:45Z"),
       updatedAt: dateFormat.parse("2018-01-23T23:28:46Z"),
       deviceIdentifier: "wall-e",
       desiredLevel: 2,
-      action: "eat",
-      resource: "your lunch",
+      action: "dig up",
+      resource: "your lawn",
       expiresAt: dateFormat.parse("2018-01-23T23:28:47Z"),
       userPresence: true,
-      prompt: true
+      prompt: true,
+      result: new TrusonaficationResultResponse(
+        id: randomUUID(),
+        accepted: true,
+        acceptedLevel: 2,
+        boundUserIdentifier: "wall.e"
+      )
     ))
 
     then:
     res.trusonaficationId == fromString('96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9')
-    res.status == IN_PROGRESS
+    res.status == ACCEPTED
     res.userIdentifier == 'sealz'
+    res.boundUserIdentifier == 'wall.e'
   }
 
   def "trusonaficationResultFromResponse should use the trusona id for the user identifier"() {
     when:
     def res = sut.trusonaficationResultFromResponse(new TrusonaficationResponse(
       id: fromString("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"),
-      status: "IN_PROGRESS",
+      status: "ACCEPTED",
       trusonaId: "123456789",
       createdAt: dateFormat.parse("2018-01-23T23:28:45Z"),
       updatedAt: dateFormat.parse("2018-01-23T23:28:46Z"),
       deviceIdentifier: "wall-e",
       desiredLevel: 2,
-      action: "eat",
-      resource: "your lunch",
+      action: "dig up",
+      resource: "your lawn",
       expiresAt: dateFormat.parse("2018-01-23T23:28:47Z"),
       userPresence: true,
-      prompt: true
+      prompt: true,
+      result: new TrusonaficationResultResponse(
+        id: randomUUID(),
+        accepted: true,
+        acceptedLevel: 2,
+        boundUserIdentifier: null
+      )
     ))
 
     then:
     res.trusonaficationId == fromString('96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9')
-    res.status == IN_PROGRESS
+    res.status == ACCEPTED
     res.userIdentifier == 'trusonaId:123456789'
+    res.boundUserIdentifier == null
   }
 }

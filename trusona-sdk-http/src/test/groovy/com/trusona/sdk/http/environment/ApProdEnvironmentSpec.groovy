@@ -19,7 +19,7 @@ class ApProdEnvironmentSpec extends Specification {
     res == HttpLoggingInterceptor.Level.NONE
   }
 
-  def "getEndpointUrl should return the AP island url"() {
+  def "getEndpointUrl should return the AP prod url"() {
     when:
     def res = sut.getEndpointUrl()
 

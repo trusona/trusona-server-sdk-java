@@ -20,7 +20,8 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
     expiresAt: dateFormat.parse('2018-01-23T23:28:45Z'),
     userPresence: false,
     prompt: false,
-    showIdentityDocument: true
+    showIdentityDocument: true,
+    customFields: ["foo": "bar"]
   )
 
   String json = """\
@@ -36,7 +37,10 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
     "user_presence": false,
     "email": "african-tiger@taco.net",
     "prompt": false,
-    "show_identity_document": true
+    "show_identity_document": true,
+    "custom_fields": {
+      "foo": "bar"
+    }
   }
   """
 

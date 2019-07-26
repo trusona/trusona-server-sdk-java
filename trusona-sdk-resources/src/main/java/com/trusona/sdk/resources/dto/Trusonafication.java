@@ -1,6 +1,8 @@
 package com.trusona.sdk.resources.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Date;
@@ -24,6 +26,7 @@ public class Trusonafication extends BaseDto {
   private boolean userPresence;
   private boolean prompt;
   private boolean showIdentityDocument;
+  private Map<String, Object> customFields;
 
   @JsonProperty("email")
   private String emailAddress;
@@ -73,6 +76,10 @@ public class Trusonafication extends BaseDto {
 
   public boolean isShowIdentityDocument() {
     return showIdentityDocument;
+  }
+
+  public Map<String, Object> getCustomFields() {
+    return customFields;
   }
 
   public String getEmail() {
@@ -174,6 +181,12 @@ public class Trusonafication extends BaseDto {
     FinalizeStep expiresAt(Date expiresAt);
 
     /**
+     * Adds a custom field value to the Trusonafication. The custom field will be available in the Trusonafication
+     * when it arrives on the mobile device, and can be shown in the UI if using the mobile SDK.
+     */
+    FinalizeStep customField(String name, Object value);
+
+    /**
      * Returns the trusonafication that was configured by the builder.
      *
      * @return the trusonafication.
@@ -247,6 +260,15 @@ public class Trusonafication extends BaseDto {
     @Override
     public FinalizeStep withoutUserPresence() {
       trusonafication.userPresence = false;
+      return this;
+    }
+
+    @Override
+    public FinalizeStep customField(String name, Object value) {
+      if (trusonafication.customFields == null) {
+        trusonafication.customFields = new HashMap<>();
+      }
+      trusonafication.customFields.put(name, value);
       return this;
     }
 
