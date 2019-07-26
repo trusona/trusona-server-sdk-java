@@ -2,7 +2,7 @@ package com.trusona.sdk.http.client.v2.response;
 
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
-import com.trusona.sdk.http.client.v2.BaseResponse;
+import com.trusona.sdk.resources.dto.BaseDto;
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,7 +10,7 @@ import java.util.UUID;
  * Copyright Trusona, Inc.
  * Created on 1/22/18 for trusona-server-sdk.
  */
-public class TrusonaficationResponse extends BaseResponse {
+public class TrusonaficationResponse extends BaseDto {
   private static final long serialVersionUID = 3555946086952925089L;
 
   private String deviceIdentifier;

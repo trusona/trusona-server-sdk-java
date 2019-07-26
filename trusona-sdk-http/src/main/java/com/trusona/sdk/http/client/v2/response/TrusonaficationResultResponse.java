@@ -1,17 +1,16 @@
 package com.trusona.sdk.http.client.v2.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.trusona.sdk.http.client.v2.BaseResponse;
-
-import java.util.UUID;
-
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.trusona.sdk.resources.dto.BaseDto;
+import java.util.UUID;
 
 /**
  * Copyright Trusona, Inc.
  * Created on 1/22/18 for trusona-server-sdk.
  */
-public class TrusonaficationResultResponse extends BaseResponse {
+public class TrusonaficationResultResponse extends BaseDto {
   private static final long serialVersionUID = 5349104976805324511L;
 
   private UUID id;
