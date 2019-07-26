@@ -40,8 +40,8 @@ class TrusonaficationClientSpec extends ClientSpec {
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
       .deviceIdentifier('wall-e')
-      .action('pee')
-      .resource('your lawn')
+      .action('eat')
+      .resource('your lunch')
       .build())
     def request = mockWebServer.takeRequest()
 
@@ -68,8 +68,8 @@ class TrusonaficationClientSpec extends ClientSpec {
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
       .truCode(truCodeId)
-      .action('pee')
-      .resource('your lawn')
+      .action('eat')
+      .resource('your lunch')
       .build())
 
     def request = mockWebServer.takeRequest()
@@ -99,9 +99,9 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
-      .email(email)
-      .action('pee')
-      .resource('your lawn')
+      .email(emailAddress)
+      .action('eat')
+      .resource('your lunch')
       .build())
 
     def request = mockWebServer.takeRequest()
@@ -116,6 +116,38 @@ class TrusonaficationClientSpec extends ClientSpec {
     res.status == IN_PROGRESS
   }
 
+  def "createTrusonafication using a trusonaId should send the trusonaId to the trusona service."() {
+    given:
+    def responseJson = """\
+    {
+      "id": "96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9",
+      "status": "IN_PROGRESS"
+    }
+    """
+
+    def trusonaId = "123456789"
+
+    mockWebServer.enqueue(signedResponse(201, responseJson))
+
+    when:
+    def res = sut.createTrusonafication(Trusonafication.essential()
+      .trusonaId(trusonaId)
+      .action('eat')
+      .resource('your lunch')
+      .build())
+
+    def request = mockWebServer.takeRequest()
+    def map = new JsonSlurper().parse(request.body.readByteArray()) as Map
+
+    then:
+    request.method == 'POST'
+    request.path == '/api/v2/trusonafications'
+    map.trusona_id == trusonaId
+
+    res.trusonaficationId == fromString('96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9')
+    res.status == IN_PROGRESS
+  }
+
   @Unroll
   def "createTrusonafication should handle generic exceptions (#statusCode)"() {
     given:
@@ -124,8 +156,8 @@ class TrusonaficationClientSpec extends ClientSpec {
     when:
     sut.createTrusonafication(Trusonafication.essential()
       .deviceIdentifier('wall-e')
-      .action('pee')
-      .resource('your lawn')
+      .action('eat')
+      .resource('your lunch')
       .build())
 
     then:
