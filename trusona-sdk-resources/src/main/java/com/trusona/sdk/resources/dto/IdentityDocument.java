@@ -40,11 +40,13 @@ public class IdentityDocument extends BaseDto {
   }
 
   public Date getVerifiedAt() {
-    return verifiedAt;
+    return verifiedAt != null ? new Date(verifiedAt.getTime()) : null;
   }
 
   public void setVerifiedAt(Date verifiedAt) {
-    this.verifiedAt = verifiedAt;
+    if (verifiedAt != null) {
+      this.verifiedAt = new Date(verifiedAt.getTime());
+    }
   }
 
   public String getType() {

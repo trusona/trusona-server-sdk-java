@@ -82,7 +82,7 @@ public class Trusonafication extends BaseDto {
   }
 
   public Date getExpiresAt() {
-    return expiresAt;
+    return expiresAt != null ? new Date(expiresAt.getTime()) : null;
   }
 
   public Map<String, Object> getCustomFields() {

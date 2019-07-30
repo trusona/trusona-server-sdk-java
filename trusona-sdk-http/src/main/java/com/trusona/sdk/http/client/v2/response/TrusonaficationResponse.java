@@ -1,16 +1,17 @@
 package com.trusona.sdk.http.client.v2.response;
 
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
-
 import com.trusona.sdk.resources.dto.BaseDto;
+
 import java.util.Date;
 import java.util.UUID;
 
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+
 /**
- * Copyright Trusona, Inc.
- * Created on 1/22/18 for trusona-server-sdk.
+ * Copyright Trusona, Inc. Created on 1/22/18 for trusona-server-sdk.
  */
 public class TrusonaficationResponse extends BaseDto {
+
   private static final long serialVersionUID = 3555946086952925089L;
 
   private String deviceIdentifier;
@@ -77,11 +78,13 @@ public class TrusonaficationResponse extends BaseDto {
   }
 
   public Date getExpiresAt() {
-    return expiresAt;
+    return expiresAt != null ? new Date(expiresAt.getTime()) : null;
   }
 
   public void setExpiresAt(Date expiresAt) {
-    this.expiresAt = expiresAt;
+    if (expiresAt != null) {
+      this.expiresAt = new Date(expiresAt.getTime());
+    }
   }
 
   public boolean isUserPresence() {
@@ -141,19 +144,23 @@ public class TrusonaficationResponse extends BaseDto {
   }
 
   public Date getCreatedAt() {
-    return createdAt;
+    return createdAt != null ? new Date(createdAt.getTime()) : null;
   }
 
   public void setCreatedAt(Date createdAt) {
-    this.createdAt = createdAt;
+    if (createdAt != null) {
+      this.createdAt = new Date(createdAt.getTime());
+    }
   }
 
   public Date getUpdatedAt() {
-    return updatedAt;
+    return updatedAt != null ? new Date(updatedAt.getTime()) : null;
   }
 
   public void setUpdatedAt(Date updatedAt) {
-    this.updatedAt = updatedAt;
+    if (updatedAt != null) {
+      this.updatedAt = new Date(updatedAt.getTime());
+    }
   }
 
   public TrusonaficationResultResponse getResult() {
