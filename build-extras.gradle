@@ -37,3 +37,18 @@ artifactory {
 jacoco {
   toolVersion = "0.8.2"
 }
+
+spotbugs {
+  showProgress = true
+}
+
+spotbugsMain {
+  reports {
+    xml.enabled = false
+    html.enabled = true
+  }
+}
+
+spotbugsTest {
+  enabled = false
+}
