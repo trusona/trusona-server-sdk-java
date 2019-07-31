@@ -29,7 +29,7 @@ TAG_NAME="v${RELEASE_VERSION}"
 
 git checkout -b ${BRANCH_NAME}
 
-sed -i -e "s/${SNAPSHOT_VERSION}/${RELEASE_VERSION}/g" build.gradle
+sed -i '' "s/${SNAPSHOT_VERSION}/${RELEASE_VERSION}/g" build.gradle
 git add build.gradle
 
 git commit -m "release ${TAG_NAME}"
