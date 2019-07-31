@@ -33,7 +33,7 @@ allprojects {
 
 subprojects {
   group "com.trusona"
-  version "3.7.0-SNAPSHOT"
+  version "3.8.0-SNAPSHOT"
 
   apply plugin: "java"
   apply plugin: "groovy"
