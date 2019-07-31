@@ -71,7 +71,7 @@ Then add the `com.trusona:trusona-sdk` dependency, as shown below, and rebuild y
 
 ```groovy
 dependencies {
-  compile "com.trusona:trusona-sdk:3.5.2"
+  compile "com.trusona:trusona-sdk:3.8.0"
 }
 ```
 

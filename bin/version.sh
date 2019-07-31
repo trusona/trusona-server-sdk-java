@@ -26,5 +26,5 @@ else
   exit -2
 fi
 
-sed -i "s/[0-9]*\.[0-9]*\.[0-9]*-SNAPSHOT/${VERSION}-SNAPSHOT/" build.gradle
-sed -i "s/com.trusona:trusona-sdk:[0-9]*\.[0-9]*\.[0-9]*/com.trusona:trusona-sdk:${VERSION}/" README.md
+sed -i '' "s/[0-9]*\.[0-9]*\.[0-9]*-SNAPSHOT/${VERSION}-SNAPSHOT/" build.gradle
+sed -i '' "s/com.trusona:trusona-sdk:[0-9]*\.[0-9]*\.[0-9]*/com.trusona:trusona-sdk:${VERSION}/" README.md
