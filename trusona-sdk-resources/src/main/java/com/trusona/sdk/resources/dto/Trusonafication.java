@@ -16,20 +16,25 @@ public class Trusonafication extends BaseDto {
   private static final long serialVersionUID = 4438341104830942514L;
 
   private int desiredLevel;
-  private String deviceIdentifier;
+
   @JsonProperty("trucode_id")
   private UUID truCodeId;
+  private String deviceIdentifier;
   private String userIdentifier;
+  private String email;
+
   private String action;
   private String resource;
-  private Date expiresAt;
-  private boolean userPresence;
-  private boolean prompt;
-  private boolean showIdentityDocument;
-  private Map<String, Object> customFields;
 
-  @JsonProperty("email")
-  private String emailAddress;
+  private boolean prompt;
+  private boolean userPresence;
+  private boolean showIdentityDocument;
+
+  private Date expiresAt;
+  private Map<String, Object> customFields;
+  private String callbackUrl;
+
+  private String trusonaId;
 
   private Trusonafication() {
     this.userPresence = true;
@@ -40,16 +45,20 @@ public class Trusonafication extends BaseDto {
     return desiredLevel;
   }
 
-  public String getDeviceIdentifier() {
-    return deviceIdentifier;
-  }
-
   public UUID getTruCodeId() {
     return truCodeId;
   }
 
+  public String getDeviceIdentifier() {
+    return deviceIdentifier;
+  }
+
   public String getUserIdentifier() {
     return userIdentifier;
+  }
+
+  public String getEmail() {
+    return email;
   }
 
   public String getAction() {
@@ -60,39 +69,35 @@ public class Trusonafication extends BaseDto {
     return resource;
   }
 
-  public Date getExpiresAt() {
-    return expiresAt;
+  public boolean isPrompt() {
+    return prompt;
   }
 
   public boolean isUserPresence() {
     return userPresence;
   }
 
-  public boolean isPrompt() {
-    return prompt;
-  }
-
   public boolean isShowIdentityDocument() {
     return showIdentityDocument;
+  }
+
+  public Date getExpiresAt() {
+    return expiresAt;
   }
 
   public Map<String, Object> getCustomFields() {
     return customFields;
   }
 
-  public String getEmail() {
-    return emailAddress;
+  public String getCallbackUrl() {
+    return callbackUrl;
+  }
+
+  public String getTrusonaId() {
+    return trusonaId;
   }
 
   public interface IdentifierStep {
-    /**
-     * Sets the device identifier of the user to be authenticated.
-     *
-     * @param deviceIdentifier the user's device identifier.
-     * @return the next step required to finish building the trusonafication.
-     */
-    ActionStep deviceIdentifier(String deviceIdentifier);
-
     /**
      * Sets the TruCode ID that was scanned by a Trusona enabled device. The TruCode ID will be used to look up the
      * device identifier that performed the scan.
@@ -103,6 +108,14 @@ public class Trusonafication extends BaseDto {
     ActionStep truCode(UUID truCodeId);
 
     /**
+     * Sets the device identifier of the user to be authenticated.
+     *
+     * @param deviceIdentifier the user's device identifier.
+     * @return the next step required to finish building the trusonafication.
+     */
+    ActionStep deviceIdentifier(String deviceIdentifier);
+
+    /**
      * Sets the user identifier of the user to be authenticated.
      *
      * @param userIdentifier the user's identifier.
@@ -111,12 +124,20 @@ public class Trusonafication extends BaseDto {
     ActionStep userIdentifier(String userIdentifier);
 
     /**
-     * Sets the user identifier of the user to be authenticated.
+     * Sets the email address of the user to be authenticated using the Trusona app.
      *
-     * @param emailAddress the user's email address
+     * @param email the user's email address
      * @return the next step required to finish building the trusonafication.
      */
-    ActionStep email(String emailAddress);
+    ActionStep email(String email);
+
+    /**
+     * Sets the Trusona ID of the user to be authenticated using the Trusona app.
+     *
+     * @param trusonaId the user's Trusona ID
+     * @return the next step required to finish building the trusonafication.
+     */
+    ActionStep trusonaId(String trusonaId);
   }
 
   public interface ActionStep {
@@ -169,8 +190,25 @@ public class Trusonafication extends BaseDto {
     /**
      * Adds a custom field value to the Trusonafication. The custom field will be available in the Trusonafication
      * when it arrives on the mobile device, and can be shown in the UI if using the mobile SDK.
+     *
+     * @param name the key name of the custom field.
+     * @param value the value of the custom field.
+     * @return the next step required to finish building the trusonafication.
      */
     FinalizeStep customField(String name, Object value);
+
+    /**
+     * An HTTPS URL to call when the trusonafication has been completed (accepted, rejected, or expired). The
+     * request will be a POST and the body will be the same JSON format as sending a GET request to
+     * /api/v2/trusonafications/{id}.
+     *
+     * NOTE: The URL should include a randomized segment so it cannot be guessed and abused by third-parties
+     * (i.e https://your.domain.com/completed_authentications/f8abe61d-4e51-493f-97b1-464c157624f2).
+     *
+     * @param callbackUrl the URL to POST to when the trusonafication is completed.
+     * @return the next step required to finish building the trusonafication.
+     */
+    FinalizeStep callbackUrl(String callbackUrl);
 
     /**
      * Returns the trusonafication that was configured by the builder.
@@ -202,14 +240,20 @@ public class Trusonafication extends BaseDto {
     }
 
     @Override
-    public ActionStep email(String emailAddress) {
-      trusonafication.emailAddress = emailAddress;
+    public ActionStep email(String email) {
+      trusonafication.email = email;
       return this;
     }
 
     @Override
     public ActionStep userIdentifier(String userIdentifier) {
       trusonafication.userIdentifier = userIdentifier;
+      return this;
+    }
+
+    @Override
+    public ActionStep trusonaId(String trusonaId) {
+      trusonafication.trusonaId = trusonaId;
       return this;
     }
 
@@ -249,6 +293,12 @@ public class Trusonafication extends BaseDto {
         trusonafication.customFields = new HashMap<>();
       }
       trusonafication.customFields.put(name, value);
+      return this;
+    }
+
+    @Override
+    public FinalizeStep callbackUrl(String callbackUrl) {
+      trusonafication.callbackUrl = callbackUrl;
       return this;
     }
 

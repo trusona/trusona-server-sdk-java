@@ -29,7 +29,7 @@ class TrusonaficationExecutiveBuilderSpec extends Specification {
     res == sut
   }
 
-  def "emailAddress should set the emailAddress and return the builder"() {
+  def "email should set the email and return the builder"() {
     when:
     def res = sut.email('taco@jones.com')
 

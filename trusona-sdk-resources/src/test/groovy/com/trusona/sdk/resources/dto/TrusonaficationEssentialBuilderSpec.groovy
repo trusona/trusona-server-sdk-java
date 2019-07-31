@@ -24,7 +24,7 @@ class TrusonaficationEssentialBuilderSpec extends Specification {
     res == sut
   }
 
-  def "emailAddress should set the emailAddress and return the builder"() {
+  def "email should set the email and return the builder"() {
     when:
     def res = sut.email('taco@jones.com')
 
@@ -89,6 +89,14 @@ class TrusonaficationEssentialBuilderSpec extends Specification {
     then:
     sut.trusonafication.customFields['foo'] == 'bar'
     res == sut
+  }
+
+  def "callbackUrl should set the callbackUrl and return the builder"() {
+    when:
+    def res = sut.callbackUrl('https://call.me/back')
+
+    then:
+    sut.trusonafication.callbackUrl == 'https://call.me/back'
   }
 
   def "build should return the underlying trusonafication"() {

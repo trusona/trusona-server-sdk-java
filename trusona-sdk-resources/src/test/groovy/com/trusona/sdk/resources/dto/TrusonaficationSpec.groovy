@@ -11,8 +11,9 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
   Trusonafication sut = new Trusonafication(
     deviceIdentifier: 'datDevice',
     userIdentifier: 'datUser',
-    emailAddress: 'african-tiger@taco.net',
+    email: 'african-tiger@taco.net',
     truCodeId: UUID.fromString("3827D5E5-B6C1-49F8-865E-72794D10BEF4"),
+    trusonaId: '123456789',
     desiredLevel: 2,
     action: 'partay',
     resource: 'your hauz',
@@ -20,7 +21,8 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
     userPresence: false,
     prompt: false,
     showIdentityDocument: true,
-    customFields: ["foo": "bar"]
+    customFields: ["foo": "bar"],
+    callbackUrl: 'https://call.me/back'
   )
 
   String json = """\
@@ -28,6 +30,7 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
     "device_identifier": "datDevice",
     "user_identifier": "datUser",
     "trucode_id": "3827D5E5-B6C1-49F8-865E-72794D10BEF4",
+    "trusona_id": "123456789",
     "desired_level": 2,
     "action": "partay",
     "resource": "your hauz",
@@ -38,7 +41,8 @@ class TrusonaficationSpec extends DtoSpec<Trusonafication> {
     "show_identity_document": true,
     "custom_fields": {
       "foo": "bar"
-    }
+    },
+    "callback_url": "https://call.me/back"
   }
   """
 

@@ -1,12 +1,11 @@
 package com.trusona.sdk.http.client.v2.response;
 
-import com.trusona.sdk.http.client.v2.BaseRequestResponse;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
+import com.trusona.sdk.resources.dto.BaseDto;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class ErrorResponse extends BaseRequestResponse {
+public class ErrorResponse extends BaseDto {
   private static final long serialVersionUID = -207143182156053353L;
 
   private String error;

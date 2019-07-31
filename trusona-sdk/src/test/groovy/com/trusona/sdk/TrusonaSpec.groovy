@@ -244,8 +244,8 @@ class TrusonaSpec extends Specification {
     given:
     def truso = Trusonafication.essential()
       .truCode(UUID.randomUUID())
-      .action('pee')
-      .resource('your lawn')
+      .action('eat')
+      .resource('your lunch')
       .build()
 
     when:
