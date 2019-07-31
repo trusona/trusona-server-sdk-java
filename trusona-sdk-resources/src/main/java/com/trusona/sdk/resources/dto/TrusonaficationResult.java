@@ -9,6 +9,7 @@ import java.util.UUID;
  * A representation of an authentication request that has completed.
  */
 public class TrusonaficationResult extends BaseDto {
+
   private static final long serialVersionUID = 800826708432719459L;
 
   private final UUID trusonaficationId;
@@ -21,7 +22,7 @@ public class TrusonaficationResult extends BaseDto {
     this.trusonaficationId = trusonaficationId;
     this.status = status;
     this.userIdentifier = userIdentifier;
-    this.expiresAt = expiresAt;
+    this.expiresAt = expiresAt != null ? new Date(expiresAt.getTime()) : null;
     this.boundUserIdentifier = boundUserIdentifier;
   }
 
@@ -35,8 +36,8 @@ public class TrusonaficationResult extends BaseDto {
   }
 
   /**
-   * Gets the status of the authentication request. The status can be checked if more information is needed than the
-   * true/false response from calling the {@link TrusonaficationResult#isSuccessful()} method.
+   * Gets the status of the authentication request. The status can be checked if more information is needed than the true/false
+   * response from calling the {@link TrusonaficationResult#isSuccessful()} method.
    *
    * @return the trusonafication status.
    */
@@ -45,20 +46,19 @@ public class TrusonaficationResult extends BaseDto {
   }
 
   /**
-   * @deprecated
-   * The identifier of the user that responded to the authentication request. May be populated even if the user didn't
-   * meet all the security requirements, so it is important check the result of the
-   * {@link TrusonaficationResult#isSuccessful()} method before granting access to the user.
-   *
    * @return the user's identifier.
+   * @deprecated The identifier of the user that responded to the authentication request. May be populated even if the user
+   * didn't meet all the security requirements, so it is important check the result of the {@link
+   * TrusonaficationResult#isSuccessful()} method before granting access to the user.
    */
+  @Deprecated
   public String getUserIdentifier() {
     return userIdentifier;
   }
 
   /**
-   * Returns true if the user met or exceeded the security requirements of the authentication request. Otherwise,
-   * returns false.
+   * Returns true if the user met or exceeded the security requirements of the authentication request. Otherwise, returns
+   * false.
    *
    * @return whether the trusonafication was successful.
    */
@@ -72,14 +72,12 @@ public class TrusonaficationResult extends BaseDto {
    * @return the expiration time
    */
   public Date getExpiresAt() {
-    return expiresAt;
+    return expiresAt != null ? new Date(expiresAt.getTime()) : null;
   }
 
   /**
-   * The user identifier bound between the user who responded to the Trusonafication and the Relying Party that
-   * created the Trusonafication
-   *
-   * @return
+   * The user identifier bound between the user who responded to the Trusonafication and the Relying Party that created the
+   * Trusonafication
    */
   public String getBoundUserIdentifier() {
     return boundUserIdentifier;

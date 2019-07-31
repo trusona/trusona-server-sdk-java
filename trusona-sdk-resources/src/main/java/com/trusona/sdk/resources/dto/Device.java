@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import java.util.Date;
 
 public class Device extends BaseDto {
+
   private static final long serialVersionUID = 2973513094326789650L;
 
   private Date activatedAt;
@@ -14,11 +15,13 @@ public class Device extends BaseDto {
   private boolean active;
 
   public Date getActivatedAt() {
-    return activatedAt;
+    return activatedAt != null ? new Date(activatedAt.getTime()) : null;
   }
 
   public void setActivatedAt(Date activatedAt) {
-    this.activatedAt = activatedAt;
+    if (activatedAt != null) {
+      this.activatedAt = new Date(activatedAt.getTime());
+    }
   }
 
   public boolean isActive() {
