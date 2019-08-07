@@ -198,12 +198,10 @@ public class Trusonafication extends BaseDto {
     FinalizeStep customField(String name, Object value);
 
     /**
-     * An HTTPS URL to call when the trusonafication has been completed (accepted, rejected, or expired). The
-     * request will be a POST and the body will be the same JSON format as sending a GET request to
-     * /api/v2/trusonafications/{id}.
+     * A HTTPS URL to POST to when the trusonafication has been completed (accepted, rejected, or expired).
      *
      * NOTE: The URL should include a randomized segment so it cannot be guessed and abused by third-parties
-     * (i.e https://your.domain.com/completed_authentications/f8abe61d-4e51-493f-97b1-464c157624f2).
+     * e.g. https://your.domain.com/completed_authentications/f8abe61d-4e51-493f-97b1-464c157624f2.
      *
      * @param callbackUrl the URL to POST to when the trusonafication is completed.
      * @return the next step required to finish building the trusonafication.
