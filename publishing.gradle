@@ -36,7 +36,11 @@ publishing {
   }
 
   nexusPublishing {
-    username = ossrhUsername
-    password = ossrhPassword
+    repositories {
+      sonatype {
+        username = ossrhUsername
+        password = ossrhPassword
+      }
+    }
   }
 }
