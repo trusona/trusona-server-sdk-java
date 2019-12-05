@@ -1,5 +1,7 @@
 package com.trusona.sdk.http.client;
 
+import static com.trusona.sdk.resources.dto.TrusonaficationStatus.IN_PROGRESS;
+
 import com.trusona.sdk.http.CallHandler;
 import com.trusona.sdk.http.ErrorHandler;
 import com.trusona.sdk.http.GenericErrorHandler;
@@ -13,14 +15,12 @@ import com.trusona.sdk.resources.dto.TrusonaficationResult;
 import com.trusona.sdk.resources.dto.TrusonaficationStatus;
 import com.trusona.sdk.resources.exception.NoIdentityDocumentsException;
 import com.trusona.sdk.resources.exception.TrusonaException;
-import retrofit2.Response;
-
 import java.time.Duration;
 import java.util.UUID;
-
-import static com.trusona.sdk.resources.dto.TrusonaficationStatus.IN_PROGRESS;
+import retrofit2.Response;
 
 public class TrusonaficationClient implements TrusonaficationApi {
+
   private final static String LEGACY_PREFIX = "trusonaId:";
 
   private final ServiceGenerator serviceGenerator;
@@ -70,40 +70,46 @@ public class TrusonaficationClient implements TrusonaficationApi {
   public TrusonaficationResult getTrusonaficationResult(UUID trusonaficationId) throws TrusonaException {
     TrusonaficationService service = serviceGenerator.getService(TrusonaficationService.class);
 
-    TrusonaficationResponse response = new CallHandler<TrusonaficationResponse>(service.getTrusonafication(trusonaficationId))
+    TrusonaficationResponse response = new CallHandler<>(service.getTrusonafication(trusonaficationId))
       .handle(defaultErrorHandler);
 
     while (response != null && IN_PROGRESS.equals(TrusonaficationStatus.valueOf(response.getStatus()))) {
-      try {
-        sleep(pollingInterval);
-      }
-      catch (InterruptedException e) {
-        throw new TrusonaException("Thread was interrupted while polling for trusonafication result", e);
-      }
+      sleep(pollingInterval);
 
-      response = new CallHandler<TrusonaficationResponse>(service.getTrusonafication(trusonaficationId))
+      response = new CallHandler<>(service.getTrusonafication(trusonaficationId))
         .handle(defaultErrorHandler);
     }
 
     return response == null ? null : trusonaficationResultFromResponse(response);
   }
 
-  private static TrusonaficationResult trusonaficationResultFromResponse(TrusonaficationResponse response) {
-    String userIdentifier = response.getUserIdentifier();
+  static TrusonaficationResult trusonaficationResultFromResponse(TrusonaficationResponse response) {
+    String userIdentifier;
 
     if (response.getTrusonaId() != null) {
       userIdentifier = LEGACY_PREFIX + response.getTrusonaId();
     }
+    else {
+      userIdentifier = response.getUserIdentifier();
+    }
+
     return new TrusonaficationResult(
       response.getId(),
       TrusonaficationStatus.valueOf(response.getStatus()),
       userIdentifier,
       response.getExpiresAt(),
-      response.getResult() != null ? response.getResult().getBoundUserIdentifier() : null
+      response.getResult() != null ? response.getResult().getBoundUserIdentifier() : null,
+      response.getCreatedAt(),
+      response.getUpdatedAt()
     );
   }
 
-  private static void sleep(Duration duration) throws InterruptedException {
-    Thread.sleep(duration.toMillis());
+  private static void sleep(Duration duration) throws TrusonaException {
+    try {
+      Thread.sleep(duration.toMillis());
+    }
+    catch (InterruptedException e) {
+      throw new TrusonaException("Thread was interrupted while polling for trusonafication result", e);
+    }
   }
 }
