@@ -61,7 +61,7 @@ class TrusonaficationClientSpec extends ClientSpec {
     }
     """
 
-    def truCodeId = UUID.randomUUID()
+    def truCodeId = randomUUID()
 
     mockWebServer.enqueue(signedResponse(201, responseJson))
 
@@ -216,7 +216,7 @@ class TrusonaficationClientSpec extends ClientSpec {
 
   def "getTrusonaficationResult should poll while it is IN_PROGRESS"() {
     given:
-    def trusonaficationId = UUID.randomUUID()
+    def trusonaficationId = randomUUID()
     def inProgressBody = """\
         {
           "id": "$trusonaficationId",
@@ -261,7 +261,7 @@ class TrusonaficationClientSpec extends ClientSpec {
     )
 
     when:
-    def res = sut.getTrusonaficationResult(UUID.randomUUID())
+    def res = sut.getTrusonaficationResult(randomUUID())
 
     then:
     res == null
@@ -295,6 +295,8 @@ class TrusonaficationClientSpec extends ClientSpec {
     res.status == ACCEPTED
     res.userIdentifier == 'sealz'
     res.boundUserIdentifier == 'wall.e'
+    res.createdAt.present
+    res.updatedAt.present
   }
 
   def "trusonaficationResultFromResponse should use the trusona id for the user identifier"() {
@@ -325,5 +327,7 @@ class TrusonaficationClientSpec extends ClientSpec {
     res.status == ACCEPTED
     res.userIdentifier == 'trusonaId:123456789'
     res.boundUserIdentifier == null
+    res.createdAt.present
+    res.updatedAt.present
   }
 }

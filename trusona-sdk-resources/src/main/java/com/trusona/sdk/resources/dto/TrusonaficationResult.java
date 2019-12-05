@@ -1,9 +1,9 @@
 package com.trusona.sdk.resources.dto;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * A representation of an authentication request that has completed.
@@ -17,14 +17,40 @@ public class TrusonaficationResult extends BaseDto {
   private final String userIdentifier;
   private final Date expiresAt;
   private final String boundUserIdentifier;
+  private final Date createdAt;
+  private final Date updatedAt;
 
-  public TrusonaficationResult(UUID trusonaficationId, TrusonaficationStatus status, String userIdentifier, Date expiresAt, String boundUserIdentifier) {
+  @Deprecated
+  public TrusonaficationResult(UUID trusonaficationId,
+                               TrusonaficationStatus trusonaficationStatus,
+                               String userIdentifier,
+                               Date expiresAt,
+                               String boundUserIdentifier) {
     this.trusonaficationId = trusonaficationId;
-    this.status = status;
+    this.status = trusonaficationStatus;
     this.userIdentifier = userIdentifier;
     this.expiresAt = expiresAt != null ? new Date(expiresAt.getTime()) : null;
     this.boundUserIdentifier = boundUserIdentifier;
+    this.createdAt = null;
+    this.updatedAt = null;
   }
+
+  public TrusonaficationResult(UUID trusonaficationId,
+                               TrusonaficationStatus trusonaficationStatus,
+                               String userIdentifier,
+                               Date expiresAt,
+                               String boundUserIdentifier,
+                               Date createdAt,
+                               Date updatedAt) {
+    this.trusonaficationId = trusonaficationId;
+    this.status = trusonaficationStatus;
+    this.userIdentifier = userIdentifier;
+    this.expiresAt = expiresAt != null ? new Date(expiresAt.getTime()) : null;
+    this.boundUserIdentifier = boundUserIdentifier;
+    this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
+    this.updatedAt = updatedAt != null ? new Date(updatedAt.getTime()) : null;
+  }
+
 
   /**
    * Gets the trusonafication id of the authentication request that was created.
@@ -86,5 +112,23 @@ public class TrusonaficationResult extends BaseDto {
   @Override
   public int hashCode() {
     return HashCodeBuilder.reflectionHashCode(2255, 299837, this);
+  }
+
+  /**
+   * Date optional representation of when this result was created.
+   *
+   * @return Date representing when this result was created
+   */
+  public Optional<Date> getCreatedAt() {
+    return createdAt != null ? Optional.of(new Date(createdAt.getTime())) : Optional.empty();
+  }
+
+  /**
+   * Date optional representation of when this result was last updated.
+   *
+   * @return Date representing when this result was last updated
+   */
+  public Optional<Date> getUpdatedAt() {
+    return updatedAt != null ? Optional.of(new Date(updatedAt.getTime())) : Optional.empty();
   }
 }
