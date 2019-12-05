@@ -124,9 +124,9 @@ public class TrusonaficationResult extends BaseDto {
   }
 
   /**
-   * Date optional representation of when this result was created.
+   * Date optional representation of when this result was last updated.
    *
-   * @return Date representing when this result was created
+   * @return Date representing when this result was last updated
    */
   public Optional<Date> getUpdatedAt() {
     return updatedAt != null ? Optional.of(new Date(updatedAt.getTime())) : Optional.empty();
