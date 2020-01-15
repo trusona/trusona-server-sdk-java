@@ -3,6 +3,7 @@ package com.trusona.sdk.http.client
 import com.trusona.sdk.http.GenericErrorHandler
 import com.trusona.sdk.http.client.v2.response.TrusonaficationResponse
 import com.trusona.sdk.http.client.v2.response.TrusonaficationResultResponse
+import com.trusona.sdk.resources.dto.AuthenticatorType
 import com.trusona.sdk.resources.dto.Trusonafication
 import com.trusona.sdk.resources.exception.NoIdentityDocumentsException
 import com.trusona.sdk.resources.exception.TrusonaException
@@ -13,6 +14,7 @@ import spock.lang.Unroll
 import java.time.Duration
 
 import static com.trusona.sdk.config.JacksonConfig.getDateFormat
+import static com.trusona.sdk.resources.dto.AuthenticatorType.MOBILE_APP
 import static com.trusona.sdk.resources.dto.TrusonaficationStatus.ACCEPTED
 import static com.trusona.sdk.resources.dto.TrusonaficationStatus.IN_PROGRESS
 import static java.util.UUID.fromString
@@ -282,6 +284,7 @@ class TrusonaficationClientSpec extends ClientSpec {
       expiresAt: dateFormat.parse("2018-01-23T23:28:47Z"),
       userPresence: true,
       prompt: true,
+      authenticatorType: 'MOBILE_APP',
       result: new TrusonaficationResultResponse(
         id: randomUUID(),
         accepted: true,
@@ -297,6 +300,7 @@ class TrusonaficationClientSpec extends ClientSpec {
     res.boundUserIdentifier == 'wall.e'
     res.createdAt.present
     res.updatedAt.present
+    res.authenticatorType == MOBILE_APP
   }
 
   def "trusonaficationResultFromResponse should use the trusona id for the user identifier"() {

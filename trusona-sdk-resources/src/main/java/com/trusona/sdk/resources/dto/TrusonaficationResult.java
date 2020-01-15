@@ -19,21 +19,7 @@ public class TrusonaficationResult extends BaseDto {
   private final String boundUserIdentifier;
   private final Date createdAt;
   private final Date updatedAt;
-
-  @Deprecated
-  public TrusonaficationResult(UUID trusonaficationId,
-                               TrusonaficationStatus trusonaficationStatus,
-                               String userIdentifier,
-                               Date expiresAt,
-                               String boundUserIdentifier) {
-    this.trusonaficationId = trusonaficationId;
-    this.status = trusonaficationStatus;
-    this.userIdentifier = userIdentifier;
-    this.expiresAt = expiresAt != null ? new Date(expiresAt.getTime()) : null;
-    this.boundUserIdentifier = boundUserIdentifier;
-    this.createdAt = null;
-    this.updatedAt = null;
-  }
+  private final AuthenticatorType authenticatorType;
 
   public TrusonaficationResult(UUID trusonaficationId,
                                TrusonaficationStatus trusonaficationStatus,
@@ -41,7 +27,8 @@ public class TrusonaficationResult extends BaseDto {
                                Date expiresAt,
                                String boundUserIdentifier,
                                Date createdAt,
-                               Date updatedAt) {
+                               Date updatedAt,
+                               AuthenticatorType authenticatorType) {
     this.trusonaficationId = trusonaficationId;
     this.status = trusonaficationStatus;
     this.userIdentifier = userIdentifier;
@@ -49,6 +36,7 @@ public class TrusonaficationResult extends BaseDto {
     this.boundUserIdentifier = boundUserIdentifier;
     this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
     this.updatedAt = updatedAt != null ? new Date(updatedAt.getTime()) : null;
+    this.authenticatorType = authenticatorType;
   }
 
 
@@ -130,5 +118,9 @@ public class TrusonaficationResult extends BaseDto {
    */
   public Optional<Date> getUpdatedAt() {
     return updatedAt != null ? Optional.of(new Date(updatedAt.getTime())) : Optional.empty();
+  }
+
+  public AuthenticatorType getAuthenticatorType() {
+    return authenticatorType;
   }
 }

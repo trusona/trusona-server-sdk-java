@@ -10,12 +10,14 @@ import com.trusona.sdk.http.client.v2.response.ErrorResponse;
 import com.trusona.sdk.http.client.v2.response.TrusonaficationResponse;
 import com.trusona.sdk.http.client.v2.service.TrusonaficationService;
 import com.trusona.sdk.resources.TrusonaficationApi;
+import com.trusona.sdk.resources.dto.AuthenticatorType;
 import com.trusona.sdk.resources.dto.Trusonafication;
 import com.trusona.sdk.resources.dto.TrusonaficationResult;
 import com.trusona.sdk.resources.dto.TrusonaficationStatus;
 import com.trusona.sdk.resources.exception.NoIdentityDocumentsException;
 import com.trusona.sdk.resources.exception.TrusonaException;
 import java.time.Duration;
+import java.util.Optional;
 import java.util.UUID;
 import retrofit2.Response;
 
@@ -93,6 +95,11 @@ public class TrusonaficationClient implements TrusonaficationApi {
       userIdentifier = response.getUserIdentifier();
     }
 
+    AuthenticatorType authenticatorType = Optional
+        .ofNullable(response.getAuthenticatorType())
+        .map(AuthenticatorType::valueOf)
+        .orElse(null);
+
     return new TrusonaficationResult(
       response.getId(),
       TrusonaficationStatus.valueOf(response.getStatus()),
@@ -100,7 +107,8 @@ public class TrusonaficationClient implements TrusonaficationApi {
       response.getExpiresAt(),
       response.getResult() != null ? response.getResult().getBoundUserIdentifier() : null,
       response.getCreatedAt(),
-      response.getUpdatedAt()
+      response.getUpdatedAt(),
+      authenticatorType
     );
   }
 
