@@ -23,6 +23,7 @@ public class TrusonaficationResponse extends BaseDto {
   private boolean userPresence;
   private boolean prompt;
   private boolean showIdentityDocument;
+  private String authenticatorType;
 
   private UUID id;
   private String status;
@@ -161,6 +162,14 @@ public class TrusonaficationResponse extends BaseDto {
     if (updatedAt != null) {
       this.updatedAt = new Date(updatedAt.getTime());
     }
+  }
+
+  public String getAuthenticatorType() {
+    return authenticatorType;
+  }
+
+  public void setAuthenticatorType(String authenticatorType) {
+    this.authenticatorType = authenticatorType;
   }
 
   public TrusonaficationResultResponse getResult() {
