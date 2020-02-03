@@ -4,6 +4,7 @@ import com.trusona.sdk.http.client.v2.response.TrusonaficationResponse;
 import com.trusona.sdk.resources.dto.Trusonafication;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -20,4 +21,7 @@ public interface TrusonaficationService {
 
   @GET("/api/v2/trusonafications/{id}")
   Call<TrusonaficationResponse> getTrusonafication(@Path("id") UUID id);
+
+  @DELETE("api/v2/trusonafications/{id}")
+  Call<Void> cancelTrusonafication(@Path("id") UUID id);
 }

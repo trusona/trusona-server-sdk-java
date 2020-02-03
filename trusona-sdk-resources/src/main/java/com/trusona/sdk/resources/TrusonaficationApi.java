@@ -10,4 +10,6 @@ public interface TrusonaficationApi {
   TrusonaficationResult createTrusonafication(Trusonafication trusonafication) throws TrusonaException;
 
   TrusonaficationResult getTrusonaficationResult(UUID trusonaficationId) throws TrusonaException;
+
+  Void cancelTrusonafication(UUID trusonaficationId) throws TrusonaException;
 }
