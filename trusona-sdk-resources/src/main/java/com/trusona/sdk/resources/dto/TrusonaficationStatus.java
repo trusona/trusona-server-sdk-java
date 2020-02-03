@@ -26,7 +26,7 @@ public enum TrusonaficationStatus {
 
   /**
    * The user accepted the authentication request, but at least one of the security requirements
-   * that were ask for was not met by the user.
+   * that were asked for was not met by the user.
    */
   ACCEPTED_AT_LOWER_LEVEL,
 
