@@ -25,8 +25,8 @@ public enum TrusonaficationStatus {
   ACCEPTED,
 
   /**
-   * The user accepted the authentication request, but at least one of the security requirements that were ask for
-   * was not met by the user.
+   * The user accepted the authentication request, but at least one of the security requirements
+   * that were asked for was not met by the user.
    */
   ACCEPTED_AT_LOWER_LEVEL,
 
@@ -38,5 +38,10 @@ public enum TrusonaficationStatus {
   /**
    * The authentication request was not responded to or timed-out before getting a response.
    */
-  EXPIRED
+  EXPIRED,
+
+  /**
+   * The authentication request was canceled before it could be acted upon
+   */
+  CANCELED
 }

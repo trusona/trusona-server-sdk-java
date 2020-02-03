@@ -35,6 +35,7 @@ class TrusonaficationResultSpec extends Specification {
     true     | ACCEPTED_AT_HIGHER_LEVEL
     false    | REJECTED
     false    | EXPIRED
+    false    | CANCELED
     false    | IN_PROGRESS
     false    | INVALID
     false    | ACCEPTED_AT_LOWER_LEVEL
