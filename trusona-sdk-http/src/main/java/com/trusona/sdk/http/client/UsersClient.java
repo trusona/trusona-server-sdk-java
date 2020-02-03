@@ -21,11 +21,12 @@ public class UsersClient implements UsersApi {
   }
 
   @Override
-  public Void deactivateUser(String userIdentifier) throws UserNotFoundException, TrusonaException {
+  public Void deactivateUser(String userIdentifier) throws TrusonaException {
     UserService userService = serviceGenerator.getService(UserService.class);
 
     ErrorHandler notFoundErrorHandler = new BaseErrorHandler() {
-      public void handleErrors(Response response) throws TrusonaException {
+      @Override
+      public void handleErrors(Response<?> response) throws TrusonaException {
         if (response.code() == 404) {
           throw new UserNotFoundException("The user you are attempting to deactivate does not exist or is already inactive.");
         }

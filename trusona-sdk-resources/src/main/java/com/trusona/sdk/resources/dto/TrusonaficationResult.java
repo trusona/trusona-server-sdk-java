@@ -92,6 +92,8 @@ public class TrusonaficationResult extends BaseDto {
   /**
    * The user identifier bound between the user who responded to the Trusonafication and the Relying Party that created the
    * Trusonafication
+   *
+   * @return the bound user identifier
    */
   public String getBoundUserIdentifier() {
     return boundUserIdentifier;

@@ -14,7 +14,10 @@ import com.trusona.sdk.resources.dto.AuthenticatorType;
 import com.trusona.sdk.resources.dto.Trusonafication;
 import com.trusona.sdk.resources.dto.TrusonaficationResult;
 import com.trusona.sdk.resources.dto.TrusonaficationStatus;
+import com.trusona.sdk.resources.exception.InvalidCredentialsException;
 import com.trusona.sdk.resources.exception.NoIdentityDocumentsException;
+import com.trusona.sdk.resources.exception.ResourceNotFound;
+import com.trusona.sdk.resources.exception.ResourceNotProcessable;
 import com.trusona.sdk.resources.exception.TrusonaException;
 import java.time.Duration;
 import java.util.Optional;
@@ -45,7 +48,7 @@ public class TrusonaficationClient implements TrusonaficationApi {
     TrusonaficationService service = serviceGenerator.getService(TrusonaficationService.class);
 
     ErrorHandler cannotBeCompletedErrorHandler = new BaseErrorHandler() {
-      public void handleErrors(Response response) throws TrusonaException {
+      public void handleErrors(Response<?> response) throws TrusonaException {
         if (response.code() == 424) {
           ErrorResponse errorResponse = getErrorResponse(response);
 
@@ -85,6 +88,25 @@ public class TrusonaficationClient implements TrusonaficationApi {
     return response == null ? null : trusonaficationResultFromResponse(response);
   }
 
+  @Override
+  public Void cancelTrusonafication(UUID trusonaficationId) throws TrusonaException {
+    TrusonaficationService service = serviceGenerator.getService(TrusonaficationService.class);
+
+    return new CallHandler<>(service.cancelTrusonafication(trusonaficationId))
+      .handle(response -> {
+        if (response.code() == 403) {
+          throw new InvalidCredentialsException();
+        }
+        if (response.code() == 404) {
+          throw new ResourceNotFound("Trusonafication was not found");
+        }
+        if (response.code() == 422) {
+          throw new ResourceNotProcessable("Trusonafication could not be cancelled");
+        }
+
+      }, defaultErrorHandler);
+  }
+
   static TrusonaficationResult trusonaficationResultFromResponse(TrusonaficationResponse response) {
     String userIdentifier;
 
@@ -96,9 +118,9 @@ public class TrusonaficationClient implements TrusonaficationApi {
     }
 
     AuthenticatorType authenticatorType = Optional
-        .ofNullable(response.getAuthenticatorType())
-        .map(AuthenticatorType::valueOf)
-        .orElse(null);
+      .ofNullable(response.getAuthenticatorType())
+      .map(AuthenticatorType::valueOf)
+      .orElse(null);
 
     return new TrusonaficationResult(
       response.getId(),
