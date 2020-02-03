@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public abstract class BaseErrorHandler implements ErrorHandler {
 
-  protected ErrorResponse getErrorResponse(Response response) throws TrusonaException {
+  protected ErrorResponse getErrorResponse(Response<?> response) throws TrusonaException {
     Optional<ResponseBody> errorBody = Optional.ofNullable(response.errorBody());
 
     if (errorBody.isPresent()) {
