@@ -1,15 +1,15 @@
 package com.trusona.sdk.http.client.security;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.digest.HmacUtils;
-import org.apache.commons.lang3.StringUtils;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.commons.lang3.StringUtils.LF;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.apache.commons.lang3.StringUtils.LF;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.HmacAlgorithms;
+import org.apache.commons.codec.digest.HmacUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class DefaultHmacSignatureGenerator implements HmacSignatureGenerator {
 
@@ -24,7 +24,8 @@ public class DefaultHmacSignatureGenerator implements HmacSignatureGenerator {
     );
 
     String valueToDigest = StringUtils.join(parts, LF);
-
-    return Base64.encodeBase64String(HmacUtils.hmacSha256Hex(secret, valueToDigest).getBytes(UTF_8));
+    return Base64.encodeBase64String(new HmacUtils(HmacAlgorithms.HMAC_SHA_256, secret)
+                                       .hmacHex(valueToDigest)
+                                       .getBytes(UTF_8));
   }
 }
