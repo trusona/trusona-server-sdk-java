@@ -5,6 +5,6 @@ import com.trusona.sdk.resources.exception.UserNotFoundException;
 
 public interface UsersApi {
 
-  Void deactivateUser(String userIdentifier) throws UserNotFoundException, TrusonaException;
+  Void deactivateUser(String userIdentifier) throws  TrusonaException;
 
 }
