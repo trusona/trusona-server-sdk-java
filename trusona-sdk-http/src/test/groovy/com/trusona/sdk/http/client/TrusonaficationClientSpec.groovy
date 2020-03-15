@@ -3,7 +3,6 @@ package com.trusona.sdk.http.client
 import com.trusona.sdk.http.GenericErrorHandler
 import com.trusona.sdk.http.client.v2.response.TrusonaficationResponse
 import com.trusona.sdk.http.client.v2.response.TrusonaficationResultResponse
-import com.trusona.sdk.resources.dto.AuthenticatorType
 import com.trusona.sdk.resources.dto.Trusonafication
 import com.trusona.sdk.resources.exception.NoIdentityDocumentsException
 import com.trusona.sdk.resources.exception.TrusonaException

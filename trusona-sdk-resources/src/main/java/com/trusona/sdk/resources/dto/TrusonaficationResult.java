@@ -20,6 +20,7 @@ public class TrusonaficationResult extends BaseDto {
   private final Date createdAt;
   private final Date updatedAt;
   private final AuthenticatorType authenticatorType;
+  private final String magicLinkEmail;
 
   public TrusonaficationResult(UUID trusonaficationId,
                                TrusonaficationStatus trusonaficationStatus,
@@ -28,7 +29,8 @@ public class TrusonaficationResult extends BaseDto {
                                String boundUserIdentifier,
                                Date createdAt,
                                Date updatedAt,
-                               AuthenticatorType authenticatorType) {
+                               AuthenticatorType authenticatorType,
+                               String magicLinkEmail) {
     this.trusonaficationId = trusonaficationId;
     this.status = trusonaficationStatus;
     this.userIdentifier = userIdentifier;
@@ -37,8 +39,8 @@ public class TrusonaficationResult extends BaseDto {
     this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
     this.updatedAt = updatedAt != null ? new Date(updatedAt.getTime()) : null;
     this.authenticatorType = authenticatorType;
+    this.magicLinkEmail = magicLinkEmail;
   }
-
 
   /**
    * Gets the trusonafication id of the authentication request that was created.
@@ -124,5 +126,9 @@ public class TrusonaficationResult extends BaseDto {
 
   public AuthenticatorType getAuthenticatorType() {
     return authenticatorType;
+  }
+
+  public String getMagicLinkEmail() {
+    return magicLinkEmail;
   }
 }

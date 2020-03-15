@@ -130,7 +130,8 @@ public class TrusonaficationClient implements TrusonaficationApi {
       response.getResult() != null ? response.getResult().getBoundUserIdentifier() : null,
       response.getCreatedAt(),
       response.getUpdatedAt(),
-      authenticatorType
+      authenticatorType,
+      response.getMagicLinkEmail()
     );
   }
 
