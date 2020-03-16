@@ -20,7 +20,8 @@ class TrusonaficationResultSpec extends Specification {
         null,
         new Date(),
         new Date(),
-        MOBILE_APP
+        MOBILE_APP,
+        null
     )
 
     when:
