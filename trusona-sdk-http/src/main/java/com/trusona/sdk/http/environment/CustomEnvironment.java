@@ -1,6 +1,6 @@
 package com.trusona.sdk.http.environment;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.Objects;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -25,7 +25,8 @@ public class CustomEnvironment implements Environment {
 
   @Override
   public boolean equals(Object object) {
-    return object != null && getClass().equals(object.getClass()) && EqualsBuilder.reflectionEquals(this, object);
+    return object != null && getClass().equals(object.getClass()) &&
+        Objects.equals(getEndpointUrl(), ((CustomEnvironment) object).getEndpointUrl());
   }
 
   @Override

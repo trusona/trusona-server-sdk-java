@@ -1,6 +1,6 @@
 package com.trusona.sdk.http.environment;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.Objects;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -21,8 +21,8 @@ public class UatEnvironment implements Environment {
 
   @Override
   public boolean equals(Object object) {
-    return object != null && getClass().equals(object.getClass()) && EqualsBuilder
-        .reflectionEquals(this, object);
+    return object != null && getClass().equals(object.getClass()) &&
+        Objects.equals(getEndpointUrl(), ((UatEnvironment) object).getEndpointUrl());
   }
 
   @Override
