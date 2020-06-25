@@ -1,7 +1,7 @@
 package com.trusona.sdk.http.environment;
 
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -21,11 +21,12 @@ public class EuUatEnvironment implements Environment {
 
   @Override
   public boolean equals(Object object) {
-    return object != null && getClass().equals(object.getClass()) && reflectionEquals(this, object);
+    return object != null && getClass().equals(object.getClass()) && EqualsBuilder
+        .reflectionEquals(this, object);
   }
 
   @Override
   public int hashCode() {
-    return reflectionHashCode(1787, 73839, this);
+    return HashCodeBuilder.reflectionHashCode(1787, 73839, this);
   }
 }
