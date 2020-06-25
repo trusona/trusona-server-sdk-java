@@ -5,9 +5,13 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
-public class EuUatEnvironment implements Environment {
+public class CustomEnvironment implements Environment {
 
-  private static final String ENDPOINT_URL = "https://api.staging.eu.trusona.net";
+  private final String endpointUrl;
+
+  public CustomEnvironment(String endpointUrl) {
+    this.endpointUrl = endpointUrl;
+  }
 
   @Override
   public HttpLoggingInterceptor.Level getLoggingLevel() {
@@ -16,7 +20,7 @@ public class EuUatEnvironment implements Environment {
 
   @Override
   public String getEndpointUrl() {
-    return ENDPOINT_URL;
+    return endpointUrl;
   }
 
   @Override
@@ -26,6 +30,6 @@ public class EuUatEnvironment implements Environment {
 
   @Override
   public int hashCode() {
-    return reflectionHashCode(1787, 73839, this);
+    return reflectionHashCode(1789, 73837, this);
   }
 }

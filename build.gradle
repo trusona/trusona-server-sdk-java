@@ -26,8 +26,8 @@ allprojects {
   }
 
   tasks.matching { it instanceof Test }.all {
-    testLogging.events = ["failed", "passed", "skipped", "standardOut", "standardError"]
-    testLogging.showStandardStreams = true
+    testLogging.events = ["failed", "passed", "skipped"]
+    testLogging.showStandardStreams = false
   }
 }
 

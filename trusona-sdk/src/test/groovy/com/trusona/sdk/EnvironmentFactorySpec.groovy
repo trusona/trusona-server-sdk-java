@@ -15,8 +15,6 @@ class EnvironmentFactorySpec extends Specification {
     env           | envClass
     PRODUCTION    | new ProdEnvironment()
     UAT           | new UatEnvironment()
-    AP_PRODUCTION | new ApProdEnvironment()
-    AP_UAT        | new ApUatEnvironment()
     EU_PRODUCTION | new EuProdEnvironment()
     EU_UAT        | new EuUatEnvironment()
     TEST_VERIFY   | new TestVerifyEnvironment()
@@ -25,6 +23,22 @@ class EnvironmentFactorySpec extends Specification {
   def "getEnvironment should return IllegalArgumentException for unknown environments"() {
     when:
     EnvironmentFactory.getEnvironment(null)
+
+    then:
+    thrown(IllegalArgumentException)
+  }
+
+  def 'getCustomEnvironment should return environment with endpoint url'() {
+    given:
+    def sut = EnvironmentFactory.getCustomEnvironment('https://localhost:8080')
+
+    expect:
+    sut == new CustomEnvironment('https://localhost:8080')
+  }
+
+  def "getCustomEnvironment should return IllegalArgumentException for null endpoint url"() {
+    when:
+    EnvironmentFactory.getCustomEnvironment(null)
 
     then:
     thrown(IllegalArgumentException)
