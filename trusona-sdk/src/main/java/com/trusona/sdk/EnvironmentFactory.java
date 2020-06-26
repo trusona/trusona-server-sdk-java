@@ -23,7 +23,7 @@ public class EnvironmentFactory {
     }
   }
 
-  public static Environment getCustomEnvironment(String endpointUrl) {
+  public static CustomEnvironment getCustomEnvironment(String endpointUrl) {
     if (endpointUrl == null) {
       throw new IllegalArgumentException("endpointUrl must not be null");
     }
