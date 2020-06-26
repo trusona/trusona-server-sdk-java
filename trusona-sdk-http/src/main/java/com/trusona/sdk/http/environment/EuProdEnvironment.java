@@ -1,7 +1,6 @@
 package com.trusona.sdk.http.environment;
 
 import java.util.Objects;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -21,12 +20,11 @@ public class EuProdEnvironment implements Environment {
 
   @Override
   public boolean equals(Object object) {
-    return object != null && getClass().equals(object.getClass()) &&
-        Objects.equals(getEndpointUrl(), ((EuProdEnvironment) object).getEndpointUrl());
+    return object != null && getClass().equals(object.getClass());
   }
 
   @Override
   public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(1189, 71837, this);
+    return Objects.hash(getEndpointUrl());
   }
 }

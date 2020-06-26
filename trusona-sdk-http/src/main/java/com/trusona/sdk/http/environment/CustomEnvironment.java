@@ -1,7 +1,6 @@
 package com.trusona.sdk.http.environment;
 
 import java.util.Objects;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -31,6 +30,6 @@ public class CustomEnvironment implements Environment {
 
   @Override
   public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(1789, 73837, this);
+    return Objects.hash(getEndpointUrl());
   }
 }
