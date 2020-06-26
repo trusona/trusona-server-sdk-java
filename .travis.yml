@@ -5,29 +5,10 @@ before_script:
 - bin/ci-setup-env.sh
 - openssl aes-256-cbc -K $encrypted_877b689a489a_key -iv $encrypted_877b689a489a_iv
   -in keystores/trusona-signing.gpg.enc -out keystores/trusona-signing.gpg -d
-- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
-  > ./cc-test-reporter
-- chmod +x ./cc-test-reporter
 script:
 - "./gradlew clean build"
 after_script:
-- >
-  JACOCO_SOURCE_PATH=trusona-sdk/src/main/java
-  ./cc-test-reporter format-coverage trusona-sdk/build/reports/jacoco/test/jacocoTestReport.xml
-  --input-type jacoco
-  -o coverage/codeclimate.trusona-sdk.json
-- >
-  JACOCO_SOURCE_PATH=trusona-sdk-http/src/main/java
-  ./cc-test-reporter format-coverage trusona-sdk-http/build/reports/jacoco/test/jacocoTestReport.xml
-  --input-type jacoco
-  -o coverage/codeclimate.trusona-sdk-http.json
-- >
-  JACOCO_SOURCE_PATH=trusona-sdk-resources/src/main/java
-  ./cc-test-reporter format-coverage trusona-sdk-resources/build/reports/jacoco/test/jacocoTestReport.xml
-  --input-type jacoco
-  -o coverage/codeclimate.trusona-sdk-resources.json
-- ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 3
-- if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi
+- bin/coverage-report.sh
 deploy:
 - provider: script
   skip_cleanup: true
