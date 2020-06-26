@@ -12,10 +12,6 @@ public class EnvironmentFactory {
         return new ProdEnvironment();
       case UAT:
         return new UatEnvironment();
-      case AP_PRODUCTION:
-        return new ApProdEnvironment();
-      case AP_UAT:
-        return new ApUatEnvironment();
       case EU_PRODUCTION:
         return new EuProdEnvironment();
       case EU_UAT:
@@ -25,5 +21,12 @@ public class EnvironmentFactory {
       default:
         throw new IllegalArgumentException("Unexpected environment: " + env);
     }
+  }
+
+  public static CustomEnvironment getCustomEnvironment(String endpointUrl) {
+    if (endpointUrl == null) {
+      throw new IllegalArgumentException("endpointUrl must not be null");
+    }
+    return new CustomEnvironment(endpointUrl);
   }
 }

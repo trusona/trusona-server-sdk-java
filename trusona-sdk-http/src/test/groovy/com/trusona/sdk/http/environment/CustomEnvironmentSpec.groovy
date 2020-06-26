@@ -3,12 +3,12 @@ package com.trusona.sdk.http.environment
 import okhttp3.logging.HttpLoggingInterceptor
 import spock.lang.Specification
 
-class ApProdEnvironmentSpec extends Specification {
+class CustomEnvironmentSpec extends Specification {
 
-  ApProdEnvironment sut
+  CustomEnvironment sut
 
   def setup() {
-    sut = new ApProdEnvironment()
+    sut = new CustomEnvironment('http://localhost:8080')
   }
 
   def "getLoggingLevel should return NONE"() {
@@ -16,14 +16,14 @@ class ApProdEnvironmentSpec extends Specification {
     def res = sut.getLoggingLevel()
 
     then:
-    res == HttpLoggingInterceptor.Level.NONE
+    res.equals(HttpLoggingInterceptor.Level.BASIC)
   }
 
-  def "getEndpointUrl should return the AP prod url"() {
+  def "getEndpointUrl should return the custom url that was set"() {
     when:
     def res = sut.getEndpointUrl()
 
     then:
-    res == "https://api.ap.trusona.net"
+    res == "http://localhost:8080"
   }
 }

@@ -4,9 +4,13 @@ import java.util.Objects;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
-public class UatEnvironment implements Environment {
+public class CustomEnvironment implements Environment {
 
-  private static final String ENDPOINT_URL = "https://api.staging.trusona.net";
+  private final String endpointUrl;
+
+  public CustomEnvironment(String endpointUrl) {
+    this.endpointUrl = endpointUrl;
+  }
 
   @Override
   public HttpLoggingInterceptor.Level getLoggingLevel() {
@@ -15,12 +19,13 @@ public class UatEnvironment implements Environment {
 
   @Override
   public String getEndpointUrl() {
-    return ENDPOINT_URL;
+    return endpointUrl;
   }
 
   @Override
   public boolean equals(Object object) {
-    return object != null && getClass().equals(object.getClass());
+    return object != null && getClass().equals(object.getClass()) &&
+        Objects.equals(getEndpointUrl(), ((CustomEnvironment) object).getEndpointUrl());
   }
 
   @Override
