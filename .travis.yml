@@ -8,11 +8,26 @@ before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
   > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
-- "./cc-test-reporter before-build"
 script:
 - "./gradlew clean build"
 after_script:
-- ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+- >
+  JACOCO_SOURCE_PATH=trusona-sdk/src/main/java
+  ./cc-test-reporter format-coverage trusona-sdk/build/reports/jacoco/test/jacocoTestReport.xml
+  --input-type jacoco
+  -o coverage/codeclimate.trusona-sdk.json
+- >
+  JACOCO_SOURCE_PATH=trusona-sdk-http/src/main/java
+  ./cc-test-reporter format-coverage trusona-sdk-http/build/reports/jacoco/test/jacocoTestReport.xml
+  --input-type jacoco
+  -o coverage/codeclimate.trusona-sdk-http.json
+- >
+  JACOCO_SOURCE_PATH=trusona-sdk-resources/src/main/java
+  ./cc-test-reporter format-coverage trusona-sdk-resources/build/reports/jacoco/test/jacocoTestReport.xml
+  --input-type jacoco
+  -o coverage/codeclimate.trusona-sdk-resources.json
+- ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 3
+- if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi
 deploy:
 - provider: script
   skip_cleanup: true

@@ -7,3 +7,4 @@ buildinfo.*
 keystores/trusona-signing.*
 tmp/
 */out/
+coverage
