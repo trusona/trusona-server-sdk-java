@@ -12,6 +12,10 @@ public class EnvironmentFactory {
         return new ProdEnvironment();
       case UAT:
         return new UatEnvironment();
+      case AP_PRODUCTION:
+        return new ApProdEnvironment();
+      case AP_UAT:
+        return new ApUatEnvironment();
       case EU_PRODUCTION:
         return new EuProdEnvironment();
       case EU_UAT:
