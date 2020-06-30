@@ -8,7 +8,7 @@ class CustomEnvironmentSpec extends Specification {
   CustomEnvironment sut
 
   def setup() {
-    sut = new CustomEnvironment('http://localhost:8080')
+    sut = new CustomEnvironment(new URL('http://localhost:8080'))
   }
 
   def "getLoggingLevel should return NONE"() {

@@ -36,6 +36,7 @@ import com.trusona.sdk.resources.exception.NoIdentityDocumentsException;
 import com.trusona.sdk.resources.exception.TrusonaException;
 import com.trusona.sdk.resources.exception.UserNotFoundException;
 import com.trusona.sdk.resources.exception.ValidationException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
@@ -92,12 +93,12 @@ public class Trusona implements TrusonaApi {
   /**
    * Create a Trusona object using an endpoint URL
    *
-   * @param token       Your API token, provided by Trusona
-   * @param secret      Your API secret, provided by Trusona
-   * @param endpointUrl The Trusona endpoint URL you would like to point at
+   * @param token    Your API token, provided by Trusona
+   * @param secret   Your API secret, provided by Trusona
+   * @param endpoint The Trusona endpoint URL you would like to point at
    */
-  public Trusona(String token, String secret, String endpointUrl) {
-    this(EnvironmentFactory.getCustomEnvironment(endpointUrl), new ApiCredentials(token, secret));
+  public Trusona(String token, String secret, URL endpoint) {
+    this(EnvironmentFactory.getCustomEnvironment(endpoint), new ApiCredentials(token, secret));
   }
 
   /**

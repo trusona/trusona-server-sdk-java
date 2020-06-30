@@ -1,5 +1,6 @@
 package com.trusona.sdk.http.environment;
 
+import java.net.URL;
 import java.util.Objects;
 
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -8,8 +9,8 @@ public class CustomEnvironment implements Environment {
 
   private final String endpointUrl;
 
-  public CustomEnvironment(String endpointUrl) {
-    this.endpointUrl = endpointUrl;
+  public CustomEnvironment(URL endpoint) {
+    this.endpointUrl = endpoint.toString();
   }
 
   @Override
