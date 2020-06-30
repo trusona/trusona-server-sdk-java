@@ -1,8 +1,10 @@
 package com.trusona.sdk;
 
 import com.trusona.sdk.http.environment.*;
+import java.net.URL;
 
 public class EnvironmentFactory {
+
   public static Environment getEnvironment(TrusonaEnvironment env) {
     if (env == null) {
       throw new IllegalArgumentException("environment must not be null");
@@ -27,10 +29,10 @@ public class EnvironmentFactory {
     }
   }
 
-  public static CustomEnvironment getCustomEnvironment(String endpointUrl) {
-    if (endpointUrl == null) {
-      throw new IllegalArgumentException("endpointUrl must not be null");
+  public static CustomEnvironment getCustomEnvironment(URL endpoint) {
+    if (endpoint == null) {
+      throw new IllegalArgumentException("endpoint must not be null");
     }
-    return new CustomEnvironment(endpointUrl);
+    return new CustomEnvironment(endpoint);
   }
 }

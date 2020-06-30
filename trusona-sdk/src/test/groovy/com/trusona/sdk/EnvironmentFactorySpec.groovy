@@ -32,10 +32,10 @@ class EnvironmentFactorySpec extends Specification {
 
   def 'getCustomEnvironment should return environment with endpoint url'() {
     given:
-    def sut = EnvironmentFactory.getCustomEnvironment('https://localhost:8080')
+    def sut = EnvironmentFactory.getCustomEnvironment(new URL('https://localhost:8080'))
 
     expect:
-    sut == new CustomEnvironment('https://localhost:8080')
+    sut.getEndpointUrl() == 'https://localhost:8080'
   }
 
   def "getCustomEnvironment should return IllegalArgumentException for null endpoint url"() {
