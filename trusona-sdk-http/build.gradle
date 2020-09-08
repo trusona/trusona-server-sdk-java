@@ -54,7 +54,7 @@ dependencies {
   compile "commons-codec:commons-codec:1.11"
   compile "com.squareup.retrofit2:retrofit:2.5.0"
   compile "com.squareup.retrofit2:converter-jackson:2.5.0"
-  compile "com.squareup.okhttp3:logging-interceptor:3.14.0"
+  compile "com.squareup.okhttp3:logging-interceptor:4.8.1"
   compile "org.slf4j:slf4j-api:1.7.30"
 
   testCompile "org.codehaus.groovy:groovy-all:2.5.3"
