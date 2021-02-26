@@ -52,7 +52,7 @@ dependencies {
   compile project(":trusona-sdk-resources")
 
   testCompile "org.codehaus.groovy:groovy-all:3.0.7"
-  testCompile "org.spockframework:spock-core:2.0-M3-groovy-3.0"
+  testCompile "org.spockframework:spock-core:2.0-M4-groovy-3.0"
   testCompile "com.squareup.okhttp3:mockwebserver:4.9.1"
   testCompile "ch.qos.logback:logback-classic:1.2.3"
 
