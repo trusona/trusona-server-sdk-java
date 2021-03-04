@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    pull-request-branch-name:
+      separator: "-"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "gradle"
+    directory: "/trusona-sdk"
+    schedule:
+      interval: "daily"
+    pull-request-branch-name:
+      separator: "-"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "gradle"
+    directory: "/trusona-sdk-http"
+    schedule:
+      interval: "daily"
+    pull-request-branch-name:
+      separator: "-"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "gradle"
+    directory: "/trusona-sdk-resources"
+    schedule:
+      interval: "daily"
+    pull-request-branch-name:
+      separator: "-"
+    open-pull-requests-limit: 5
