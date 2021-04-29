@@ -53,7 +53,7 @@ dependencies {
   compile "com.fasterxml.jackson.core:jackson-databind:2.12.3"
   compile "org.slf4j:slf4j-api:1.7.30"
 
-  testCompile "org.codehaus.groovy:groovy-all:3.0.7"
+  testCompile "org.codehaus.groovy:groovy-all:3.0.8"
   testCompile "org.spockframework:spock-core:2.0-M5-groovy-3.0"
   testCompile "ch.qos.logback:logback-classic:1.2.3"
 
