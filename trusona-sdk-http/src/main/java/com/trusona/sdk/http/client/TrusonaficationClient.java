@@ -20,6 +20,7 @@ import com.trusona.sdk.resources.exception.ResourceNotFound;
 import com.trusona.sdk.resources.exception.ResourceNotProcessable;
 import com.trusona.sdk.resources.exception.TrusonaException;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 import retrofit2.Response;
@@ -73,19 +74,34 @@ public class TrusonaficationClient implements TrusonaficationApi {
 
   @Override
   public TrusonaficationResult getTrusonaficationResult(UUID trusonaficationId) throws TrusonaException {
+    return pollTrusonaficationResult(trusonaficationId, Duration.ZERO);
+  }
+
+  @Override
+  public TrusonaficationResult pollTrusonaficationResult(UUID trusonaficationId, Duration timeout)
+    throws TrusonaException {
     TrusonaficationService service = serviceGenerator.getService(TrusonaficationService.class);
 
-    TrusonaficationResponse response = new CallHandler<>(service.getTrusonafication(trusonaficationId))
-      .handle(defaultErrorHandler);
+    Instant start = Instant.now();
+    TrusonaficationResponse response = null;
 
-    while (response != null && IN_PROGRESS.equals(TrusonaficationStatus.valueOf(response.getStatus()))) {
-      sleep(pollingInterval);
+    do {
+        response = new CallHandler<>(service.getTrusonafication(trusonaficationId))
+            .handle(defaultErrorHandler);
 
-      response = new CallHandler<>(service.getTrusonafication(trusonaficationId))
-        .handle(defaultErrorHandler);
-    }
+        if (response == null || !IN_PROGRESS.equals(TrusonaficationStatus.valueOf(response.getStatus()))) {
+            return response == null ? null : trusonaficationResultFromResponse(response);
+        }
 
-    return response == null ? null : trusonaficationResultFromResponse(response);
+        if (!timeout.equals(Duration.ZERO) && start.plusMillis(timeout.toMillis()).isBefore(Instant.now())) {
+            break;
+        }
+
+        sleep(pollingInterval);
+
+    } while (IN_PROGRESS.equals(TrusonaficationStatus.valueOf(response.getStatus())));
+
+    return null;
   }
 
   @Override

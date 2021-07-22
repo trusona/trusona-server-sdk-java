@@ -237,6 +237,22 @@ public class Trusona implements TrusonaApi {
     return trusonaficationApi.getTrusonaficationResult(trusonaficationId);
   }
 
+  /**
+   * Gets a TrusonaficationResult for a given Trusonafication ID. This will block until the
+   * Trusonafication is no longer IN_PROGRESS or the timeout expires
+   *
+   * @param trusonaficationId The ID of the trusonafication if it exists, or null
+   * @param timeout how long to wait before giving up, Duration.ZERO for unlimited
+   * @return A TrusonaficationResult for the given Trusonafication.
+   * @throws TrusonaException If there was a problem processing the API request, or polling was
+   *                          interrupted.
+   */
+  @Override
+  public TrusonaficationResult pollTrusonaficationResult(UUID trusonaficationId, Duration timeout)
+      throws TrusonaException {
+      return trusonaficationApi.pollTrusonaficationResult(trusonaficationId, timeout);
+  }
+
   @Override
   public Void cancelTrusonafication(UUID trusonaficationId) throws TrusonaException {
     return trusonaficationApi.cancelTrusonafication(trusonaficationId);
