@@ -11,7 +11,7 @@ buildscript {
     classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.24.14"
     classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.4.0"
     classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0"
-    classpath "com.google.guava:guava:30.1.1-jre"
+    classpath "com.google.guava:guava:31.0-jre"
   }
 }
 
@@ -23,11 +23,6 @@ allprojects {
     tasks.withType(GroovyCompile) {
       options.compilerArgs << "-Xlint:all,-processing"
     }
-  }
-
-  tasks.matching { it instanceof Test }.all {
-    testLogging.events = ["failed", "passed", "skipped"]
-    testLogging.showStandardStreams = false
   }
 }
 
@@ -60,8 +55,10 @@ subprojects {
   }
 
   test {
+    useJUnitPlatform()
+
     testLogging {
-      showStandardStreams = true
+      showStandardStreams = false
       events "PASSED", "FAILED", "SKIPPED"
     }
 
