@@ -2,7 +2,7 @@ language: java
 jdk: openjdk8
 install: true
 
-before_script: bin/ci-setup-env.sh
+before_script: . bin/ci-setup-env.sh
 
 script: >
         if [ -n "$TRAVIS_TAG" ]; then
