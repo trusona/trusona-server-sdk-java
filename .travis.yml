@@ -4,19 +4,24 @@ install: true
 
 before_script: bin/ci-setup-env.sh
 
-script: ./gradlew build
+script: >
+        if [ -n "$TRAVIS_TAG" ]; then
+          ./gradlew build
+        else
+          ./gradlew check test
+        fi
 
 after_script: bin/coverage-report.sh
 
 deploy:
   - provider: script
     skip_cleanup: true
-    script: "./gradlew publish artifactoryPublish"
+    script: ./gradlew publish artifactoryPublish
     on:
       branch: master
   - provider: script
     skip_cleanup: true
-    script: "./gradlew publish artifactoryPublish"
+    script: ./gradlew publish artifactoryPublish
     on:
       tags: true
 notifications:
