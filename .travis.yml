@@ -1,25 +1,27 @@
 language: java
 jdk: openjdk8
 install: true
-before_script:
-  - bin/ci-setup-env.sh
-  - >
-    if [ -n $TRAVIS_TAG ]; then
-      openssl aes-256-cbc -K $encrypted_877b689a489a_key -iv $encrypted_877b689a489a_iv -in keystores/trusona-signing.gpg.enc -out keystores/trusona-signing.gpg -d
-    fi
-script:
-  - "./gradlew clean build"
-after_script:
-  - bin/coverage-report.sh
+
+before_script: bin/ci-setup-env.sh
+
+script: >
+        if [ -n "$TRAVIS_TAG" ]; then
+          ./gradlew build
+        else
+          ./gradlew check test
+        fi
+
+after_script: bin/coverage-report.sh
+
 deploy:
   - provider: script
     skip_cleanup: true
-    script: "./gradlew publish artifactoryPublish"
+    script: ./gradlew publish artifactoryPublish
     on:
       branch: master
   - provider: script
     skip_cleanup: true
-    script: "./gradlew publish artifactoryPublish"
+    script: ./gradlew publish artifactoryPublish
     on:
       tags: true
 notifications:

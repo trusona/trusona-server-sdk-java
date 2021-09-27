@@ -24,11 +24,6 @@ allprojects {
       options.compilerArgs << "-Xlint:all,-processing"
     }
   }
-
-  tasks.matching { it instanceof Test }.all {
-    testLogging.events = ["failed", "passed", "skipped"]
-    testLogging.showStandardStreams = false
-  }
 }
 
 subprojects {
@@ -60,8 +55,10 @@ subprojects {
   }
 
   test {
+    useJUnitPlatform()
+
     testLogging {
-      showStandardStreams = true
+      showStandardStreams = false
       events "PASSED", "FAILED", "SKIPPED"
     }
 
