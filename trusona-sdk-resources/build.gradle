@@ -57,5 +57,5 @@ dependencies {
   testCompile "org.spockframework:spock-core:2.1-groovy-3.0"
   testCompile "ch.qos.logback:logback-classic:1.2.11"
 
-  spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0"
+  spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0"
 }
