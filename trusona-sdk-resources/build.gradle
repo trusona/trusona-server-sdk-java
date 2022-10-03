@@ -55,7 +55,7 @@ dependencies {
 
   testCompile "org.codehaus.groovy:groovy-all:3.0.13"
   testCompile "org.spockframework:spock-core:2.1-groovy-3.0"
-  testCompile "ch.qos.logback:logback-classic:1.4.1"
+  testCompile "ch.qos.logback:logback-classic:1.4.3"
 
   spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0"
 }
