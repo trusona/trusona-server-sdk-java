@@ -48,20 +48,20 @@ signing {
 }
 
 dependencies {
-  compile project(":trusona-sdk-resources")
+  implementation project(":trusona-sdk-resources")
 
-  compile "org.apache.commons:commons-lang3:3.12.0"
-  compile "commons-codec:commons-codec:1.15"
-  compile "com.squareup.retrofit2:retrofit:2.9.0"
-  compile "com.squareup.retrofit2:converter-jackson:2.9.0"
-  compile "com.squareup.okhttp3:logging-interceptor:4.10.0"
-  compile "org.slf4j:slf4j-api:2.0.3"
+  api "org.apache.commons:commons-lang3:3.12.0"
+  api "commons-codec:commons-codec:1.15"
+  api "com.squareup.retrofit2:retrofit:2.9.0"
+  api "com.squareup.retrofit2:converter-jackson:2.9.0"
+  api "com.squareup.okhttp3:logging-interceptor:4.10.0"
+  api "org.slf4j:slf4j-api:2.0.3"
 
-  testCompile "org.codehaus.groovy:groovy-all:3.0.13"
-  testCompile "org.spockframework:spock-core:2.3-groovy-4.0"
-  testCompile "ch.qos.logback:logback-classic:1.4.4"
-  testCompile "com.squareup.okhttp3:mockwebserver:4.10.0"
-  testCompile "com.squareup.retrofit2:retrofit-mock:2.9.0"
+  testImplementation "org.apache.groovy:groovy-all:4.0.5"
+  testImplementation "org.spockframework:spock-core:2.3-groovy-4.0"
+  testImplementation "ch.qos.logback:logback-classic:1.4.4"
+  testImplementation "com.squareup.okhttp3:mockwebserver:4.10.0"
+  testImplementation "com.squareup.retrofit2:retrofit-mock:2.9.0"
 
   spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0"
 }

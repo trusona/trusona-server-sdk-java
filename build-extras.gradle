@@ -13,7 +13,7 @@ artifactory {
 
   publish {
     repository {
-      repoKey =  environmentValue.call("TRAVIS_TAG") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
+      repoKey = environmentValue.call("TRAVIS_TAG") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
       username = System.getenv("artifactory_username") ?: trusonaUsername
       password = System.getenv("artifactory_password") ?: trusonaPassword
       maven = true
@@ -26,7 +26,7 @@ artifactory {
   }
   resolve {
     repository {
-      repoKey =  environmentValue.call("TRAVIS_TAG") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
+      repoKey = environmentValue.call("TRAVIS_TAG") ? "sdk-public-releases-local" : "sdk-public-snapshots-local"
       username = System.getenv("artifactory_username") ?: trusonaUsername
       password = System.getenv("artifactory_password") ?: trusonaPassword
       maven = true
@@ -35,10 +35,11 @@ artifactory {
 }
 
 jacoco {
-  toolVersion = "0.8.2"
+  toolVersion = "0.8.8"
 }
 
 spotbugs {
+  toolVersion = '4.7.2'
   showProgress = true
 }
 
