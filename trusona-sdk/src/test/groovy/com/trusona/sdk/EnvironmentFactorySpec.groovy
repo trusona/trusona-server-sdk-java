@@ -15,8 +15,6 @@ class EnvironmentFactorySpec extends Specification {
     env           | envClass
     PRODUCTION    | new ProdEnvironment()
     UAT           | new UatEnvironment()
-    AP_PRODUCTION | new ApProdEnvironment()
-    AP_UAT        | new ApUatEnvironment()
     EU_PRODUCTION | new EuProdEnvironment()
     EU_UAT        | new EuUatEnvironment()
     TEST_VERIFY   | new TestVerifyEnvironment()

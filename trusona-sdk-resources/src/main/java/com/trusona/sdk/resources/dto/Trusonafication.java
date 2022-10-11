@@ -3,6 +3,8 @@ package com.trusona.sdk.resources.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.trusona.sdk.annotation.SuppressFBWarnings;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Date;
@@ -12,6 +14,7 @@ import java.util.UUID;
  * A representation of an authentication request to be sent to a Trusona enabled device/user. Use the
  * {@link Trusonafication#essential()} method to build an Essential level trusonafication.
  */
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Instance is not accessed by untrusted code")
 public class Trusonafication extends BaseDto {
   private static final long serialVersionUID = 4438341104830942514L;
 
