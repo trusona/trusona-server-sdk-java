@@ -10,7 +10,7 @@ buildscript {
   dependencies {
     classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.29.1"
     classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.4.0"
-    classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0"
+    classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.7.5"
     classpath "com.google.guava:guava:31.1-jre"
   }
 }
@@ -28,20 +28,19 @@ allprojects {
 
 subprojects {
   group "com.trusona"
-  version "4.3.1-SNAPSHOT"
+  version "4.4.0-SNAPSHOT"
 
-  apply plugin: "java"
+  apply plugin: "java-library"
   apply plugin: "groovy"
   apply plugin: "signing"
-  apply plugin: "maven"
   apply plugin: "maven-publish"
   apply plugin: "jacoco"
   apply plugin: "com.github.spotbugs"
   apply from: "../publishing.gradle"
   apply from: "../build-extras.gradle"
 
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
+  sourceCompatibility = 1.11
+  targetCompatibility = 1.11
 
   repositories {
     mavenCentral()

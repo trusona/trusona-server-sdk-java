@@ -1,5 +1,6 @@
 package com.trusona.sdk.http.client.v2.response;
 
+import com.trusona.sdk.annotation.SuppressFBWarnings;
 import com.trusona.sdk.resources.dto.BaseDto;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 /**
  * Copyright Trusona, Inc. Created on 1/22/18 for trusona-server-sdk.
  */
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Instance is not accessed by untrusted code")
 public class TrusonaficationResponse extends BaseDto {
 
   private static final long serialVersionUID = 3555946086952925089L;

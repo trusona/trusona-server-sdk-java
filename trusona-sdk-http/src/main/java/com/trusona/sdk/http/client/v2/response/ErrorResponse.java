@@ -1,10 +1,12 @@
 package com.trusona.sdk.http.client.v2.response;
 
+import com.trusona.sdk.annotation.SuppressFBWarnings;
 import com.trusona.sdk.resources.dto.BaseDto;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Instance is not accessed by untrusted code")
 public class ErrorResponse extends BaseDto {
   private static final long serialVersionUID = -207143182156053353L;
 

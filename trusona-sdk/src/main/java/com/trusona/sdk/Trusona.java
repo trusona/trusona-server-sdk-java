@@ -1,6 +1,9 @@
 package com.trusona.sdk;
 
-import static org.apache.commons.lang3.Validate.notEmpty;
+import java.net.URL;
+import java.time.Duration;
+import java.util.List;
+import java.util.UUID;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.trusona.sdk.config.JacksonConfig;
@@ -34,12 +37,11 @@ import com.trusona.sdk.resources.exception.DeviceAlreadyBoundException;
 import com.trusona.sdk.resources.exception.DeviceNotFoundException;
 import com.trusona.sdk.resources.exception.NoIdentityDocumentsException;
 import com.trusona.sdk.resources.exception.TrusonaException;
-import com.trusona.sdk.resources.exception.UserNotFoundException;
 import com.trusona.sdk.resources.exception.ValidationException;
-import java.net.URL;
-import java.time.Duration;
-import java.util.List;
-import java.util.UUID;
+import org.apache.commons.lang3.ThreadUtils;
+import org.apache.commons.lang3.time.StopWatch;
+
+import static org.apache.commons.lang3.Validate.notEmpty;
 
 /**
  * The main class to interact with Trusona.
@@ -57,7 +59,7 @@ public class Trusona implements TrusonaApi {
 
 
   Trusona(ServiceGenerator serviceGenerator, ApiCredentials apiCredentials,
-      TrusonaficationApi trusonaficationApi, DevicesApi devicesApi, UsersApi usersApi) {
+          TrusonaficationApi trusonaficationApi, DevicesApi devicesApi, UsersApi usersApi) {
 
     this.serviceGenerator = serviceGenerator;
     this.apiCredentials = apiCredentials;
@@ -71,7 +73,7 @@ public class Trusona implements TrusonaApi {
   //TODO: Remove these intermediary constructors after everything is delegated to clients.
   Trusona(ServiceGenerator sg, ApiCredentials apiCredentials) {
     this(sg, apiCredentials, new TrusonaficationClient(sg), new DevicesClient(sg),
-        new UsersClient(sg));
+      new UsersClient(sg));
   }
 
   Trusona(TrusonaEnvironment environment, ApiCredentials apiCredentials) {
@@ -79,7 +81,7 @@ public class Trusona implements TrusonaApi {
         EnvironmentFactory.getEnvironment(environment),
         apiCredentials,
         new DefaultHmacSignatureGenerator()),
-        apiCredentials);
+      apiCredentials);
   }
 
   Trusona(CustomEnvironment environment, ApiCredentials apiCredentials) {
@@ -87,7 +89,7 @@ public class Trusona implements TrusonaApi {
         environment,
         apiCredentials,
         new DefaultHmacSignatureGenerator()),
-        apiCredentials);
+      apiCredentials);
   }
 
   /**
@@ -155,7 +157,7 @@ public class Trusona implements TrusonaApi {
    */
   @Override
   public UserDevice createUserDevice(String userIdentifier, String deviceIdentifier)
-      throws DeviceNotFoundException, DeviceAlreadyBoundException, ValidationException, TrusonaException {
+    throws DeviceNotFoundException, DeviceAlreadyBoundException, ValidationException, TrusonaException {
     UserDevice request = new UserDevice();
     request.setDeviceIdentifier(deviceIdentifier);
     request.setUserIdentifier(userIdentifier);
@@ -164,16 +166,16 @@ public class Trusona implements TrusonaApi {
       switch (response.code()) {
         case 409:
           throw new DeviceAlreadyBoundException(
-              "A different user has already been bound to this device.");
+            "A different user has already been bound to this device.");
         case 424:
           throw new DeviceNotFoundException(
-              "The device you are attempting to bind to a user does not exist. " +
-                  "The device will need to be re-registered with Trusona before attempting to bind it again.");
+            "The device you are attempting to bind to a user does not exist. " +
+              "The device will need to be re-registered with Trusona before attempting to bind it again.");
       }
     };
 
     return new CallHandler<>(getUserDeviceService().createUserDevice(request))
-        .handle(createUserDeviceErrorHandler, genericErrorHandler);
+      .handle(createUserDeviceErrorHandler, genericErrorHandler);
   }
 
   /**
@@ -190,20 +192,20 @@ public class Trusona implements TrusonaApi {
    */
   @Override
   public boolean activateUserDevice(String activationCode)
-      throws DeviceNotFoundException, ValidationException, TrusonaException {
+    throws DeviceNotFoundException, ValidationException, TrusonaException {
     UserDevice request = new UserDevice();
     request.setActive(true);
 
     ErrorHandler activeErrorHandler = response -> {
       if (response.code() == 404) {
         throw new DeviceNotFoundException(
-            "The device you are attempting to activate does not exist. " +
-                "You will need to re-register the device and re-bind it to the user to get a new activation code.");
+          "The device you are attempting to activate does not exist. " +
+            "You will need to re-register the device and re-bind it to the user to get a new activation code.");
       }
     };
 
     return new CallHandler<>(getUserDeviceService().updateUserDevice(activationCode, request))
-        .handle(activeErrorHandler, genericErrorHandler).isActive();
+      .handle(activeErrorHandler, genericErrorHandler).isActive();
   }
 
   /**
@@ -218,7 +220,7 @@ public class Trusona implements TrusonaApi {
    */
   @Override
   public TrusonaficationResult createTrusonafication(Trusonafication trusonafication)
-      throws TrusonaException {
+    throws TrusonaException {
     return trusonaficationApi.createTrusonafication(trusonafication);
   }
 
@@ -233,7 +235,7 @@ public class Trusona implements TrusonaApi {
    */
   @Override
   public TrusonaficationResult getTrusonaficationResult(UUID trusonaficationId)
-      throws TrusonaException {
+    throws TrusonaException {
     return trusonaficationApi.getTrusonaficationResult(trusonaficationId);
   }
 
@@ -254,7 +256,7 @@ public class Trusona implements TrusonaApi {
     ParsedToken parsedToken = apiCredentials.getParsedToken();
     if (parsedToken == null) {
       throw new TrusonaException(
-          "The provided access token is invalid. Please check your configuration");
+        "The provided access token is invalid. Please check your configuration");
     }
 
     WebSdkConfig config = new WebSdkConfig(serviceGenerator.getBaseUrl(), parsedToken.getSubject());
@@ -262,7 +264,7 @@ public class Trusona implements TrusonaApi {
       return JacksonConfig.getObjectMapper().writeValueAsString(config);
     } catch (JsonProcessingException e) {
       throw new TrusonaException(
-          "Could not serializer Web SDK config. Contact Trusona to determine the exact cause", e);
+        "Could not serializer Web SDK config. Contact Trusona to determine the exact cause", e);
     }
   }
 
@@ -276,7 +278,7 @@ public class Trusona implements TrusonaApi {
   @Override
   public TruCode getPairedTruCode(UUID id) throws TrusonaException {
     return new CallHandler<>(getTruCodeService().getPairedTrucode(id))
-        .handle(genericErrorHandler);
+      .handle(genericErrorHandler);
   }
 
   /**
@@ -289,32 +291,41 @@ public class Trusona implements TrusonaApi {
    */
   @Override
   public TruCode getPairedTruCode(UUID id, Long timeout) throws TrusonaException {
-    final long stopTime = System.currentTimeMillis() + timeout;
-    TruCode truCode = getPairedTruCode(id);
-    long remainingTime;
-    while (truCode == null && (remainingTime = stopTime - System.currentTimeMillis()) >= 0) {
-      long sleepTime = Math.min(pollingInterval.toMillis(), remainingTime);
-      try {
-        Thread.sleep(sleepTime);
-      } catch (InterruptedException e) {
-        throw new TrusonaException("Thread was interrupted while polling for a paired TruCode", e);
+    long stopTime = System.currentTimeMillis() + timeout;
+    StopWatch stopWatch = StopWatch.createStarted();
+
+    while (stopWatch.getTime() < stopTime) {
+      TruCode truCode = getPairedTruCode(id);
+
+      if (truCode != null) {
+        return truCode;
+      } else {
+        long remainingTime = stopTime - System.currentTimeMillis();
+
+        if (remainingTime > 0) {
+          long sleepTime = Math.min(pollingInterval.toMillis(), remainingTime);
+
+          try {
+            ThreadUtils.sleep(Duration.ofMillis(sleepTime));
+          } catch (InterruptedException e) {
+            throw new TrusonaException("Thread was interrupted while polling for a paired TruCode", e);
+          }
+        }
       }
-      truCode = getPairedTruCode(id);
     }
-    return truCode;
+
+    return null;
   }
 
   @Override
-  public List<IdentityDocument> findIdentityDocuments(String userIdentifier)
-      throws TrusonaException {
+  public List<IdentityDocument> findIdentityDocuments(String userIdentifier) throws TrusonaException {
     return new CallHandler<>(getIdentityDocumentService().findIdentityDocuments(userIdentifier))
-        .handle(genericErrorHandler);
+      .handle(genericErrorHandler);
   }
 
   @Override
   public IdentityDocument getIdentityDocument(UUID id) throws TrusonaException {
-    return new CallHandler<>(getIdentityDocumentService().getIdentityDocument(id))
-        .handle(genericErrorHandler);
+    return new CallHandler<>(getIdentityDocumentService().getIdentityDocument(id)).handle(genericErrorHandler);
   }
 
   /**
@@ -322,11 +333,10 @@ public class Trusona implements TrusonaApi {
    *
    * @param userIdentifier A String that would be used to identify the user.
    * @return Void
-   * @throws UserNotFoundException If the user cannot be found or is already inactive.
-   * @throws TrusonaException      If any network or server errors occur.
+   * @throws TrusonaException If any network or server errors occur.
    */
   @Override
-  public Void deactivateUser(String userIdentifier) throws UserNotFoundException, TrusonaException {
+  public Void deactivateUser(String userIdentifier) throws TrusonaException {
     return usersApi.deactivateUser(notEmpty(userIdentifier));
   }
 

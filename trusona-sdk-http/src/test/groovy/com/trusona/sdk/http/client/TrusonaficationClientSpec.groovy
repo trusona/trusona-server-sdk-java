@@ -40,10 +40,10 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
-      .deviceIdentifier('wall-e')
-      .action('eat')
-      .resource('your lunch')
-      .build())
+        .deviceIdentifier('wall-e')
+        .action('eat')
+        .resource('your lunch')
+        .build())
     def request = mockWebServer.takeRequest()
 
     then:
@@ -68,10 +68,10 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
-      .truCode(truCodeId)
-      .action('eat')
-      .resource('your lunch')
-      .build())
+        .truCode(truCodeId)
+        .action('eat')
+        .resource('your lunch')
+        .build())
 
     def request = mockWebServer.takeRequest()
     def map = new JsonSlurper().parse(request.body.readByteArray()) as Map
@@ -100,10 +100,10 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
-      .email(email)
-      .action('eat')
-      .resource('your lunch')
-      .build())
+        .email(email)
+        .action('eat')
+        .resource('your lunch')
+        .build())
 
     def request = mockWebServer.takeRequest()
     def map = new JsonSlurper().parse(request.body.readByteArray()) as Map
@@ -132,10 +132,10 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     when:
     def res = sut.createTrusonafication(Trusonafication.essential()
-      .trusonaId(trusonaId)
-      .action('eat')
-      .resource('your lunch')
-      .build())
+        .trusonaId(trusonaId)
+        .action('eat')
+        .resource('your lunch')
+        .build())
 
     def request = mockWebServer.takeRequest()
     def map = new JsonSlurper().parse(request.body.readByteArray()) as Map
@@ -156,10 +156,10 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     when:
     sut.createTrusonafication(Trusonafication.essential()
-      .deviceIdentifier('wall-e')
-      .action('eat')
-      .resource('your lunch')
-      .build())
+        .deviceIdentifier('wall-e')
+        .action('eat')
+        .resource('your lunch')
+        .build())
 
     then:
     thrown(TrusonaException)
@@ -171,8 +171,8 @@ class TrusonaficationClientSpec extends ClientSpec {
   def "createTrusonafication should throw a NoIdentityDocumentException when the user has no documents and an executive trusonafication is created."() {
     given:
     mockWebServer.enqueue(signedResponse(
-      424,
-      """
+        424,
+        """
       {
         "error": "NO_DOCUMENTS",
         "message": "User does not meet the requirements to accept this Trusonafication.",
@@ -182,10 +182,10 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     when:
     sut.createTrusonafication(Trusonafication.executive()
-      .deviceIdentifier("clayto")
-      .action("eat")
-      .resource("socks")
-      .build()
+        .deviceIdentifier("clayto")
+        .action("eat")
+        .resource("socks")
+        .build()
     )
 
     then:
@@ -195,8 +195,8 @@ class TrusonaficationClientSpec extends ClientSpec {
   def "createTrusonafication should throw a generic exception when the service determines the relying-party cannot trusonafy a specific email address"() {
     given:
     mockWebServer.enqueue(signedResponse(
-      422,
-      """
+        422,
+        """
       {
         "error": "Failed Trusonafication",
         "message": "Relying Party is not allowed to send a trusonafication to 'bob@taco.com'"
@@ -205,10 +205,10 @@ class TrusonaficationClientSpec extends ClientSpec {
 
     when:
     sut.createTrusonafication(Trusonafication.executive()
-      .email("bob@taco.com")
-      .action("eat")
-      .resource("socks")
-      .build()
+        .email("bob@taco.com")
+        .action("eat")
+        .resource("socks")
+        .build()
     )
 
     then:
@@ -258,7 +258,7 @@ class TrusonaficationClientSpec extends ClientSpec {
   def "getTrusonaficationResult should return null if trusonafication is not found."() {
     given:
     mockWebServer.enqueue(new MockResponse()
-      .setResponseCode(404)
+        .setResponseCode(404)
     )
 
     when:
@@ -271,25 +271,25 @@ class TrusonaficationClientSpec extends ClientSpec {
   def "trusonaficationResultFromResponse should map a TrusonaficationResponse to a TrusonaficationResult"() {
     when:
     def res = sut.trusonaficationResultFromResponse(new TrusonaficationResponse(
-      id: fromString("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"),
-      status: "ACCEPTED",
-      userIdentifier: "sealz",
-      createdAt: dateFormat.parse("2018-01-23T23:28:45Z"),
-      updatedAt: dateFormat.parse("2018-01-23T23:28:46Z"),
-      deviceIdentifier: "wall-e",
-      desiredLevel: 2,
-      action: "dig up",
-      resource: "your lawn",
-      expiresAt: dateFormat.parse("2018-01-23T23:28:47Z"),
-      userPresence: true,
-      prompt: true,
-      authenticatorType: 'MOBILE_APP',
-      result: new TrusonaficationResultResponse(
-        id: randomUUID(),
-        accepted: true,
-        acceptedLevel: 2,
-        boundUserIdentifier: "wall.e"
-      )
+        id: fromString("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"),
+        status: "ACCEPTED",
+        userIdentifier: "sealz",
+        createdAt: dateFormat.parse("2018-01-23T23:28:45Z"),
+        updatedAt: dateFormat.parse("2018-01-23T23:28:46Z"),
+        deviceIdentifier: "wall-e",
+        desiredLevel: 2,
+        action: "dig up",
+        resource: "your lawn",
+        expiresAt: dateFormat.parse("2018-01-23T23:28:47Z"),
+        userPresence: true,
+        prompt: true,
+        authenticatorType: 'MOBILE_APP',
+        result: new TrusonaficationResultResponse(
+            id: randomUUID(),
+            accepted: true,
+            acceptedLevel: 2,
+            boundUserIdentifier: "wall.e"
+        )
     ))
 
     then:
@@ -305,24 +305,24 @@ class TrusonaficationClientSpec extends ClientSpec {
   def "trusonaficationResultFromResponse should use the trusona id for the user identifier"() {
     when:
     def res = sut.trusonaficationResultFromResponse(new TrusonaficationResponse(
-      id: fromString("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"),
-      status: "ACCEPTED",
-      trusonaId: "123456789",
-      createdAt: dateFormat.parse("2018-01-23T23:28:45Z"),
-      updatedAt: dateFormat.parse("2018-01-23T23:28:46Z"),
-      deviceIdentifier: "wall-e",
-      desiredLevel: 2,
-      action: "dig up",
-      resource: "your lawn",
-      expiresAt: dateFormat.parse("2018-01-23T23:28:47Z"),
-      userPresence: true,
-      prompt: true,
-      result: new TrusonaficationResultResponse(
-        id: randomUUID(),
-        accepted: true,
-        acceptedLevel: 2,
-        boundUserIdentifier: null
-      )
+        id: fromString("96ea5830-8e5e-42c5-9cbb-8a941d2ff7f9"),
+        status: "ACCEPTED",
+        trusonaId: "123456789",
+        createdAt: dateFormat.parse("2018-01-23T23:28:45Z"),
+        updatedAt: dateFormat.parse("2018-01-23T23:28:46Z"),
+        deviceIdentifier: "wall-e",
+        desiredLevel: 2,
+        action: "dig up",
+        resource: "your lawn",
+        expiresAt: dateFormat.parse("2018-01-23T23:28:47Z"),
+        userPresence: true,
+        prompt: true,
+        result: new TrusonaficationResultResponse(
+            id: randomUUID(),
+            accepted: true,
+            acceptedLevel: 2,
+            boundUserIdentifier: null
+        )
     ))
 
     then:

@@ -1,5 +1,6 @@
 package com.trusona.sdk.http.client.interceptor;
 
+import com.trusona.sdk.annotation.SuppressFBWarnings;
 import com.trusona.sdk.http.ApiCredentials;
 import com.trusona.sdk.http.Headers;
 import com.trusona.sdk.http.client.security.HmacSignatureGenerator;
@@ -7,11 +8,13 @@ import com.trusona.sdk.http.client.security.RequestHmacMessage;
 import com.trusona.sdk.http.client.security.ResponseHmacMessage;
 import com.trusona.sdk.http.client.security.TrusonaAuthorizationHeader;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Instance is not accessed by untrusted code")
 public class HmacAuthInterceptor implements Interceptor {
   private static final Logger logger = LoggerFactory.getLogger(HmacAuthInterceptor.class);
   private static final String EMPTY_JSON = "{}";
@@ -29,6 +32,7 @@ public class HmacAuthInterceptor implements Interceptor {
     this(signatureGenerator, new ApiCredentials(accessToken, macSecret));
   }
 
+  @NotNull
   @Override
   public Response intercept(Chain chain) throws IOException {
     Request request = chain.request();
@@ -44,7 +48,7 @@ public class HmacAuthInterceptor implements Interceptor {
   }
 
   private ResponseBody getEmptyJson() {
-    return ResponseBody.create(MediaType.parse(EMPTY_JSON_CONTENT_TYPE), EMPTY_JSON);
+    return ResponseBody.create(EMPTY_JSON, MediaType.parse(EMPTY_JSON_CONTENT_TYPE));
   }
 
   private Response failResponse(Response incomingResponse) {
