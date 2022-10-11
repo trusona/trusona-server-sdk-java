@@ -14,11 +14,11 @@ import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS
 /**
  * Copyright Trusona, Inc. Created on 1/19/18 for trusona-server-sdk.
  */
+@SuppressFBWarnings(justification = "Instance is not accessed by untrusted code")
 public class JacksonConfig {
 
   private static final DateFormat DATE_FORMAT = new ISO8601DateFormat();
 
-  @SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Instance is not accessed by untrusted code")
   public static DateFormat getDateFormat() {
     return DATE_FORMAT;
   }
