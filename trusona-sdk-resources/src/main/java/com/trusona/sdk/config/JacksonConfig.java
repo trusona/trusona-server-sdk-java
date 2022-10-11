@@ -1,14 +1,11 @@
 package com.trusona.sdk.config;
 
 import java.text.DateFormat;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
-import com.fasterxml.jackson.databind.util.StdDateFormat;
-import org.apache.commons.lang3.LocaleUtils;
+import com.trusona.sdk.annotation.SuppressFBWarnings;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 import static com.fasterxml.jackson.databind.PropertyNamingStrategies.SNAKE_CASE;
@@ -21,6 +18,7 @@ public class JacksonConfig {
 
   private static final DateFormat DATE_FORMAT = new ISO8601DateFormat();
 
+  @SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Instance is not accessed by untrusted code")
   public static DateFormat getDateFormat() {
     return DATE_FORMAT;
   }
