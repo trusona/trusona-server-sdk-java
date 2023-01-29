@@ -11,6 +11,7 @@ jobs:
         distribution: 'temurin'
         java-version: '11'
         cache: 'gradle'
+    - run: ./bin/ci-setup-env.sh
     - uses: gradle/gradle-build-action@v2
       with:
         arguments: check test
