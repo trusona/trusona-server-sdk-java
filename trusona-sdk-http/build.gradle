@@ -55,7 +55,7 @@ dependencies {
   api "com.squareup.retrofit2:retrofit:2.9.0"
   api "com.squareup.retrofit2:converter-jackson:2.9.0"
   api "com.squareup.okhttp3:logging-interceptor:4.10.0"
-  api "org.slf4j:slf4j-api:2.0.5"
+  api "org.slf4j:slf4j-api:2.0.6"
 
   testImplementation "org.apache.groovy:groovy-all:4.0.8"
   testImplementation "org.spockframework:spock-core:2.3-groovy-4.0"
