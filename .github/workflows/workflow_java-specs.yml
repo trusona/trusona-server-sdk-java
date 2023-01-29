@@ -1,0 +1,17 @@
+name: Java
+on: [ workflow_call ]
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+        cache: 'gradle'
+    - run: ./bin/ci-setup-env.sh
+    - uses: gradle/gradle-build-action@v2
+      with:
+        arguments: check test
