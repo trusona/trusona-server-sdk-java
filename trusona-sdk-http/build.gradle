@@ -51,7 +51,7 @@ dependencies {
   implementation project(":trusona-sdk-resources")
 
   api "org.apache.commons:commons-lang3:3.12.0"
-  api "commons-codec:commons-codec:1.15"
+  api "commons-codec:commons-codec:1.16.0"
   api "com.squareup.retrofit2:retrofit:2.9.0"
   api "com.squareup.retrofit2:converter-jackson:2.9.0"
   api "com.squareup.okhttp3:logging-interceptor:4.11.0"
