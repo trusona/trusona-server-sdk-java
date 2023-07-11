@@ -11,7 +11,7 @@ buildscript {
     classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.32.0"
     classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.4.0"
     classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.7.5"
-    classpath "com.google.guava:guava:32.1.0-jre"
+    classpath "com.google.guava:guava:32.1.1-jre"
   }
 }
 
