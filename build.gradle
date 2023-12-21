@@ -8,7 +8,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.33.7"
+    classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.33.8"
     classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.4.0"
     classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.7.5"
     classpath "com.google.guava:guava:32.1.3-jre"
