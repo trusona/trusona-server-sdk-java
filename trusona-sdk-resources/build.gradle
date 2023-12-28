@@ -50,7 +50,7 @@ signing {
 dependencies {
   api "org.apache.commons:commons-lang3:3.14.0"
   api "commons-codec:commons-codec:1.16.0"
-  api "com.fasterxml.jackson.core:jackson-databind:2.16.0"
+  api "com.fasterxml.jackson.core:jackson-databind:2.16.1"
   api "org.slf4j:slf4j-api:2.0.9"
 
   testImplementation "org.apache.groovy:groovy-all:4.0.16"
