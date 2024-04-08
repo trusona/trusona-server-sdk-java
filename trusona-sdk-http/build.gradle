@@ -52,8 +52,8 @@ dependencies {
 
   api "org.apache.commons:commons-lang3:3.14.0"
   api "commons-codec:commons-codec:1.16.1"
-  api "com.squareup.retrofit2:retrofit:2.9.0"
-  api "com.squareup.retrofit2:converter-jackson:2.9.0"
+  api "com.squareup.retrofit2:retrofit:2.11.0"
+  api "com.squareup.retrofit2:converter-jackson:2.11.0"
   api "com.squareup.okhttp3:logging-interceptor:4.12.0"
   api "org.slf4j:slf4j-api:2.0.12"
 
@@ -61,7 +61,7 @@ dependencies {
   testImplementation "org.spockframework:spock-core:2.3-groovy-4.0"
   testImplementation "ch.qos.logback:logback-classic:1.5.3"
   testImplementation "com.squareup.okhttp3:mockwebserver:4.12.0"
-  testImplementation "com.squareup.retrofit2:retrofit-mock:2.9.0"
+  testImplementation "com.squareup.retrofit2:retrofit-mock:2.11.0"
 
   spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:1.13.0"
 }
