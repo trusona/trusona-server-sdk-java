@@ -50,7 +50,7 @@ signing {
 dependencies {
   implementation project(":trusona-sdk-resources")
 
-  api "org.apache.commons:commons-lang3:3.16.0"
+  api "org.apache.commons:commons-lang3:3.17.0"
   api "commons-codec:commons-codec:1.17.1"
   api "com.squareup.retrofit2:retrofit:2.11.0"
   api "com.squareup.retrofit2:converter-jackson:2.11.0"
