@@ -51,7 +51,7 @@ dependencies {
   implementation project(":trusona-sdk-http")
   implementation project(":trusona-sdk-resources")
 
-  testImplementation "org.apache.groovy:groovy-all:4.0.22"
+  testImplementation "org.apache.groovy:groovy-all:4.0.23"
   testImplementation "org.spockframework:spock-core:2.3-groovy-4.0"
   testImplementation "com.squareup.okhttp3:mockwebserver:4.12.0"
   testImplementation "ch.qos.logback:logback-classic:1.5.7"
