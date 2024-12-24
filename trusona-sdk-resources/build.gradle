@@ -48,12 +48,12 @@ signing {
 }
 
 dependencies {
-  api "org.apache.commons:commons-lang3:3.16.0"
+  api "org.apache.commons:commons-lang3:3.17.0"
   api "commons-codec:commons-codec:1.17.1"
-  api "com.fasterxml.jackson.core:jackson-databind:2.17.2"
+  api "com.fasterxml.jackson.core:jackson-databind:2.18.1"
   api "org.slf4j:slf4j-api:2.0.16"
 
-  testImplementation "org.apache.groovy:groovy-all:4.0.22"
+  testImplementation "org.apache.groovy:groovy-all:4.0.24"
   testImplementation "org.spockframework:spock-core:2.3-groovy-4.0"
   testImplementation "ch.qos.logback:logback-classic:1.5.7"
 
