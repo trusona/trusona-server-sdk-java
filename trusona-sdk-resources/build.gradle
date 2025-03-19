@@ -55,7 +55,7 @@ dependencies {
 
   testImplementation "org.apache.groovy:groovy-all:4.0.24"
   testImplementation "org.spockframework:spock-core:2.3-groovy-4.0"
-  testImplementation "ch.qos.logback:logback-classic:1.5.12"
+  testImplementation "ch.qos.logback:logback-classic:1.5.18"
 
   spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:1.13.0"
 }
